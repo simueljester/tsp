@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-Dashboard
+<div>
+    inquiries
+</div>
 @endsection

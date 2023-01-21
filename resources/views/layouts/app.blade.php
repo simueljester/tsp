@@ -82,7 +82,20 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <div class="container">
+                <div class="card shadow-sm border-custom">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <a href="{{route('home')}}" style="text-decoration: none;" class="text-muted"> <i class="fa-solid fa-gauge"></i> Dashboard </a> 
+                            <a href="{{route('page-admin.index')}}" style="text-decoration: none;" class="ml-2 text-muted"> <i class="fa-solid fa-globe"></i> Page </a> 
+                            <a href="{{route('inquiry.index')}}" style="text-decoration: none;" class="ml-2 text-muted"> <i class="fa-solid fa-envelope-open-text"></i> Socials & Inquiries </a>
+                            <a href="{{route('users.index')}}" style="text-decoration: none;" class="ml-2 text-muted"> <i class="fa-solid fa-users-gear"></i> Users </a> 
+                        </div>
+                        <hr>
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 </body>

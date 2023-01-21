@@ -20,3 +20,18 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Page Routes
+Route::group(['prefix'=>'page-admin','as'=>'page-admin.'], function(){
+    Route::get('/', ['as' => 'index', 'uses' => 'PageController@index']);
+});
+
+//Inquiry Routes
+Route::group(['prefix'=>'inquiry','as'=>'inquiry.'], function(){
+    Route::get('/', ['as' => 'index', 'uses' => 'InquiryController@index']);
+});
+
+//User Routes
+Route::group(['prefix'=>'users','as'=>'users.'], function(){
+    Route::get('/', ['as' => 'index', 'uses' => 'UserController@index']);
+});
