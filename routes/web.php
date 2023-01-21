@@ -34,4 +34,11 @@ Route::group(['prefix'=>'inquiry','as'=>'inquiry.'], function(){
 //User Routes
 Route::group(['prefix'=>'users','as'=>'users.'], function(){
     Route::get('/', ['as' => 'index', 'uses' => 'UserController@index']);
+    Route::get('/create', ['as' => 'create', 'uses' => 'UserController@create']);
+    Route::post('/save', ['as' => 'save', 'uses' => 'UserController@save']);
+    Route::get('/show/{user}', ['as' => 'show', 'uses' => 'UserController@show']);
+    Route::get('/edit/{user}', ['as' => 'edit', 'uses' => 'UserController@edit']);
+    Route::post('/update', ['as' => 'update', 'uses' => 'UserController@update']);
+    Route::get('/archive/{user}', ['as' => 'archive', 'uses' => 'UserController@archive']);
+    Route::get('/set-to-active/{user}', ['as' => 'set.active', 'uses' => 'UserController@setToActive']);
 });

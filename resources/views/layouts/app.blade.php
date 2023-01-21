@@ -15,18 +15,26 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+        }
         .text-custom{
             color: #F59732
         }
         .border-custom{
             border-radius: 12px;
         }
+        
     </style>
 </head>
 <body class="bg-light">
@@ -83,6 +91,26 @@
 
         <main class="py-4">
             <div class="container">
+                 @if(session()->has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                        <span class="alert-text"><strong>Success!</strong> {{ session()->get('success') }}</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+                @if(session()->has('error'))
+                    <div class="alert alert-danger" role="alert">
+                        <i class="fas fa-exclamation-triangle"></i> <strong>Notice!</strong>  {{session()->get('error') }}
+                    </div>
+                 @endif
+                  @if ($errors->any())
+                    @foreach ($errors->all() as $error)
+                         <div class="alert alert-danger" role="alert">{{$error}}</div>
+                    @endforeach
+                @endif
+
                 <div class="card shadow-sm border-custom">
                     <div class="card-body">
                         <div class="mb-3">
