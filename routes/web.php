@@ -21,9 +21,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//Page Routes
+//Page Routes - Admin
 Route::group(['prefix'=>'page-admin','as'=>'page-admin.'], function(){
     Route::get('/', ['as' => 'index', 'uses' => 'PageController@index']);
+});
+
+//Page Routes - Landing
+Route::group(['prefix'=>'homepage','as'=>'homepage.'], function(){
+    Route::get('/', ['as' => 'index', 'uses' => 'PageLandingController@index']);
 });
 
 //Inquiry Routes
