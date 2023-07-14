@@ -1,11 +1,11 @@
 
-<div class="container-fluid bg-light p-5 text-center">
+<div class="container-fluid bg-white p-5 text-center">
    <div class="row ">
     <div class="col-sm-6 text-right">
         <div class="single-item mt-3">
-            <div class="card bg-light" style="border:none;">
+            <div class="card" style="border:none;">
                 <div class="card-body">
-                    <img  style="max-width:100%; object-fit: contain;" src="{{ asset('images') }}/305391452_485433810258648_2874490425379946841_n.jpg"> 
+                    <img style="max-width:100%; object-fit: contain;" src="{{ asset('images') }}/305391452_485433810258648_2874490425379946841_n.jpg"> 
                 </div>
             </div>
         </div>
