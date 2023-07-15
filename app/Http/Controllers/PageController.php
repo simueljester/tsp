@@ -9,6 +9,6 @@ class PageController extends Controller
     //
      public function index()
     {
-        return view('page.admin.index');
+        return view('page.admin.dashboard');
     }
 }

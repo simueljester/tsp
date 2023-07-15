@@ -13,30 +13,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Page Routes - Landing
+//Landing page means the website
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-Route::get('/soft-ui', function () {
-    return view('layouts.app-soft-ui');
-});
+Route::get('/', ['as' => 'index', 'uses' => 'PageLandingController@index']);
 
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+
+
 //Page Routes - Admin
-Route::group(['prefix'=>'page-admin','as'=>'page-admin.'], function(){
-    Route::get('/', ['as' => 'index', 'uses' => 'PageController@index']);
+Route::group(['prefix'=>'dashboard','as'=>'dashboard.'], function(){
+    Route::get('/', ['as' => 'index', 'uses' => 'DashboardController@index']);
 });
 
-//Page Routes - Landing
-Route::group(['prefix'=>'homepage','as'=>'homepage.'], function(){
-    Route::get('/', ['as' => 'index', 'uses' => 'PageLandingController@index']);
-});
 
 //Inquiry Routes
 Route::group(['prefix'=>'inquiry','as'=>'inquiry.'], function(){
