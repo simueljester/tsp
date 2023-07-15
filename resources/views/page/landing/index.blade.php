@@ -48,6 +48,7 @@
     @include('page.landing.intro')
     @include('page.landing.service')
     @include('page.landing.articles')
+    @include('page.landing.brands')
     @include('page.landing.about')
     @include('page.landing.socials')
     @include('page.landing.contact')
@@ -69,6 +70,8 @@
             centerMode: true,
             centerPadding: '60px',
             slidesToShow: 3,
+            dots: true,
+            arrows:true,
             responsive: [
                 {
                     breakpoint: 768,

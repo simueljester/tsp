@@ -2,7 +2,8 @@
 <div class="container-fluid bg-white text-center">
     <div class="card pt-5" style="border:none;"> 
         <div class="card-body">
-            <h2> <b> Services Offered </b> </h2>
+            <h2> <b> Featured Services </b> </h2>
+            <div> <a href=""> Browse All Services </a> </div>
             <div class="slick-center mt-5 mb-5">
                 <div class="card h-100" style="border:none;">
                     <div class="card-body">
