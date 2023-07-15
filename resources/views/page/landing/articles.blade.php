@@ -3,7 +3,7 @@
     <h2> <b> Articles </b> </h2>
     <div class="row">
         <div class="col-sm-4">
-            <div class="card bg-light" style="border:none;cursor:pointer;">
+            <div class="card bg-light" style="border:none;cursor:pointer">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-6">

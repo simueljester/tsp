@@ -13,9 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/soft-ui', function () {
+    return view('layouts.app-soft-ui');
+});
+
 
 Auth::routes();
 
