@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Repositories\IntroductionRepository;
 
 class IntroductionController extends Controller
 {
@@ -34,22 +35,24 @@ class IntroductionController extends Controller
     public function save(Request $request){
 
         $request->validate([
-            'title' => 'required|unique:users,email',
-            'description' => 'required|confirmed'
+            'title'         => 'required',
+            'slogan'        => 'required',
+            'description'   => 'required'
         ]);
 
         $data = [
-            'title'        => $request->name,
-            'description'  => $request->email
+            'title'         => $request->title,
+            'slogan'        => $request->slogan,
+            'description'   => $request->description
         ];
 
         try {
-            app(UserRepository::class)->save($data);
-            return redirect()->route('admin.users.index')->with('success', 'User successfully added');
+            app(IntroductionRepository::class)->save($data);
+            return redirect()->route('admin.pages.introduction.index')->with('success', 'Introduction Template successfully added');
         }
         //catch exception
         catch(\Exception $e) {
-            return redirect()->route('users.create')->with('error', 'Unable to create');
+            return redirect()->back()->with('error', 'Unable to create');
         }
     }
 }

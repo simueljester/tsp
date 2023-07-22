@@ -5,10 +5,14 @@
             <img class="zoomIn" src="{{ asset('images') }}/symbol2.png" width="280">
         </div>
         <div class="col-sm-5 text-left mt-5">
-            <h1 class="mt-5 fadeIn"> <b> Technology Solutions Provider & Consultancy </b> </h1>
+            <h1 class="mt-5 fadeIn">
+                <b> Technology Solutions Provider & Consultancy </b>
+                <p class="text-new-warning" style=" font-family: cursive;font-style: oblique;font-size:22px;"> We do it with Passion! </p>
+            </h1>
             <p class="text-muted fadeIn">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Vivamus suscipit tortor eget felis porttitor volutpat. Sed porttitor lectus nibh. Sed porttitor lectus nibh.
             </p>
+
         </div>
     </div>
 </div>

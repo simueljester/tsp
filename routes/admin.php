@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], function () { 
+Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], function () {
 
     //Dashboard
     Route::group(['prefix'=>'dashboard','as'=>'dashboard.'], function(){
@@ -36,7 +36,7 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
         Route::group(['prefix'=>'introduction','as'=>'introduction.'], function(){
             Route::get('/', ['as' => 'index', 'uses' => 'IntroductionController@index']);
             Route::get('/create', ['as' => 'create', 'uses' => 'IntroductionController@create']);
-            Route::get('/save', ['as' => 'save', 'uses' => 'IntroductionController@save']);
+            Route::post('/save', ['as' => 'save', 'uses' => 'IntroductionController@save']);
         });
 
     });
