@@ -34,7 +34,9 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
 
         // Intro
         Route::group(['prefix'=>'introduction','as'=>'introduction.'], function(){
-            Route::get('/', ['as' => 'index', 'uses' => 'InquiryController@index']);
+            Route::get('/', ['as' => 'index', 'uses' => 'IntroductionController@index']);
+            Route::get('/create', ['as' => 'create', 'uses' => 'IntroductionController@create']);
+            Route::get('/save', ['as' => 'save', 'uses' => 'IntroductionController@save']);
         });
 
     });

@@ -69,16 +69,16 @@
           </a>
         </li>
         <li class="nav-item mt-3" >
-            <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6 text-new-primary"><i class="fa-solid fa-cubes fa-lg"></i> Page Management </h6>
+            <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6 text-primary"><i class="fa-solid fa-cubes fa-lg"></i> Page Management </h6>
         </li>
         <hr class="horizontal dark my-1">
         <li class="nav-item">
-            <a class="nav-link " href="#">
+            <a class="nav-link {{Route::current()->getName() == 'admin.pages.introduction.index' ? 'active' : '' }}" href="{{route('admin.pages.introduction.index')}}">
               <span class="nav-link-text ms-1"> <i class="fa-solid fa-cube"></i> &nbsp Introduction</span>
             </a>
         </li>
         <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6 text-new-primary"><i class="fa-solid fa-gear fa-lg"></i> Settings</h6>
+          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6 text-primary"><i class="fa-solid fa-gear fa-lg"></i> Settings</h6>
         </li>
         <hr class="horizontal dark my-1">
         <li class="nav-item">
@@ -214,15 +214,14 @@
   </div>
 
   {{-- CDN --}}
-  <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
-
+  @include('scripts')
 
   <!--   Core JS Files   -->
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/chartjs.min.js"></script>
+  <script src="{{asset('assets/js/core/popper.min.js')}}"></script>
+  <script src="{{asset('assets/js/core/bootstrap.min.js')}}"></script>
+  <script src="{{asset('assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
+  <script src="{{asset('assets/js/plugins/smooth-scrollbar.min.js')}} "></script>
+  <script src="{{asset('assets/js/plugins/chartjs.min.js')}}"></script>
   <script>
     var ctx = document.getElementById("chart-bars").getContext("2d");
 
@@ -394,10 +393,17 @@
     });
 
 
-    function removeElement(id_param){
-      $( "#"+id_param+"" ).remove();
+    // Function Declaration Start
 
+    function removeElement(id_param){ //Remove any element just give the id to parameter
+      $( "#"+id_param+"" ).remove();
     }
+
+    // Function Declaration End
+
+
+  
+      // CKEDITOR END
 
   </script>
   <script>
@@ -412,7 +418,8 @@
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+  <script src="{{asset('assets/js/soft-ui-dashboard.min.js')}}"></script>
+  
 </body>
 
 </html>
