@@ -10,13 +10,13 @@
         <ul class="nav nav-tabs mt-5">
     
             <li class="nav-item">
-                <a class="nav-link {{Route::current()->getName() == 'users.index' && $status == 'active' ? 'active text-dark' : 'text-muted'}}" href="{{route('users.index')}}"> Active List </a>
+                <a class="nav-link {{Route::current()->getName() == 'users.index' && $status == 'active' ? 'active text-dark' : 'text-muted'}}" href="{{route('users.index')}}"> Active </a>
             </li>
     
             @if (Route::current()->getName() == 'users.index')
                 <form action="">
                     <li class="nav-item">
-                        <button class="nav-link {{ $status == 'archive' ? 'active text-dark' : 'text-muted' }} " style="cursor: pointer;"  name="status"  value="archive">Archive List</button>
+                        <button class="nav-link {{ $status == 'archive' ? 'active text-dark' : 'text-muted' }} " style="cursor: pointer;"  name="status"  value="archive">Archive </button>
                     </li>
                 </form>
             @endif
@@ -36,8 +36,6 @@
                     <a class="nav-link {{Route::current()->getName() == 'users.edit' ? 'active text-dark' : 'text-muted' }}"> Edit User </a>
                 </li> 
             @endif
-     
-          
         </ul>
         @yield('user-content')
     </div>

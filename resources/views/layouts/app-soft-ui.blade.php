@@ -33,6 +33,7 @@
   <link href="{{asset('assets/css/nucleo-svg.css')}}" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="{{asset('assets/css/soft-ui-dashboard.css')}}" rel="stylesheet" />
+  <link href="{{asset('css/main.css')}}" rel="stylesheet" />
   <!-- Nepcha Analytics (nepcha.com) -->
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
@@ -121,7 +122,24 @@
 
     <div class="container-fluid py-4">
 {{-- Yield --}}
+      @if(session()->has('success'))
+        <div class="alert alert-success fadeIn" role="alert" id="alert_success" style="cursor: pointer" onclick="removeElement('alert_success')">
+          <i class="fa-solid fa-circle-check"></i> Success! {{ session()->get('success') }}
+        </div>
+      @endif
+        @if(session()->has('error'))
+        <div class="alert alert-danger fadeIn" role="alert" style="cursor: pointer" onclick="removeElement('alert_success')">
+            <i class="fas fa-exclamation-triangle"></i> <strong>Notice!</strong>  {{session()->get('error') }}
+        </div>
+      @endif
+      @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-danger fadeIn" role="alert" style="cursor: pointer" onclick="removeElement('alert_success')">{{$error}}</div>
+        @endforeach
+      @endif
+      <div>
         @yield('content')
+      </div>
 {{-- End Yield --}}
 
       <footer class="footer pt-3  ">
@@ -189,6 +207,11 @@
       </div>
     </div>
   </div>
+
+  {{-- CDN --}}
+  <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+
+
   <!--   Core JS Files   -->
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
@@ -364,6 +387,13 @@
         },
       },
     });
+
+
+    function removeElement(id_param){
+      $( "#"+id_param+"" ).remove();
+
+    }
+
   </script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;

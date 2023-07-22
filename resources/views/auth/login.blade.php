@@ -89,11 +89,15 @@
   <main class="main-content  mt-0">
     <section>
       <div class="page-header min-vh-75">
+        
         <div class="container">
           <div class="row">
             <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
               <div class="card card-plain mt-8">
                 <div class="card-header pb-0 text-left bg-transparent">
+                  <center>
+                    <img class="about" width="150" src="{{ asset('images') }}/tsp3.png"> 
+                  </center>
                   <h3 class="font-weight-bolder" style="#FF5733">Technology Solutions Provider & Consultancy</h3>
                   <p class="mb-0">Enter your email and password to sign in</p>
                 </div>
