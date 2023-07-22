@@ -25,11 +25,11 @@
             </div>
             <div class="mt-3">
                 @if ($user->archived_at)
-                    <a href="{{route('users.set.active',$user)}}" class="btn btn-success"> <i class="fa-solid fa-box-archive"></i> Set Active </a>
+                    <a href="{{route('admin.users.set.active',$user)}}" class="btn btn-success"> <i class="fa-solid fa-box-archive"></i> Set Active </a>
                 @else
-                    <a href="{{route('users.archive',$user)}}" class="btn btn-warning"> <i class="fa-solid fa-box-archive"></i> Archive User </a>
+                    <a href="{{route('admin.users.archive',$user)}}" class="btn btn-warning"> <i class="fa-solid fa-box-archive"></i> Archive User </a>
                 @endif      
-                <a href="{{route('users.edit',$user)}}" class="btn btn-primary"> <i class="fa-regular fa-pen-to-square"></i> Edit User </a>
+                <a href="{{route('admin.users.edit',$user)}}" class="btn btn-primary"> <i class="fa-regular fa-pen-to-square"></i> Edit User </a>
             </div>
         </div>
         <div class="col-sm-6">

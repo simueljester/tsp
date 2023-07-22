@@ -14,7 +14,7 @@
             @forelse ($users as $user)
                 <tr>
                     <td class="text-capitalize">
-                        <a href="{{route('users.show',$user)}}" style="color:#8E44AD"> <i class="fa-solid fa-user"></i> {{$user->name}} </a>
+                        <a href="{{route('admin.users.show',$user)}}" class="text-new-warning"> <i class="fa-solid fa-user"></i> {{$user->name}} </a>
                     </td>
                     <td>
                         {{$user->email}} 

@@ -61,7 +61,7 @@ class UserController extends Controller
 
         try {
             app(UserRepository::class)->save($data);
-            return redirect()->route('users.index')->with('success', 'User successfully added');
+            return redirect()->route('admin.users.index')->with('success', 'User successfully added');
         }
         //catch exception
         catch(\Exception $e) {
@@ -97,21 +97,21 @@ class UserController extends Controller
 
             try {
                 app(UserRepository::class)->update($request->id,$data);
-                return redirect()->route('users.index')->with('success', 'User successfully updated');
+                return redirect()->route('admin.users.index')->with('success', 'User successfully updated');
             }
             //catch exception
             catch(\Exception $e) {
-                return redirect()->route('users.create')->with('error', 'Unable to update');
+                return redirect()->route('admin.users.create')->with('error', 'Unable to update');
             }
         }else{
-            return redirect()->route('users.index')->with('error', 'User not found!');
+            return redirect()->route('admin.users.index')->with('error', 'User not found!');
         }
        
     }
 
     public function archive($user){
         app(UserRepository::class)->archive($user);
-        return redirect()->route('users.index')->with('success', 'User archived!');
+        return redirect()->route('admin.users.index')->with('success', 'User archived!');
     }
     public function setToActive($user){
         app(UserRepository::class)->archiveRemove($user);

@@ -5,8 +5,11 @@
      font-family: 'Sen', sans-serif;
  }
 
- .text-custom {
+ .text-new-warning {
      color: #F59732
+ }
+ .text-new-primary{
+    color: #2A75F9;
  }
 
  .background-orange{

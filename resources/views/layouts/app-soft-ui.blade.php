@@ -54,7 +54,7 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link {{Route::current()->getName() == 'dashboard.index' ? 'active' : '' }}" href="{{route('dashboard.index')}}">
+          <a class="nav-link {{Route::current()->getName() == 'admin.dashboard.index' ? 'active' : '' }}" href="{{route('admin.dashboard.index')}}">
             <span class="nav-link-text ms-1">  <i class="fa-solid fa-gauge fa-lg"></i> &nbsp Dashboard</span>
           </a>
         </li>
@@ -69,20 +69,20 @@
           </a>
         </li>
         <li class="nav-item mt-3" >
-            <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6" style="color:#8E44AD"><i class="fa-solid fa-cubes fa-lg"></i> Page Management </h6>
+            <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6 text-new-primary"><i class="fa-solid fa-cubes fa-lg"></i> Page Management </h6>
         </li>
         <hr class="horizontal dark my-1">
         <li class="nav-item">
-            <a class="nav-link " href="{{route('dashboard.index')}}">
+            <a class="nav-link " href="#">
               <span class="nav-link-text ms-1"> <i class="fa-solid fa-cube"></i> &nbsp Introduction</span>
             </a>
         </li>
         <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6" style="color:#8E44AD"><i class="fa-solid fa-gear fa-lg"></i> Settings</h6>
+          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6 text-new-primary"><i class="fa-solid fa-gear fa-lg"></i> Settings</h6>
         </li>
         <hr class="horizontal dark my-1">
         <li class="nav-item">
-          <a class="nav-link {{Route::current()->getName() == 'users.index' ? 'active' : '' }}" href="{{route('users.index')}}">
+          <a class="nav-link {{Route::current()->getName() == 'admin.users.index' ? 'active' : '' }}" href="{{route('admin.users.index')}}">
             <span class="nav-link-text ms-1">  <i class="fa-solid fa-users"></i> &nbsp Users </span>
           </a>
         </li>

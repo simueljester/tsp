@@ -2,7 +2,7 @@
 
 @section('user-content')
 <div class="mt-3">
-    <form action="{{route('users.save')}}" method="POST" autocomplete="off">
+    <form action="{{route('admin.users.save')}}" method="POST" autocomplete="off">
         @csrf
         @method('POST')
         <strong class="text-muted"> Fill up form </strong>
@@ -26,7 +26,7 @@
             </select>
         </div>
         <div class="form-group">
-            <a href="{{route('users.index')}}" type="button" class="btn btn-outline-secondary"> Cancel </a>
+            <a href="{{route('admin.users.index')}}" type="button" class="btn btn-outline-secondary"> Cancel </a>
             <button onclick="return confirm('Are you sure you want to add new user?')" class="btn btn-success"> <i class="fa-solid fa-plus"></i> Create </button>
         </div>
     </form>
