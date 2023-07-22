@@ -3,7 +3,7 @@
     <h2> <b> Articles </b> </h2>
     <div class="row">
         <div class="col-sm-4">
-            <div class="card bg-light" style="border:none;cursor:pointer">
+            <div class="card bg-light articles" style="border:none;cursor:pointer">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-6">
@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="col-sm-4">
-            <div class="card bg-light" style="border:none;">
+            <div class="card bg-light articles" style="border:none;">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-6">
@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="col-sm-4">
-            <div class="card bg-light" style="border:none;">
+            <div class="card bg-light articles" style="border:none;">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-6">

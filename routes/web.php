@@ -23,21 +23,29 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
-
-
-//Page Routes - Admin
+//Admin Dashboard
 Route::group(['prefix'=>'dashboard','as'=>'dashboard.'], function(){
     Route::get('/', ['as' => 'index', 'uses' => 'DashboardController@index']);
 });
 
 
-//Inquiry Routes
+//Admin Inquiry
 Route::group(['prefix'=>'inquiry','as'=>'inquiry.'], function(){
     Route::get('/', ['as' => 'index', 'uses' => 'InquiryController@index']);
 });
 
-//User Routes
+
+//Admin Page Management
+Route::group(['prefix'=>'pages','as'=>'pages.'], function(){
+
+    // Admin Page Management - Intro
+    Route::group(['prefix'=>'introduction','as'=>'introduction.'], function(){
+        Route::get('/', ['as' => 'index', 'uses' => 'InquiryController@index']);
+    });
+
+});
+
+//Admin Users
 Route::group(['prefix'=>'users','as'=>'users.'], function(){
     Route::get('/', ['as' => 'index', 'uses' => 'UserController@index']);
     Route::get('/create', ['as' => 'create', 'uses' => 'UserController@create']);

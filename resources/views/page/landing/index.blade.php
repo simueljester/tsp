@@ -48,9 +48,9 @@
     @include('page.landing.intro')
     @include('page.landing.service')
     @include('page.landing.articles')
-    @include('page.landing.brands')
+    {{-- @include('page.landing.brands') --}}
     @include('page.landing.about')
-    @include('page.landing.socials')
+    @include('page.landing.choose-us')
     @include('page.landing.contact')
     @include('page.landing.footer')
 
@@ -101,18 +101,18 @@
             adaptiveHeight: true,
             dots: true,
         });
-
-        
-
     });
 
     $(window).on('scroll', function (e) {
         var top = $(window).scrollTop() + $(window).height(),
-        isVisible = top > $('.fbpage').offset().top;
-        isVisible2 = top > $('.about').offset().top;
+        isVisibleArticles = top > $('.articles').offset().top;
+        $('.articles').toggleClass('fadeInDown', isVisibleArticles);
+    });
 
-        $('.fbpage').toggleClass('fadeInDown', isVisible);
-        $('.about').toggleClass('fadeInDown', isVisible2);
+    $(window).on('scroll', function (e) {
+        var top = $(window).scrollTop() + $(window).height(),
+        isVisibleChoose = top > $('.choose-item').offset().top;
+        $('.choose-item').toggleClass('zoomIn', isVisibleChoose);
     });
 
 </script>

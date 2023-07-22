@@ -62,9 +62,14 @@
             <a class="nav-link" href="#">
               <span class="nav-link-text ms-1"> <i class="fa-solid fa-inbox fa-lg"></i>  &nbsp Inquiries</span>
             </a>
-          </li>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <span class="nav-link-text ms-1"> <i class="fa-solid fa-globe fa-lg"></i> &nbsp My Website </span>
+          </a>
+        </li>
         <li class="nav-item mt-3" >
-            <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6" style="color:#8E44AD"><i class="fa-solid fa-cubes fa-lg"></i> Pages</h6>
+            <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6" style="color:#8E44AD"><i class="fa-solid fa-cubes fa-lg"></i> Page Management </h6>
         </li>
         <hr class="horizontal dark my-1">
         <li class="nav-item">
