@@ -36,12 +36,12 @@ class UserController extends Controller
                 $q->whereNull('archived_at');
         })
         ->get();
-        return view('users.list',compact('users','status'));
+        return view('admin.users.list',compact('users','status'));
     }
 
     public function create(){
         $status = null;
-        return view('users.create',compact('status'));
+        return view('admin.users.create',compact('status'));
     }
 
     public function save(Request $request){
@@ -71,12 +71,12 @@ class UserController extends Controller
 
     public function show(User $user){
         $status = null;
-        return view('users.show',compact('user','status'));
+        return view('admin.users.show',compact('user','status'));
     }
 
     public function edit(User $user){
         $status = null;
-        return view('users.edit',compact('user','status'));
+        return view('admin.users.edit',compact('user','status'));
     }
 
     public function update(Request $request){

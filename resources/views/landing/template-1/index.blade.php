@@ -45,14 +45,14 @@
     </div>
 
 
-    @include('page.landing.intro')
-    @include('page.landing.service')
-    @include('page.landing.articles')
-    {{-- @include('page.landing.brands') --}}
-    @include('page.landing.about-events')
-    @include('page.landing.choose-us')
-    @include('page.landing.contact')
-    @include('page.landing.footer')
+    @include('landing.template-1.intro')
+    @include('landing.template-1.service')
+    @include('landing.template-1.articles')
+    @include('landing.template-1.brands')
+    @include('landing.template-1.about-events')
+    @include('landing.template-1.choose-us')
+    @include('landing.template-1.contact')
+    @include('landing.template-1.footer')
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>

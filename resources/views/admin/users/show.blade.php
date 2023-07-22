@@ -1,4 +1,4 @@
-@extends('users.index')
+@extends('admin.users.index')
 
 @section('user-content')
 <div class="mt-3">

@@ -8,6 +8,6 @@ class PageLandingController extends Controller
 {
     //
     public function index(){
-        return view('page.landing.index');
+        return view('landing.template-1.index');
     }
 }
