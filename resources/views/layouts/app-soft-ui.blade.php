@@ -97,10 +97,10 @@
 {{-- Nav Bar --}}
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
       <div class="container-fluid py-1 px-3">
-     
+
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-           
+
           </div>
           <ul class="navbar-nav  justify-content-end">
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -117,7 +117,7 @@
                 <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
               </a>
             </li>
-      
+
           </ul>
         </div>
       </div>
@@ -200,7 +200,7 @@
       </div>
       <hr class="horizontal dark my-1">
       <div class="card-body pt-sm-3 pt-0">
-        <a href="{{ route('logout') }}" class="btn bg-gradient-dark w-100" 
+        <a href="{{ route('logout') }}" class="btn bg-gradient-dark w-100"
             onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
             <i class="fa-solid fa-right-from-bracket"></i> {{ __('Logout') }}
@@ -402,7 +402,7 @@
     // Function Declaration End
 
 
-  
+
       // CKEDITOR END
 
   </script>
@@ -419,7 +419,7 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{{asset('assets/js/soft-ui-dashboard.min.js')}}"></script>
-  
+
 </body>
 
 </html>

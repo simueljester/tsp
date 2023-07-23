@@ -34,7 +34,7 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
 
         // Intro
         Route::group(['prefix'=>'introduction','as'=>'introduction.'], function(){
-            Route::get('/', ['as' => 'index', 'uses' => 'IntroductionController@index']);
+            Route::get('/list/{viewingId?}', ['as' => 'index', 'uses' => 'IntroductionController@index']);
             Route::get('/create', ['as' => 'create', 'uses' => 'IntroductionController@create']);
             Route::post('/save', ['as' => 'save', 'uses' => 'IntroductionController@save']);
         });
@@ -52,6 +52,14 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
         Route::get('/archive/{user}', ['as' => 'archive', 'uses' => 'UserController@archive']);
         Route::get('/set-to-active/{user}', ['as' => 'set.active', 'uses' => 'UserController@setToActive']);
     });
+
+
+    //Helper Routes
+
+    Route::group(['prefix'=>'dropzone','as'=>'dropzone.'], function(){
+        Route::post('/store', ['as' => 'store', 'uses' => 'DropzoneController@store']);
+    });
+
 
 });
 

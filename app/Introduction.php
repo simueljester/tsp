@@ -8,6 +8,6 @@ class Introduction extends Model
 {
     //
     protected $fillable = [
-        'title', 'slogan', 'description'
+        'title', 'slogan', 'description','logo','active'
     ];
 }
