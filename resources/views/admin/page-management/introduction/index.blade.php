@@ -57,26 +57,30 @@
                             <tr>
                                 <td>
                                     <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-xs"> {{$intro->title}} </h6>
+                                        <h6 class="mb-0 text-s"> {{$intro->title}} </h6>
                                     </div>
                                 </td>
                                 <td>
                                     @if ($intro->active == true)
-                                        <span class="badge bg-success">Active</span>
+                                        <span class="badge badge-pill bg-gradient-success">Active</span>
                                     @else
-                                        <span class="badge bg-secondary">Inactive</span>
+                                        <span class="badge badge-pill bg-gradient-secondary">Inactive</span>
                                     @endif
                                 </td>
                                 <td class="align-middle">
-                                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs"onclick="viewIntro({{$intro->id}})">
-                                        <i class="fa-solid fa-eye"></i> View
-                                    </a> &nbsp
-                                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs ml-3" data-original-title="Edit user">
-                                        <i class="fa-solid fa-pen-to-square"></i> Edit
-                                    </a> &nbsp
-                                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs ml-3" data-original-title="Edit user">
-                                        <i class="fa-solid fa-trash"></i> Delete
+                                    <a href="javascript:;" class="text-white btn bg-primary btn-sm" onclick="viewIntro({{$intro->id}})">
+                                        View
                                     </a>
+                                    <a href="{{route('admin.pages.introduction.edit',$intro)}}" class="btn btn-outline-secondary btn-sm">
+                                        Edit
+                                    </a>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="confirmDelete({{$intro->id}})">
+                                        Delete
+                                    </button>
+                                    <form action="{{route('admin.pages.introduction.delete')}}" method="post" id="deleteForm">
+                                        @csrf
+                                        <input type="hidden" name="deleteId" id="deleteId">
+                                    </form>
                                 </td>
                             </tr>
                         @empty
@@ -87,16 +91,47 @@
                     </tbody>
                 </table>
             </div>
-
         </div>
     </div>
 </div>
 
+<div class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
+          <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p> Are you sure you want to delete this introduction template? </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
+          <button onclick="proceedDelete()" type="button" class="btn bg-gradient-primary">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script>
+
     function viewIntro(id){
         var url = '{{ route("admin.pages.introduction.index", ":id") }}';
         url = url.replace(':id', id);
         window.location.href = url;
     }
+
+    function confirmDelete(id){
+        $('#deleteConfirmationModal').modal('show')
+        $('#deleteId').val(id)
+    }
+
+    function proceedDelete(){
+        document.getElementById("deleteForm").submit();
+    }
+
 </script>
 @endsection

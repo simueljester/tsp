@@ -11,10 +11,6 @@ class DropzoneController extends Controller
         $image = $request->file('file');
         $imageName = $image->getClientOriginalName();
         $image->move(public_path('images/dropzone'),$imageName);
-
-        // $imageUpload = new ImageUpload();
-        // $imageUpload->filename = $imageName;
-        // $imageUpload->save();
         return response()->json(['success'=>$imageName]);
     }
 }

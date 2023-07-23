@@ -129,22 +129,22 @@
     <div class="container-fluid py-4">
 {{-- Yield --}}
       @if(session()->has('success'))
-        <div class="alert alert-success fadeIn" role="alert" id="alert_success" style="cursor: pointer" onclick="removeElement('alert_success')">
+        <div class="alert alert-success fadeIn" role="alert" id="alertSuccess" style="cursor: pointer" onclick="removeElement('alertSuccess')">
           <i class="fa-solid fa-circle-check"></i> Success! {{ session()->get('success') }}
         </div>
       @endif
         @if(session()->has('error'))
-        <div class="alert alert-danger fadeIn" role="alert" style="cursor: pointer" onclick="removeElement('alert_success')">
+        <div class="alert alert-danger fadeIn text-white" role="alert" id="alertDanger" style="cursor: pointer" onclick="removeElement('alertDanger')">
             <i class="fas fa-exclamation-triangle"></i> <strong>Notice!</strong>  {{session()->get('error') }}
         </div>
       @endif
       @if ($errors->any())
         @foreach ($errors->all() as $error)
-            <div class="alert alert-danger fadeIn" role="alert" style="cursor: pointer" onclick="removeElement('alert_success')">{{$error}}</div>
+            <div class="alert alert-danger fadeIn" role="alert" style="cursor: pointer" id="alertDangerMultiple" onclick="removeElement('alertDangerMultiple')">{{$error}}</div>
         @endforeach
       @endif
       <div>
-        @yield('content')
+            @yield('content')
       </div>
 {{-- End Yield --}}
 

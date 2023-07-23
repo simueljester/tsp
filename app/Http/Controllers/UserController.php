@@ -106,13 +106,14 @@ class UserController extends Controller
         }else{
             return redirect()->route('admin.users.index')->with('error', 'User not found!');
         }
-       
+
     }
 
     public function archive($user){
         app(UserRepository::class)->archive($user);
         return redirect()->route('admin.users.index')->with('success', 'User archived!');
     }
+
     public function setToActive($user){
         app(UserRepository::class)->archiveRemove($user);
         return redirect()->back()->with('success', 'User set to active!');
