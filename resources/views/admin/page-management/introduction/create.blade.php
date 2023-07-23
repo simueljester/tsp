@@ -19,7 +19,7 @@
   </div>
 
     <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-12">
             <form action="{{route('admin.pages.introduction.save')}}" method="POST">
                 @csrf
                 <div class="card mt-3">
@@ -54,44 +54,14 @@
                 </div>
             </form>
         </div>
-        <div class="col-sm-4">
-            <div class="card mt-3">
-                <div class="card-header bg-light">
-                    <strong> Logo </strong>
-                </div>
-                <div class="card-body">
-                    <form action="{{route('admin.dropzone.store')}}" method="post" class="dropzone" id="my-great-dropzone"  enctype="multipart/form-data">
-                        @csrf
-                    </form>
-                </div>
-            </div>
-        </div>
+
     </div>
 
 
 </div>
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+@include('scripts-ck-editor')
 
-<script>
-     Dropzone.options.dropzone =
-         {
-            maxFilesize: 12,
-            renameFile: function(file) {
-                var dt = new Date();
-                var time = dt.getTime();
-               return time+file.name;
-            },
-            acceptedFiles: ".jpeg,.jpg,.png,.gif",
-            addRemoveLinks: true,
-            timeout: 5000,
-            success: function(file, response)
-            {
-                console.log(response);
-            },
-            error: function(file, response)
-            {
-               return false;
-            }
-</script>
 
 @endsection

@@ -23,10 +23,10 @@
                 <div class="container-fluid bg-light p-5 mb-5">
                     <div class="row ml-3">
                         <div class="col-sm-5 text-center mt-5">
-                            <img class="zoomIn" src="{{ asset('images') }}/symbol2.png" width="280">
+                            {{-- <img class="zoomIn" src="{{ asset('images') }}/symbol2.png" width="280"> --}}
                         </div>
                         <div class="col-sm-5 text-left mt-5">
-                            <h1 class="mt-5 fadeIn">
+                            <h1 class="mt-3 fadeIn">
                                 <b> {{$activeViewing->title}} </b>
                                 <p class="text-new-warning" style=" font-family: cursive;font-style: oblique;font-size:22px;"> {{$activeViewing->slogan}} </p>
                             </h1>

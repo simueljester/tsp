@@ -1,12 +1,3 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-{{-- Dropzone Start --}}
-<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css"/>
-{{-- Dropzone End --}}
-
-
-{{-- CK EDITOR START --}}
 <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 <script>
     // CKEDITOR START
@@ -41,4 +32,3 @@
 
 </script>
 
-{{-- CK EDITOR END --}}
