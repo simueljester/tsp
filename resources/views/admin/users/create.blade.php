@@ -26,8 +26,8 @@
             </select>
         </div>
         <div class="form-group">
-            <a href="{{route('admin.users.index')}}" type="button" class="btn btn-outline-secondary"> Cancel </a>
-            <button onclick="return confirm('Are you sure you want to add new user?')" class="btn btn-success"> <i class="fa-solid fa-plus"></i> Create </button>
+            <button onclick="return confirm('Are you sure you want to add new user?')" class="btn btn-primary btn-sm"> Create </button>
+            <a href="{{route('admin.users.index')}}" type="button" class="btn btn-sm btn-outline-secondary"> Cancel </a>
         </div>
     </form>
 </div>

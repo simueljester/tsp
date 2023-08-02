@@ -24,8 +24,9 @@
         </div>
         <div class="form-group">
             <input type="hidden" name="id" id="id" value="{{$user->id}}">
-            <a href="{{route('admin.users.index')}}" type="button" class="btn btn-outline-secondary"> Cancel </a>
-            <button onclick="return confirm('Are you sure you want to add update user?')" class="btn btn-success"> <i class="fa-solid fa-plus"></i> Save Changes </button>
+            <button onclick="return confirm('Are you sure you want to add update user?')" class="btn btn-primary btn-sm"> Save Changes </button>
+            <a href="{{route('admin.users.index')}}" type="button" class="btn btn-outline-secondary btn-sm"> Cancel </a>
+
         </div>
     </form>
 </div>
