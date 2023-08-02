@@ -34,7 +34,17 @@ class IconHelper {
         'fa-solid fa-inbox',
         'fa-solid fa-gears',
         'fa-solid fa-layer-group',
-        'fa-solid fa-business-time'
+        'fa-solid fa-business-time',
+        'fa-brands fa-facebook',
+        'fa-solid fa-download',
+        'fa-brands fa-twitter',
+        'fa-solid fa-image',
+        'fa-brands fa-instagram',
+        'fa-brands fa-linkedin',
+        'fa-solid fa-camera-retro',
+        'fa-solid fa-sitemap',
+        'fa-solid fa-cubes-stacked',
+        'fa-solid fa-chart-pie'
       ];
     }
 }

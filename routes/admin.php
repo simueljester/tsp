@@ -53,6 +53,8 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
                 Route::post('/delete', ['as' => 'delete', 'uses' => 'ServiceCategoryController@delete']);
             });
 
+            Route::get('/list/{category}', ['as' => 'index', 'uses' => 'ServiceController@index']);
+
         });
 
     });

@@ -11,8 +11,8 @@
             </div>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('admin.pages.introduction.index')}}">List</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="{{route('admin.pages.introduction.create')}}"> <strong> Add Template </strong> </a></li>
+                    <li class="breadcrumb-item"><a href="{{route('admin.pages.introduction.index')}}">List</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{route('admin.pages.introduction.create')}}"> <strong> Add Template </strong> </a></li>
                 </ol>
             </nav>
         </div>

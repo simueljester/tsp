@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ServiceCategory;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -22,10 +23,10 @@ class ServiceController extends Controller
         // app(IntroductionRepository::class);
     }
 
-    public function index()
+    public function index(ServiceCategory $category)
     {
         $services = null;
-        return view('admin.page-management.services.categories.index',compact('services')); //direct to category
+        return view('admin.page-management.services.index',compact('services','category')); //direct to category
     }
 
 }

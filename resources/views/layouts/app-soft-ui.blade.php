@@ -138,26 +138,124 @@
 
 
     <div class="container-fluid py-4">
-{{-- Yield --}}
-      @if(session()->has('success'))
-        <div class="alert alert-success fadeIn" role="alert" id="alertSuccess" style="cursor: pointer" onclick="removeElement('alertSuccess')">
-          <i class="fa-solid fa-circle-check"></i> Success! {{ session()->get('success') }}
-        </div>
-      @endif
+
+        {{-- <section>
+
+            <div class="container mt-5">
+              <div class="row">
+
+                <div class="col-sm-12">
+                  <div class="alert fade alert-simple alert-success alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
+                    <button type="button" class="close font__size-18" data-dismiss="alert">
+                                              <span aria-hidden="true"><a>
+                              <i class="fa fa-times greencross"></i>
+                              </a></span>
+                                              <span class="sr-only">Close</span>
+                                          </button>
+                    <i class="start-icon far fa-check-circle faa-tada animated"></i>
+                    <strong class="font__weight-semibold">Well done!</strong> You successfullyread this important.
+                  </div>
+                </div>
+
+                <div class="col-sm-12">
+                  <div class="alert fade alert-simple alert-info alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" role="alert" data-brk-library="component__alert">
+                    <button type="button" class="close font__size-18" data-dismiss="alert">
+                                              <span aria-hidden="true">
+                                                  <i class="fa fa-times blue-cross"></i>
+                                              </span>
+                                              <span class="sr-only">Close</span>
+                                          </button>
+                    <i class="start-icon  fa fa-info-circle faa-shake animated"></i>
+                    <strong class="font__weight-semibold">Heads up!</strong> This alert needs your attention, but it's not super important.
+                  </div>
+
+                </div>
+
+                <div class="col-sm-12">
+                  <div class="alert fade alert-simple alert-warning alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" role="alert" data-brk-library="component__alert">
+                    <button type="button" class="close font__size-18" data-dismiss="alert">
+                                              <span aria-hidden="true">
+                                                  <i class="fa fa-times warning"></i>
+                                              </span>
+                                              <span class="sr-only">Close</span>
+                                          </button>
+                    <i class="start-icon fa fa-exclamation-triangle faa-flash animated"></i>
+                    <strong class="font__weight-semibold">Warning!</strong> Better check yourself, you're not looking too good.
+                  </div>
+                </div>
+
+                <div class="col-sm-12">
+                  <div class="alert fade alert-simple alert-danger alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" role="alert" data-brk-library="component__alert">
+                    <button type="button" class="close font__size-18" data-dismiss="alert">
+                                              <span aria-hidden="true">
+                                                  <i class="fa fa-times danger "></i>
+                                              </span>
+                                              <span class="sr-only">Close</span>
+                                          </button>
+                    <i class="start-icon far fa-times-circle faa-pulse animated"></i>
+                    <strong class="font__weight-semibold">Oh snap!</strong> Change a few things up and try submitting again.
+                  </div>
+                </div>
+
+                <div class="col-sm-12">
+                  <div class="alert fade alert-simple alert-primary alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" role="alert" data-brk-library="component__alert">
+                    <button type="button" class="close font__size-18" data-dismiss="alert">
+                                              <span  aria-hidden="true"><i class="fa fa-times alertprimary"></i></span>
+                                              <span class="sr-only">Close</span>
+                                          </button>
+                    <i class="start-icon fa fa-thumbs-up faa-bounce animated"></i>
+                    <strong class="font__weight-semibold">Well done!</strong> You successfullyread this important.
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </section> --}}
+
+
+
+
+
+
+    {{-- Yield --}}
+    <div class="square_box box_three"></div>
+    <div class="square_box box_four"></div>
+    <div style="position: absolute; top:20; right:0;" class="text-right">
+        @if(session()->has('success'))
+            <div class="alert alert-primary alert-dismissible fade show fadeInDown" role="alert" style="z-index:1">
+                <i class="fa-solid fa-circle-check fa-lg text-white fa-beat-fade"></i>
+                <span class="alert-text text-white"><strong>Success!</strong> {{ session()->get('success') }} </span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
         @if(session()->has('error'))
-        <div class="alert alert-danger fadeIn text-white" role="alert" id="alertDanger" style="cursor: pointer" onclick="removeElement('alertDanger')">
-            <i class="fas fa-exclamation-triangle"></i> <strong>Notice!</strong>  {{session()->get('error') }}
-        </div>
-      @endif
-      @if ($errors->any())
-        @foreach ($errors->all() as $error)
-            <div class="alert alert-danger fadeIn" role="alert" style="cursor: pointer" id="alertDangerMultiple" onclick="removeElement('alertDangerMultiple')">{{$error}}</div>
-        @endforeach
-      @endif
-      <div>
-            @yield('content')
-      </div>
-{{-- End Yield --}}
+            <div class="alert alert-warning alert-dismissible fade show fadeInDown" role="alert" style="z-index:1">
+                <i class="fa-solid fa-triangle-exclamation fa-lg text-dark fa-beat-fade"></i>
+                <span class="alert-text text-dark"><strong>Notice!</strong>  {{session()->get('error') }} </span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                <div class="alert alert-warning alert-dismissible fade show fadeInDown" role="alert" style="z-index:1">
+                    <i class="fa-solid fa-triangle-exclamation fa-lg text-dark fa-beat-fade"></i>
+                    <span class="alert-text text-dark"><strong>Notice!</strong> {{$error}} </span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endforeach
+        @endif
+    </div>
+    <div style="position: relative">
+        @yield('content')
+    </div>
+    {{-- End Yield --}}
 
       <footer class="footer pt-3  ">
         <div class="container-fluid">
