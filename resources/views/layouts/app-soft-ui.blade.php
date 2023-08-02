@@ -39,6 +39,12 @@
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+
 </head>
 
 <body class="g-sidenav-show">
@@ -76,6 +82,11 @@
         <li class="nav-item">
             <a class="nav-link {{Route::current()->getName() == 'admin.pages.introduction.index' ? 'active' : '' }}" href="{{route('admin.pages.introduction.index')}}">
               <span class="nav-link-text ms-1"> <i class="fa-solid fa-cube"></i> &nbsp Introduction</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{Route::current()->getName() == 'admin.pages.services.categories.index' ? 'active' : '' }}" href="{{route('admin.pages.services.categories.index')}}">
+              <span class="nav-link-text ms-1"> <i class="fa-solid fa-cube"></i> &nbsp Services</span>
             </a>
         </li>
         <li class="nav-item mt-3">

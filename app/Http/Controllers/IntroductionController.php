@@ -21,11 +21,6 @@ class IntroductionController extends Controller
         $this->introductionRepository = app(IntroductionRepository::class);
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index($viewingId = null)
     {
         $introductions = $this->introductionRepository->query()->get()->keyBy('id');

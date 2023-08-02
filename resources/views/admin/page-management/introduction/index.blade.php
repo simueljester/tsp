@@ -41,7 +41,7 @@
         <div class="card-header">
             <strong> Template List </strong>
             <div class="mt-3">
-                <a href="{{route('admin.pages.introduction.create')}}" class="btn btn-primary btn-sm"> <i class="fa-solid fa-plus"></i> Add Template  </a>
+                <a href="{{route('admin.pages.introduction.create')}}" class="btn btn-primary btn-sm"> </i> Add Template  </a>
             </div>
         </div>
         <div class="card-body">

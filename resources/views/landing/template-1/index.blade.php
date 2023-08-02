@@ -19,11 +19,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 
     {{-- Slick --}}
- <!-- Add the slick-theme.css if you want default styling -->
- <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
- <!-- Add the slick-theme.css if you want default styling -->
- <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
- <link rel="stylesheet" href="{{ asset('css/main.css') }}""/>
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}"/>
 
 </head>
 <body class="bg-light">
@@ -34,11 +34,11 @@
                     <strong> <img class="zoomIn" src="{{ asset('images') }}/symbol2.png" width="30"> <b class="text-muted">TSP</b> </strong>
                 </a>
                 <span class="float-right">
-                    <span> Home </span> 
-                    <span class="ml-2"> Services </span> 
-                    <span class="ml-2"> About </span> 
-                    <span class="ml-2"> Gallery </span> 
-                    <span class="ml-2"> Contact </span> 
+                    <span> Home </span>
+                    <span class="ml-2"> Services </span>
+                    <span class="ml-2"> About </span>
+                    <span class="ml-2"> Gallery </span>
+                    <span class="ml-2"> Contact </span>
                 </span>
             </div>
         </div>
@@ -153,7 +153,7 @@
     });
         // Slick End
 
-      
+
     });
 
     $(window).on('scroll', function (e) {

@@ -42,6 +42,16 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
             Route::post('/delete', ['as' => 'delete', 'uses' => 'IntroductionController@delete']);
         });
 
+           // Services
+        Route::group(['prefix'=>'services','as'=>'services.'], function(){
+            Route::group(['prefix'=>'categories','as'=>'categories.'], function(){
+                Route::get('/list', ['as' => 'index', 'uses' => 'ServiceCategoryController@index']);
+                Route::get('/create', ['as' => 'create', 'uses' => 'ServiceCategoryController@create']);
+                Route::post('/save', ['as' => 'save', 'uses' => 'ServiceCategoryController@save']);
+            });
+
+        });
+
     });
 
     //Users
