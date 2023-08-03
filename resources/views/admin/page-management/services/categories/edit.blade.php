@@ -29,21 +29,21 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <strong>Icon</strong> <small class="text-danger"> * </small>
+                                    <label class="form-control-label">Icon</label> <small class="text-danger"> * </small>
                                     <input type="text" name="icon" id="icon" class="form-control bg-light" placeholder="Icon" readonly required value="{{$category->icon}}">
                                 </div>
                                 <div class="form-group">
-                                    <strong>Name</strong> <small class="text-danger"> * </small>
+                                    <label class="form-control-label">Name</label><small class="text-danger"> * </small>
                                     <input type="text" name="name" id="name" class="form-control" placeholder="Service Category" required value="{{$category->name}}">
                                 </div>
                                 <div class="form-group">
-                                    <strong>Description</strong> <small class="text-danger"> * </small>
+                                    <label class="form-control-label">Description</label> <small class="text-danger"> * </small>
                                     <textarea type="text" name="description" id="description" class="form-control" rows="10"> {!! $category->description !!} </textarea>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <strong> Publish </strong>
+                                            <label class="form-control-label">Publish</label>
                                             <div>
                                                 <label class="switch">
                                                     <input type="checkbox" name="publish" value="1" {{$category->published_at ? 'checked' : ''}}>
@@ -54,7 +54,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <strong>Is Featured</strong> <small> Display in homepage </small>
+                                            <label class="form-control-label">Is Featured</label><small> Display in homepage </small>
                                             <div>
                                                 <label class="switch">
                                                     <input type="checkbox" name="is_featured" value="1" {{$category->published_at ? 'checked' : ''}}>
@@ -67,7 +67,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <strong>Select Icon</strong>
+                                <label class="form-control-label">Select Icon</label>
                                 <div class="row fadeIn">
                                     @foreach ($icons as $icon)
                                         <div class="col-sm-2 mt-3">

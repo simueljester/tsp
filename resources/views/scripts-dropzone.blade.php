@@ -5,7 +5,7 @@
 $(document).ready(function(){
     Dropzone.options.dropzone =
      {
-        maxFilesize: 12,
+        maxFilesize: 256,
         renameFile: function(file) {
             var dt = new Date();
             var time = dt.getTime();

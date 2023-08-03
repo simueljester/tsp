@@ -20,7 +20,7 @@
         <div class="card-body">
             <strong> <i class="{{$category->icon}}"></i> {{$category->name}} Service List </strong>
             <div class="mt-3">
-                <a href="#" class="btn btn-primary btn-sm"> Add Service  </a>
+                <a href="{{route('admin.pages.services.create',$category)}}" class="btn btn-primary btn-sm"> Add Service  </a>
             </div>
         </div>
     </div>

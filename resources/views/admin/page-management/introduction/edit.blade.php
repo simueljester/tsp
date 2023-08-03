@@ -29,20 +29,20 @@
                         <div class="row">
                             <div class="col-sm-8">
                                 <div class="form-group">
-                                    <strong>Title</strong> <small class="text-danger"> * </small>
+                                    <label class="form-control-label">Title</label> <small class="text-danger"> * </small>
                                     <input type="text" name="title" id="title" class="form-control" value="{{$introduction->title}}" placeholder="Technology Solutions Provider & Consultancy" required>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <strong>Slogan</strong> <small class="text-danger"> * </small>
+                                    <label class="form-control-label">Slogan</label><small class="text-danger"> * </small>
                                     <input type="text" name="slogan" id="slogan" class="form-control" value="{{$introduction->slogan}}" placeholder="We do it with Passion" required>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <strong>Description</strong> <small class="text-danger"> * </small>
+                            <label class="form-control-label">Description</label> <small class="text-danger"> * </small>
                             <textarea type="text" name="description" id="description" class="form-control description" rows="10"> {!! $introduction->description !!} </textarea>
                         </div>
                     </div>

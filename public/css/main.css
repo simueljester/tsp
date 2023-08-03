@@ -20,6 +20,9 @@
  .border-custom {
      border-radius: 12px;
  }
+ .border-custom-circle {
+    border-radius: 80px;
+}
 
  .card-hover-bg{
     transition: 0.3s;
@@ -502,3 +505,13 @@
     opacity: 0;
   }
 }
+
+/* Dropzone CSS */
+
+#dropzone{
+    background: transparent;
+    border: 1px dashed #e60b99;
+    border-radius: 12px;
+}
+
+/* Dropzone CSS End */

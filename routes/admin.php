@@ -54,7 +54,7 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
             });
 
             Route::get('/list/{category}', ['as' => 'index', 'uses' => 'ServiceController@index']);
-
+            Route::get('/create/{category}', ['as' => 'create', 'uses' => 'ServiceController@create']);
         });
 
     });
