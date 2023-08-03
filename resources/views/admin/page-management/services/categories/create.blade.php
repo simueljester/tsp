@@ -81,8 +81,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                     <div class="card-footer">
                         <button class="btn btn-sm btn-primary"> Add </button>

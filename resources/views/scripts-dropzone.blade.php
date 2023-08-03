@@ -3,6 +3,7 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
+    var filenames = []
     Dropzone.options.dropzone =
      {
         maxFilesize: 256,
@@ -14,14 +15,25 @@ $(document).ready(function(){
         acceptedFiles: ".jpeg,.jpg,.png,.gif",
         addRemoveLinks: true,
         timeout: 5000,
-        success: function(file, response)
-        {
-            console.log(response);
+        success: function(file, response){
+            console.log(file);
+            filenames.push(response.success)
+            // console.log(filenames);
+            $('#multimedia').val(filenames)
+
         },
-        error: function(file, response)
-        {
+        error: function(file, response){
            return false;
+        },
+        removedfile: function(file) {
+            var index = filenames.indexOf(file.name);
+            if (index !== -1) {
+                filenames.splice(index, 1);
+            }
+            file.previewElement.remove();
+            $('#multimedia').val(filenames)
         }
     };
+
 });
 </script>

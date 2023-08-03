@@ -9,7 +9,7 @@ class DropzoneController extends Controller
     //
     public function store(Request $request){
         $image = $request->file('file');
-        $imageName = 'tsp-upload-'.time().'.'.$image->getClientOriginalExtension();
+        $imageName = $image->getClientOriginalName();
         $image->move(public_path('images/dropzone'),$imageName);
         return response()->json(['success'=>$imageName]);
     }
