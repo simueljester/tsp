@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ServiceCategory extends Model
 {
@@ -15,4 +16,9 @@ class ServiceCategory extends Model
     protected $dates = [
         'published_at',
    ];
+
+   public function services(): HasMany {
+    return $this->hasMany('App\Service', 'category_id','id');
+}
+
 }

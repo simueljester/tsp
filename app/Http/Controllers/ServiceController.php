@@ -29,7 +29,12 @@ class ServiceController extends Controller
 
     public function index(ServiceCategory $category)
     {
-        $services = null;
+        $services = $this->serviceRepository->query()
+        ->whereCategoryId($category->id)
+        ->with('category:id,name,icon')
+        ->select('name','type','icon','description','published_at','category_id','created_at')
+        ->orderBy('created_at','DESC')
+        ->get();
         return view('admin.page-management.services.index',compact('services','category'));
     }
 
@@ -47,10 +52,9 @@ class ServiceController extends Controller
             'description'   => 'required',
             'type'          => 'required',
             'slug'          => 'required|unique:services,slug|max:191',
-            'thumbnail'     => 'required'
+            'icon'          => 'required'
         ]);
 
-        $icon =  $request->thumbnail ? UploadHelper::uploadFile($request->thumbnail) : null;
         $multimedia = $request->multimedia ? json_encode(explode(',', $request->multimedia)) : null;
 
         $data = [
@@ -59,7 +63,7 @@ class ServiceController extends Controller
             'type'          => $request->type,
             'description'   => $request->description,
             'category_id'   => $request->category_id,
-            'icon'          => $icon,
+            'icon'          => $request->icon,
             'multimedia'    => $multimedia,
             'files'         => null,
             'published_at'  => $request->publish ? now() : null

@@ -25,6 +25,55 @@
         </div>
     </div>
 
+    <div class="row fadeIn mt-3">
+        @forelse ($services as $service)
+            <div class="col-sm-4">
+                <div class="card service-card">
+                   <div class="card-body ">
+                        <div class="form-group ">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="border-custom-circle text-center custom-icon-parent-2 bg-light shadow target-icon">
+                                        <h1> <i class="{{$service->icon}} custom-icon-child-2" id="showicon"></i> </h1>
+                                    </div>
+                                    <div class="mt-2">
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div>
+                                        <strong class="text-uppercase"> {{$service->name}} </strong>
+                                    </div>
+                                    <hr class="horizontal dark my-1">
+                                    <div class="char-limit">
+                                        {!! $service->description !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+                   <div class="card-footer bg-light">
+                        @if ($service->published_at)
+                            <span class="badge bg-gradient-dark ml-5">Published</span>
+                            @else
+                            <span class="badge bg-gradient-secondary ml-5">Unpublish</span>
+                        @endif
+
+                    </div>
+                </div>
+            </div>
+        @empty
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        No services found
+                    </div>
+                 </div>
+            </div>
+        @endforelse
+
+    </div>
+
 </div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>

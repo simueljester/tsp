@@ -42,9 +42,7 @@
                                     </h6>
                                 </div>
                             </td>
-                            <td>
-                                0
-                            </td>
+                            <td>{{$category->services_count}}</td>
                             <td>
                                 @if ($category->published_at)
                                     <span class="badge badge-pill bg-gradient-success">Yes</span>

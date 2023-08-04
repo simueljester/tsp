@@ -21,7 +21,7 @@
      border-radius: 12px;
  }
  .border-custom-circle {
-    border-radius: 80px;
+    border-radius: 120px;
 }
 
  .card-hover-bg{
@@ -40,6 +40,30 @@
     border:2px solid #f41ade;
  }
 
+ .card-hover-outline{
+    border:4px solid transparent;
+    transition: border-color 500ms;
+    transition: 0.3s;
+ }
+ .card-hover-outline:hover{
+    border-color: #f41ade;
+ }
+
+ .card-hover-outline:active {
+    transform: scale(1.2);
+    border-color: #f41ade;
+ }
+
+ .service-card{
+    cursor: pointer;
+ }
+.service-card:hover .target-icon{
+    transform: scale(1.1);
+    transition-timing-function: ease-in;
+    transition: 0.3s;
+}
+
+
 .sticky {
     position: -webkit-sticky;
     position: sticky;
@@ -50,7 +74,45 @@
     z-index: 1;
     background-color: #d8d8d8;
 }
+.custom-icon-parent{
+    width:130px;
+    height:130px;
+    position: relative;
+    border: 2px dashed #f41ade;
+}
+.custom-icon-child{
+    width: 50px;
+    height: 50px;
+    /* Center vertically and horizontally */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
+.custom-icon-parent-2{
+    width:100px;
+    height:100px;
+    position: relative;
+    border: 2px dashed #f41ade;
+}
+.custom-icon-child-2{
+    width: 50px;
+    height: 50px;
+    /* Center vertically and horizontally */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.char-limit{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* number of lines to show */
+            line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
 
 .element-to-hide {
     visibility: hidden;

@@ -29,10 +29,6 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label class="form-control-label">Icon</label> <small class="text-danger"> * </small>
-                                    <input type="text" name="icon" id="icon" class="form-control bg-light" placeholder="Icon" readonly required value="{{$category->icon}}">
-                                </div>
-                                <div class="form-group">
                                     <label class="form-control-label">Name</label><small class="text-danger"> * </small>
                                     <input type="text" name="name" id="name" class="form-control" placeholder="Service Category" required value="{{$category->name}}">
                                 </div>
@@ -45,10 +41,9 @@
                                         <div class="form-group">
                                             <label class="form-control-label">Publish</label>
                                             <div>
-                                                <label class="switch">
-                                                    <input type="checkbox" name="publish" value="1" {{$category->published_at ? 'checked' : ''}}>
-                                                    <span class="slider round"></span>
-                                                </label>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="publish" name="publish" value="1" {{$category->published_at ? 'checked' : ''}}>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -56,33 +51,16 @@
                                         <div class="form-group">
                                             <label class="form-control-label">Is Featured</label><small> Display in homepage </small>
                                             <div>
-                                                <label class="switch">
-                                                    <input type="checkbox" name="is_featured" value="1" {{$category->published_at ? 'checked' : ''}}>
-                                                    <span class="slider round"></span>
-                                                </label>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="is_featured" name="is_featured" value="1" {{$category->is_featured ? 'checked' : ''}}>
+                                                </div>
                                             </div>
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <label class="form-control-label">Select Icon</label>
-                                <div class="row fadeIn">
-                                    @foreach ($icons as $icon)
-                                        <div class="col-sm-2 mt-3">
-                                            <div class="card card-hover-bg" style="cursor: pointer;" onclick="selectIcon({{json_encode($icon)}})">
-                                                <div class="card-body text-center">
-                                                    <h4> <i class="{{$icon}}"></i> </h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
                         </div>
-
-
                     </div>
                     <div class="card-footer">
                         <input type="hidden" name="id" id="id" value="{{$category->id}}">

@@ -99,5 +99,34 @@
 
     });
 
+    $('.slick-center').slick({
+        centerMode: true,
+        slidesToShow: 7,
+        dots: false,
+        arrows: true,
+        nextArrow:'<button type="button" class="btn btn-primary btn-sm"> Next </button>',
+
+        responsive: [
+            {
+            breakpoint: 768,
+            settings: {
+                arrows: false,
+                centerMode: true,
+                centerPadding: '40px',
+                slidesToShow: 3
+            }
+            },
+            {
+            breakpoint: 480,
+            settings: {
+                arrows: false,
+                centerMode: true,
+                centerPadding: '40px',
+                slidesToShow: 1
+            }
+            }
+        ]
+    });
+
 
 </script>

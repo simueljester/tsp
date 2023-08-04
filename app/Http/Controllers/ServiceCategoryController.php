@@ -26,7 +26,7 @@ class ServiceCategoryController extends Controller
 
     public function index()
     {
-        $categories = $this->categoryRepository->query()->get();
+        $categories = $this->categoryRepository->query()->withCount('services')->get();
         return view('admin.page-management.services.categories.index',compact('categories'));
     }
 
@@ -39,24 +39,22 @@ class ServiceCategoryController extends Controller
 
     public function save(Request $request)
     {
-
         $request->validate([
             'name'          => 'required',
-            'description'   => 'required',
-            'icon'          => 'required'
+            'description'   => 'required'
         ]);
 
         $data = [
-            'name'         => $request->name,
+            'name'         => ucwords($request->name),
             'description'  => $request->description,
             'published_at' => $request->publish ? now() : null,
             'is_featured'  => $request->is_featured ? true : false,
-            'icon'         => $request->icon,
+            'icon'         => null,
         ];
 
         try {
-            $this->categoryRepository->save($data);
-            return redirect()->route('admin.pages.services.categories.index')->with('success', 'Category successfully added');
+            $category = $this->categoryRepository->save($data);
+            return redirect()->route('admin.pages.services.index',$category->id)->with('success', 'Category successfully added');
         }
         catch(\Exception $e) {
             return redirect()->back()->with('error', 'Exception occured. Please contact your developer');
@@ -74,8 +72,7 @@ class ServiceCategoryController extends Controller
     {
         $request->validate([
             'name'          => 'required',
-            'description'   => 'required',
-            'icon'          => 'required'
+            'description'   => 'required'
         ]);
 
         $category = ServiceCategory::find($request->id);
@@ -91,7 +88,7 @@ class ServiceCategoryController extends Controller
 
             try {
                 $this->categoryRepository->update($request->id,$data);
-                return redirect()->route('admin.pages.services.categories.index')->with('success', 'Category successfully updated');
+                return redirect()->route('admin.pages.services.index',$request->id)->with('success', 'Category successfully updated');
             }
             catch(\Exception $e) {
                 return redirect()->back()->with('error', 'Exception occured. Please contact your developer');
@@ -103,8 +100,6 @@ class ServiceCategoryController extends Controller
     }
 
     public function delete(Request $request){
-        // $introduction = $this->categoryRepository->find($request->deleteId);
-
         try {
             $this->categoryRepository->delete($request->deleteId);
             return redirect()->route('admin.pages.services.categories.index')->with('success', 'Category successfully deleted');
@@ -112,7 +107,5 @@ class ServiceCategoryController extends Controller
         catch(\Exception $e) {
             return redirect()->back()->with('error', 'Exception occured. Please contact your developer');
         }
-
-
     }
 }

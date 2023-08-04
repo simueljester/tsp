@@ -22,7 +22,6 @@ class IconHelper {
         'fa-solid fa-globe',
         'fa-solid fa-shield-halved',
         'fa-brands fa-windows',
-        'fa-solid fa-users',
         'fa-solid fa-bag-shopping',
         'fa-solid fa-shop',
         'fa-solid fa-network-wired',

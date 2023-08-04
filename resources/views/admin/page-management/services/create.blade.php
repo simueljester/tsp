@@ -18,29 +18,42 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-8 ">
             <form method="post" action="{{route('admin.pages.services.save')}}" enctype="multipart/form-data">
                 @csrf
-                <div class="card mt-3 fadeIn">
+                <div class="card mt-3 fadeIn " >
                     <div class="card-header bg-light">
-                        <strong class="text-capitalize"> <i class="{{$category->icon}}"></i> {{$category->name}} </strong> <i class="fa-solid fa-angles-right"></i> Add Service
+                        <strong class="text-capitalize"> {{$category->name}} </strong> <i class="fa-solid fa-angles-right"></i> Add Service
                     </div>
                     <div class="card-body">
-                        <div class="form-group">
-                            <div class="text-center mt-3">
-                                <img id="output" class="border-custom-circle shadow" src="{{url('/images/thumbnail-default.png')}}" style="width:150px;height:150px;"/>
-                            </div>
-                            <label class="form-control-label">Thumbnail</label> <small class="text-danger"> * </small>
-                            <div class="input-group mb-3">
-                                <button class="btn btn-primary mb-0" type="button" id="getFile">Browse</button>
-                                <input type="text" class="form-control"  placeholder="  Select image" id="thumbnailImage"  required readonly>
-                                <input type="file" name="thumbnail" accept="image/*" id="thumbnailFile" onchange="loadFile(event)" hidden>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group ">
+                                    <div class="border-custom-circle text-center custom-icon-parent bg-light shadow">
+                                        <h1> <i class="fa-brands fa-uncharted custom-icon-child" id="showicon"></i> </h1>
+                                    </div>
+                                </div>
+                                <div class="form-group" hidden>
+                                    <label class="form-control-label">Icon</label> <small class="text-danger"> * </small>
+                                    <input type="text" name="icon" id="icon" class="form-control bg-light" readonly value="fa-brands fa-uncharted">
+                                </div>
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label class="form-control-label">Name</label><small class="text-danger"> * </small>
                             <input type="text" name="name" id="name" class="form-control " onload="convertToSlug(this.value)" onkeyup="convertToSlug(this.value)" value="{{ old('name') }}">
                         </div>
+                        <div class="form-group">
+                            <div class="slick-center">
+                                @foreach ($icons as $icon)
+                                    <div class="text-center card-hover-outline m-3 border-custom p-1" style="cursor: pointer;" onclick="selectIcon({{json_encode($icon)}})">
+                                        <h4> <i class="{{$icon}}" id="{{$icon}}"></i> </h4>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label class="form-control-label">Slug</label><small class="text-danger"> * </small>
                             <input type="text" name="slug" id="slug-text" class="form-control bg-light" readonly value="{{ old('slug') }}">
@@ -73,18 +86,17 @@
                 </div>
             </form>
         </div>
-        <div class="col-sm-6">
-            <div class="card mt-3">
+        <div class="col-sm-4">
+            <div class="card mt-3 fadeIn">
                 <div class="card-header bg-light">
-                    <strong>Additional Media</strong>
+                    <strong>Upload Images / Videos</strong>
                 </div>
                 <div class="card-body">
-                    <div class="form-group">
-                        <label class="form-control-label"></label>
+                    <div class="form-group mt-3">
                         <form method="post" action="{{route('admin.dropzone.store')}}" enctype="multipart/form-data" class="dropzone" id="dropzone">
                             @csrf
                             <div class="dz-message fadeInDown" data-dz-message>
-                                <h3><i class="fa-solid fa-cloud-arrow-up fa-fade fa-lg"></i></h3>
+                                <h2><i class="fa-solid fa-cloud-arrow-up fa-fade fa-lg"></i></h2>
                                 <span>Drop your files here</span>
                             </div>
                         </form>
@@ -92,6 +104,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
 </div>
@@ -103,33 +116,28 @@
 </style>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+@include('scripts-dropzone')
 @include('scripts-slick')
 @include('scripts-ck-editor')
-@include('scripts-dropzone')
-<script>
-    var loadFile = function(event) {
-        var output = document.getElementById('output');
-        output.src = URL.createObjectURL(event.target.files[0]);
-        output.onload = function() {
-            URL.revokeObjectURL(output.src) // free memory
-        }
-        $('#thumbnailImage').val(event.target.files[0].name)
-        $( "#output" ).show();
-    };
 
-    $("#getFile").click(function(){
-        $( "#thumbnailFile" ).trigger( "click" );
-    });
+<script>
 
     function convertToSlug( str ) {
-        //replace all special characters | symbols with a space
         str = str.replace(/[`~!@#$%^&*()_\-+=\[\]{};:'"\\|\/,.<>?\s]/g, ' ').toLowerCase();
-        // trim spaces at start and end of string
         str = str.replace(/^\s+|\s+$/gm,'');
-        // replace space with dash/hyphen
         str = str.replace(/\s+/g, '-');
         $( "#slug-text" ).val(str);
     }
+
+    function selectIcon(icon){
+        $('#icon').val(icon)
+        $('#iconSelectedLabel').html(icon + ' selected')
+        $('#showicon').removeClass()
+        $('#showicon').addClass(icon + ' fadeIn custom-icon-child')
+
+    }
+
+
 
 </script>
 

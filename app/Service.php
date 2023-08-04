@@ -2,7 +2,9 @@
 
 namespace App;
 
+use App\ServiceCategory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Service extends Model
 {
@@ -16,4 +18,9 @@ class Service extends Model
     protected $dates = [
         'published_at',
    ];
+
+   public function category(): BelongsTo
+   {
+       return $this->belongsTo(ServiceCategory::class);
+   }
 }
