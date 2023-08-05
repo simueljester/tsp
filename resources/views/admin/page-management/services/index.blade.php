@@ -28,39 +28,43 @@
     <div class="row fadeIn mt-3">
         @forelse ($services as $service)
             <div class="col-sm-4">
-                <div class="card service-card">
-                   <div class="card-body ">
-                        <div class="form-group ">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="border-custom-circle text-center custom-icon-parent-2 bg-light shadow target-icon">
-                                        <h1> <i class="{{$service->icon}} custom-icon-child-2" id="showicon"></i> </h1>
-                                    </div>
-                                    <div class="mt-2">
-
-                                    </div>
-                                </div>
-                                <div class="col-sm-8">
-                                    <div>
-                                        <strong class="text-uppercase"> {{$service->name}} </strong>
-                                    </div>
-                                    <hr class="horizontal dark my-1">
-                                    <div class="char-limit">
-                                        {!! $service->description !!}
-                                    </div>
-                                </div>
-                            </div>
+                <a href="{{route('admin.pages.services.show',$service)}}" style="text-decoration: none">
+                    <div class="card service-card mt-3">
+                        <div class="card-body ">
+                             <div class="form-group ">
+                                 <div class="row">
+                                     <div class="col-sm-4">
+                                         <div class="border-custom-circle text-center custom-icon-parent-2 bg-light shadow target-icon">
+                                             <h1> <i class="{{$service->icon}} custom-icon-child-2" id="showicon"></i> </h1>
+                                         </div>
+                                     </div>
+                                     <div class="col-sm-8">
+                                         <div>
+                                             <strong class="text-uppercase"> {{$service->name}} </strong>
+                                         </div>
+                                         <hr class="horizontal dark my-1">
+                                         <div class="char-limit">
+                                             {!! $service->description_clean !!}
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
                         </div>
-                   </div>
-                   <div class="card-footer bg-light">
-                        @if ($service->published_at)
-                            <span class="badge bg-gradient-dark ml-5">Published</span>
+                        <div class="card-footer bg-light">
+                             @if ($service->published_at)
+                                 <span class="badge bg-gradient-dark ml-5">Published</span>
+                                 @else
+                                 <span class="badge bg-gradient-secondary ml-5">Unpublish</span>
+                             @endif
+                             &nbsp
+                             @if ($service->type == 'service')
+                                <span class="badge bg-gradient-info ml-5">Service</span>
                             @else
-                            <span class="badge bg-gradient-secondary ml-5">Unpublish</span>
-                        @endif
-
-                    </div>
-                </div>
+                                <span class="badge bg-gradient-warning ml-5">Product</span>
+                            @endif
+                         </div>
+                     </div>
+                </a>
             </div>
         @empty
             <div class="col-sm-12">

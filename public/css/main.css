@@ -28,7 +28,7 @@
     transition: 0.3s;
  }
  .card-hover-bg:hover{
-    background-color: #1dd423;
+    background-color: #f41ade;
     color: white;
  }
 
@@ -36,8 +36,7 @@
     transition: 0.3s;
  }
  .card-hover-scale:hover{
-    transform: scale(1.2);
-    border:2px solid #f41ade;
+    transform: scale(1.1);
  }
 
  .card-hover-outline{
@@ -62,7 +61,6 @@
     transition-timing-function: ease-in;
     transition: 0.3s;
 }
-
 
 .sticky {
     position: -webkit-sticky;
@@ -118,6 +116,15 @@
     visibility: hidden;
 }
 
+.scrolling-wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+
+    .card-scroll-x {
+      display: inline-block;
+    }
+  }
 
 /* Animations Start */
 

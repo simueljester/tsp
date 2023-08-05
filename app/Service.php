@@ -12,7 +12,7 @@ class Service extends Model
     protected $table = 'services';
     //
     protected $fillable = [
-        'name','slug','type','description','category_id','icon','multimedia','files','published_at'
+        'name','slug','type','description','description_clean','category_id','icon','multimedia','files','published_at','is_featured'
     ];
 
     protected $dates = [

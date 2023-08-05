@@ -56,6 +56,10 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
             Route::get('/list/{category}', ['as' => 'index', 'uses' => 'ServiceController@index']);
             Route::get('/create/{category}', ['as' => 'create', 'uses' => 'ServiceController@create']);
             Route::post('/save', ['as' => 'save', 'uses' => 'ServiceController@save']);
+            Route::get('/show/{service}', ['as' => 'show', 'uses' => 'ServiceController@show']);
+            Route::get('/edit/{service}', ['as' => 'edit', 'uses' => 'ServiceController@edit']);
+            Route::post('/update', ['as' => 'update', 'uses' => 'ServiceController@update']);
+            Route::post('/remove-image', ['as' => 'remove-image', 'uses' => 'ServiceController@removeImage']);
         });
 
     });
