@@ -42,7 +42,7 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
             Route::post('/delete', ['as' => 'delete', 'uses' => 'IntroductionController@delete']);
         });
 
-           // Services
+        // Services
         Route::group(['prefix'=>'services','as'=>'services.'], function(){
             Route::group(['prefix'=>'categories','as'=>'categories.'], function(){
                 Route::get('/list', ['as' => 'index', 'uses' => 'ServiceCategoryController@index']);
@@ -63,7 +63,13 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
             Route::post('/update', ['as' => 'update', 'uses' => 'ServiceController@update']);
             Route::post('/remove-image', ['as' => 'remove-image', 'uses' => 'ServiceController@removeImage']);
             Route::post('/delete', ['as' => 'delete', 'uses' => 'ServiceController@delete']);
+        });
 
+        // Articles
+        Route::group(['prefix'=>'articles','as'=>'articles.'], function(){
+            Route::get('/list', ['as' => 'index', 'uses' => 'ArticleController@index']);
+            Route::get('/create', ['as' => 'create', 'uses' => 'ArticleController@create']);
+            Route::post('/save', ['as' => 'save', 'uses' => 'ArticleController@save']);
         });
 
     });

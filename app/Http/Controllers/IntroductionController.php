@@ -55,13 +55,7 @@ class IntroductionController extends Controller
         catch(\Exception $e) {
             return redirect()->back()->with('error', 'Exception occured. Please contact your developer');
         }
-    }
-
-    public function edit(Introduction $introduction){
-        return view('admin.page-management.introduction.edit',compact('introduction'));
-    }
-
-    public function update(Request $request)
+    } public function update(Request $request)
     {
         $request->validate([
             'title'         => 'required',
@@ -90,6 +84,12 @@ class IntroductionController extends Controller
         }
 
     }
+
+    public function edit(Introduction $introduction){
+        return view('admin.page-management.introduction.edit',compact('introduction'));
+    }
+
+
 
     public function delete(Request $request){
         $introduction = $this->introductionRepository->find($request->deleteId);
