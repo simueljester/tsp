@@ -7,6 +7,7 @@ use App\ServiceCategory;
 use App\Helpers\IconHelper;
 use Illuminate\Http\Request;
 use App\Helpers\UploadHelper;
+use App\Http\Repositories\ServiceCategoryRepository;
 use Illuminate\Validation\Rule;
 use App\Http\Repositories\ServiceRepository;
 
@@ -15,7 +16,7 @@ class ServiceController extends Controller
     //
 
 
-    public $serviceRepository;
+    public $serviceRepository, $categoryRepository;
     public $icon;
     /**
      * Create a new controller instance.
@@ -26,6 +27,7 @@ class ServiceController extends Controller
     {
         $this->middleware('auth');
         $this->serviceRepository = app(ServiceRepository::class);
+        $this->categoryRepository = app(ServiceCategoryRepository::class);
         $this->icons = IconHelper::getIcons();
     }
 
@@ -38,6 +40,21 @@ class ServiceController extends Controller
         ->orderBy('created_at','DESC')
         ->get();
         return view('admin.page-management.services.index',compact('services','category'));
+    }
+
+    public function indexUncategorize()
+    {
+
+        $services = $this->serviceRepository->query()
+        ->whereCategoryId(null)
+        ->with('category:id,name,icon')
+        ->select('id','name','type','icon','description_clean','published_at','category_id','created_at')
+        ->orderBy('created_at','DESC')
+        ->get();
+
+        $categories = $this->categoryRepository->query()->get();
+
+        return view('admin.page-management.services.index-uncategorized',compact('services','categories'));
     }
 
     public function create(ServiceCategory $category)
@@ -92,7 +109,8 @@ class ServiceController extends Controller
     public function show(Service $service)
     {
         $service->load('category');
-        return view('admin.page-management.services.show',compact('service'));
+        $categories = $this->categoryRepository->query()->get();
+        return view('admin.page-management.services.show',compact('service','categories'));
     }
 
     public function edit(Service $service)
@@ -149,17 +167,36 @@ class ServiceController extends Controller
     public function removeImage(Request $request)
     {
         $service = $this->serviceRepository->find($request->serviceId);
+
         $multimedia = json_decode($service->multimedia,true);
+
         $newVal = array_filter($multimedia, fn ($m) => $m != $request->multimediaName); //remove from array list
+
         if(count($newVal) != 0){
             $service->multimedia = json_encode(array_values($newVal));
         }else{
             $service->multimedia = null;
         }
+
         $service->save();
 
         return redirect()->back()->with('success','Image successfully removed from this service');
 
+    }
+
+    public function delete(Request $request){
+        try {
+            $this->serviceRepository->delete($request->deleteId);
+            if($request->categoryId){
+                return redirect()->route('admin.pages.services.index',$request->categoryId)->with('success', 'Category successfully deleted');
+            }else{
+                return redirect()->route('admin.pages.services.index-uncategorized')->with('success', 'Category successfully deleted');
+            }
+
+        }
+        catch(\Exception $e) {
+            return redirect()->back()->with('error', 'Exception occured. Please contact your developer');
+        }
     }
 
 }

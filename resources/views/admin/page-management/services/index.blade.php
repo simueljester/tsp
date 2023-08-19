@@ -53,11 +53,10 @@
                         <div class="card-footer bg-light">
                              @if ($service->published_at)
                                  <span class="badge bg-gradient-dark ml-5">Published</span>
-                                 @else
-                                 <span class="badge bg-gradient-secondary ml-5">Unpublish</span>
+
                              @endif
                              &nbsp
-                             @if ($service->type == 'service')
+                            @if ($service->type == 'service')
                                 <span class="badge bg-gradient-info ml-5">Service</span>
                             @else
                                 <span class="badge bg-gradient-warning ml-5">Product</span>

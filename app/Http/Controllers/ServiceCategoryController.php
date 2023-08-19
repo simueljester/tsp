@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\IconHelper;
-use App\Http\Repositories\ServiceCategoryRepository;
+use App\Service;
 use App\ServiceCategory;
+use App\Helpers\IconHelper;
 use Illuminate\Http\Request;
+use App\Http\Repositories\ServiceCategoryRepository;
 
 class ServiceCategoryController extends Controller
 {
@@ -101,6 +102,10 @@ class ServiceCategoryController extends Controller
 
     public function delete(Request $request){
         try {
+
+            // instead of deleting, mark null the existing service under this category
+            Service::whereCategoryId($request->deleteId)->update(['category_id'=>null]);
+
             $this->categoryRepository->delete($request->deleteId);
             return redirect()->route('admin.pages.services.categories.index')->with('success', 'Category successfully deleted');
         }
@@ -108,4 +113,18 @@ class ServiceCategoryController extends Controller
             return redirect()->back()->with('error', 'Exception occured. Please contact your developer');
         }
     }
+
+    public function reassignService(Request $request){
+
+        $selected_services =  explode(',', $request->selectedServices);
+
+        try{
+            Service::whereIn('id',$selected_services)->update(['category_id'=>$request->categoryId]);
+            return redirect()->route('admin.pages.services.index',$request->categoryId)->with('success', 'Services successfully reassigned!');
+
+        }catch(\Exception $e) {
+            return redirect()->back()->with('error', 'Exception occured. Please contact your developer');
+        }
+
+   }
 }

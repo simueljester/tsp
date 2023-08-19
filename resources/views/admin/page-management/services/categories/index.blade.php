@@ -32,7 +32,7 @@
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Action</th>
                     </thead>
                     <tbody>
-                        @forelse ($categories as $category)
+                        @foreach ($categories as $category)
                         <tr>
                             <td>
                                 <div class="d-flex flex-column justify-content-center">
@@ -66,11 +66,23 @@
                                 </form>
                             </td>
                         </tr>
-                        @empty
+                        @endforeach
                         <tr>
-                            <td colspan="4"> No record found </td>
+                            <td>
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h6 class="mb-0 text-s text-muted">
+                                        Uncategorized Services
+                                    </h6>
+                                </div>
+                            </td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>
+                                <a href="{{route('admin.pages.services.index-uncategorized')}}" class="btn btn-primary btn-sm" data-bs-placement="top" title="Uncategorized" data-container="body" data-animation="true">
+                                    View Services
+                                </a>
+                            </td>
                         </tr>
-                        @endforelse
                     </tbody>
                 </table>
             </div>
@@ -88,8 +100,14 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
-          <p> Are you sure you want to delete this category? Services under this category will be marked as uncategorized </p>
+        <div class="modal-body text-center">
+            <i class="fa-solid fa-triangle-exclamation fa-3x text-warning fa-fade"></i>
+            <p>
+                Are you sure you want to delete this category? Services under this category will be marked as <strong> uncategorized </strong>.
+                <br>
+                <br>
+                If you want to access the uncategorized services, The <strong> Uncategorized Services </strong> is available in this list.
+            </p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>

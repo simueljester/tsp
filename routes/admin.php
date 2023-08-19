@@ -51,15 +51,19 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
                 Route::get('/edit/{category}', ['as' => 'edit', 'uses' => 'ServiceCategoryController@edit']);
                 Route::post('/update', ['as' => 'update', 'uses' => 'ServiceCategoryController@update']);
                 Route::post('/delete', ['as' => 'delete', 'uses' => 'ServiceCategoryController@delete']);
+                Route::post('/reassign-service', ['as' => 'reassign-service', 'uses' => 'ServiceCategoryController@reassignService']);
             });
 
             Route::get('/list/{category}', ['as' => 'index', 'uses' => 'ServiceController@index']);
+            Route::get('/uncategorized', ['as' => 'index-uncategorized', 'uses' => 'ServiceController@indexUncategorize']);
             Route::get('/create/{category}', ['as' => 'create', 'uses' => 'ServiceController@create']);
             Route::post('/save', ['as' => 'save', 'uses' => 'ServiceController@save']);
             Route::get('/show/{service}', ['as' => 'show', 'uses' => 'ServiceController@show']);
             Route::get('/edit/{service}', ['as' => 'edit', 'uses' => 'ServiceController@edit']);
             Route::post('/update', ['as' => 'update', 'uses' => 'ServiceController@update']);
             Route::post('/remove-image', ['as' => 'remove-image', 'uses' => 'ServiceController@removeImage']);
+            Route::post('/delete', ['as' => 'delete', 'uses' => 'ServiceController@delete']);
+
         });
 
     });
