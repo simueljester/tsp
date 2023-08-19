@@ -22,7 +22,7 @@
             </nav>
         </div>
     </div>
-    <div class="card mt-3">
+    <div class="card fadeIn mt-3">
         <div class="card-header">
             <h3>
                 <div class="border-custom-circle text-center custom-icon-parent-2 bg-light shadow target-icon mb-3">
@@ -138,7 +138,7 @@
                     <div class="row mt-3">
                         @forelse ($categories as $category)
                         <div class="col-sm-12">
-                            <button value="{{$category->id}}" name="categoryId" class="btn {{$service->category->id == $category->id ? 'btn-primary' : 'btn-outline-primary' }} btn-sm w-100"> {{$category->name}} </button>
+                            <button value="{{$category->id}}" name="categoryId" class="btn {{$service->category->id == $category->id ? 'btn-primary' : 'btn-outline-primary' }} btn-sm w-100" {{$service->category->id == $category->id ? 'disabled' : '' }}> {{$category->name}} </button>
                         </div>
                         @empty
                         <div>

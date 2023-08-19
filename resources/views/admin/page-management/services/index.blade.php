@@ -18,11 +18,18 @@
 
     <div class="card fadeIn mt-3">
         <div class="card-body">
-            <strong> <i class="{{$category->icon}}"></i> {{$category->name}} Service List </strong>
+            <h4> <i class="{{$category->icon}}"></i> {{$category->name}} </h4>
+            <div>
+                <small> {{$category->description}} </small>
+            </div>
             <div class="mt-3">
                 <a href="{{route('admin.pages.services.create',$category)}}" class="btn btn-primary btn-sm"> Add Service  </a>
             </div>
+            <div>
+                <small> <strong> </i>Services Created: </strong> {{$services->count()}} </small>
+            </div>
         </div>
+
     </div>
 
     <div class="row fadeIn mt-3">

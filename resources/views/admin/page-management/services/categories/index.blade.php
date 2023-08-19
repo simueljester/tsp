@@ -36,7 +36,11 @@
                         <tr>
                             <td>
                                 <div class="d-flex flex-column justify-content-center">
+
                                     <h6 class="mb-0 text-s">
+                                        @if ($category->is_featured == 1)
+                                            <i class="fa-solid fa-star text-primary"></i>
+                                        @endif
                                         <i class="{{$category->icon}}"></i>
                                         {{$category->name}}
                                     </h6>
@@ -68,15 +72,13 @@
                         </tr>
                         @endforeach
                         <tr>
-                            <td>
+                            <td colspan="3">
                                 <div class="d-flex flex-column justify-content-center">
                                     <h6 class="mb-0 text-s text-muted">
                                         Uncategorized Services
                                     </h6>
                                 </div>
                             </td>
-                            <td>--</td>
-                            <td>--</td>
                             <td>
                                 <a href="{{route('admin.pages.services.index-uncategorized')}}" class="btn btn-primary btn-sm" data-bs-placement="top" title="Uncategorized" data-container="body" data-animation="true">
                                     View Services
