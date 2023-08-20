@@ -86,7 +86,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link {{Route::current()->getName() == 'admin.pages.services.categories.index' ? 'active' : '' }}" href="{{route('admin.pages.services.categories.index')}}">
-              <span class="nav-link-text ms-1"> <i class="fa-solid fa-cube"></i> &nbsp Services</span>
+              <span class="nav-link-text ms-1"> <i class="fa-solid fa-screwdriver-wrench"></i> &nbsp Services</span>
             </a>
         </li>
         <li class="nav-item">

@@ -5,11 +5,11 @@
     <div class="card">
         <div class="card-body">
             <div>
-                <h4 class="mt-3"> <i class="fa-solid fa-cube"></i> Services </h4>
+                <h4 class="mt-3"> <i class="fa-solid fa-screwdriver-wrench"></i> Services </h4>
             </div>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('admin.pages.services.categories.index')}}"> <strong> Category List </strong> </a></li>
+                    <li class="breadcrumb-item"><a href="{{route('admin.pages.services.categories.index')}}"> Category List </a></li>
                     <li class="breadcrumb-item active" aria-current="page"><strong class="text-capitalize"> {{$category->name}} Service </strong> </li>
                 </ol>
             </nav>

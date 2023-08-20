@@ -7,7 +7,7 @@
     <div class="card">
         <div class="card-body">
             <div>
-                <h4 class="mt-3"> <i class="fa-solid fa-cube"></i> Services </h4>
+                <h4 class="mt-3"> <i class="fa-solid fa-screwdriver-wrench"></i> Services </h4>
             </div>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">

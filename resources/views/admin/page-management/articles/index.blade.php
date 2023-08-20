@@ -19,7 +19,7 @@
         <div class="card-header">
             <strong> Articles </strong>
             <div class="mt-3">
-                <a href="{{route('admin.pages.articles.create')}}" class="btn btn-primary btn-sm"> </i> Add New Article  </a>
+                <a href="{{route('admin.pages.articles.create')}}" class="btn btn-primary btn-sm"> </i> Add Article  </a>
             </div>
         </div>
         <div class="card-body">
