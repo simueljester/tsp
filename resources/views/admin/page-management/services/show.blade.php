@@ -62,6 +62,10 @@
                     </div>
                 </div>
             @endif
+
+            @foreach ($service->tags as $tag)
+                <span class="badge badge-pill bg-primary" style="border-radius: 20px;">{{$tag}}</span>
+            @endforeach
         </div>
         <div class="card-footer bg-light">
             <a href="#" class="btn btn-sm btn-primary" onclick="selectCategory({{$service->id}})"> Manage Category </a>

@@ -74,6 +74,16 @@
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" id="publish" name="publish" value="1" {{old('publish') == '1' ? 'checked' : '' }}>
                             </div>
+                            <div>
+                                <small> Whether visible to user's end </small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label"> Tags </label>
+                            <input class="tag-input" />
+                            <div>
+                                <small> For search function; Input new tag by pressing "Enter" after typing the keyword or select from the existing list by typing the name </small>
+                            </div>
                         </div>
                     </div>
                     <div class="card-footer">
@@ -116,6 +126,7 @@
 </style>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+@include('scripts-tag')
 @include('scripts-dropzone')
 @include('scripts-slick')
 @include('scripts-ck-editor')
@@ -134,9 +145,9 @@
         $('#iconSelectedLabel').html(icon + ' selected')
         $('#showicon').removeClass()
         $('#showicon').addClass(icon + ' fadeIn custom-icon-child')
-
     }
 
+    createTag()
 
 
 </script>

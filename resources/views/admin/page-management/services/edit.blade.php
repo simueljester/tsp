@@ -75,6 +75,13 @@
                                 <input class="form-check-input" type="checkbox" id="publish" name="publish" value="1" {{$service->published_at ? 'checked' : '' }}>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="form-control-label"> Tags </label>
+                            <input class="tag-input" />
+                            <div>
+                                <small> For search function; Input new tag by pressing "Enter" after typing the keyword or select from the existing list by typing the name </small>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-footer">
                         <input type="hidden" name="id" id="id" value="{{$service->id}}">
@@ -180,6 +187,7 @@
 </style>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+@include('scripts-tag')
 @include('scripts-dropzone')
 @include('scripts-slick')
 @include('scripts-ck-editor')
@@ -212,6 +220,27 @@
         $('#imageConfirmation').attr('src', imgSrc);
         $('#multimediaName').val(media)
     }
+
+
+    // fetching and displaying tags
+    var existing_tags = {!! $service->toJson() !!};
+    if(existing_tags.tags){
+        fetchTag()
+    }else{
+        createTag()
+    }
+
+    function fetchTag(){
+        const arr_tags = existing_tags.tags.split(',');
+        const collected_tags = []
+
+        arr_tags.forEach(function (tag, i) {
+            collected_tags.push({id:i,name:tag})
+        });
+
+        editTag(collected_tags)
+    }
+
 
 </script>
 

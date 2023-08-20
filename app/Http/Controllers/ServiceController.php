@@ -8,16 +8,18 @@ use App\ServiceCategory;
 use App\Helpers\IconHelper;
 use Illuminate\Http\Request;
 use App\Helpers\UploadHelper;
-use App\Http\Repositories\ServiceCategoryRepository;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
+use App\Http\Repositories\TagRepository;
 use App\Http\Repositories\ServiceRepository;
+use App\Http\Repositories\ServiceCategoryRepository;
 
 class ServiceController extends Controller
 {
     //
 
 
-    public $serviceRepository, $categoryRepository;
+    public $serviceRepository, $categoryRepository, $tagRepository;
     public $icon;
     /**
      * Create a new controller instance.
@@ -29,6 +31,7 @@ class ServiceController extends Controller
         $this->middleware('auth');
         $this->serviceRepository = app(ServiceRepository::class);
         $this->categoryRepository = app(ServiceCategoryRepository::class);
+        $this->tagRepository = app(TagRepository::class);
         $this->icons = IconHelper::getIcons();
     }
 
@@ -62,11 +65,15 @@ class ServiceController extends Controller
     {
         $icons = $this->icons;
         sort($icons);
-        return view('admin.page-management.services.create',compact('category','icons'));
+
+        $tags = $this->tagRepository->query()->select('id','name')->get();
+
+        return view('admin.page-management.services.create',compact('category','icons','tags'));
     }
 
     public function save(Request $request)
     {
+
         $request->validate([
             'name'          => 'required',
             'description'   => 'required',
@@ -74,6 +81,10 @@ class ServiceController extends Controller
             'slug'          => 'required|unique:services,slug|max:191',
             'icon'          => 'required'
         ]);
+
+        $tags = $request->tags ? array_values($request->tags) : [];
+        $newly_tags =  $request->newly_tags ? array_values($request->newly_tags) : [];
+        $store_tags = array_merge($tags,$newly_tags);
 
         $multimedia = $request->multimedia ? json_encode(explode(',', $request->multimedia)) : null;
 
@@ -88,17 +99,14 @@ class ServiceController extends Controller
             'multimedia'        => $multimedia,
             'files'             => null,
             'published_at'      => $request->publish ? now() : null,
-            'is_featured'       => false
+            'is_featured'       => false,
+            'tags'              => implode (", ", $store_tags)
         ];
 
         $listRedirection = $request->save == 1 ? true : false;
 
-        try {
-            $this->serviceRepository->save($data);
-        }
-        catch(\Exception $e) {
-            return redirect()->back()->with('error', $e);
-        }
+        $this->tagRepository->saveNewlyCreatedTags($newly_tags);
+        $this->serviceRepository->save($data);
 
         if($listRedirection == true){
             return redirect()->route('admin.pages.services.index',$request->category_id)->with('success', 'Service successfully added');
@@ -111,15 +119,19 @@ class ServiceController extends Controller
     {
         $service->load('category');
         $categories = $this->categoryRepository->query()->get();
+        $service->tags = explode(',', $service->tags);
         return view('admin.page-management.services.show',compact('service','categories'));
     }
 
     public function edit(Service $service)
     {
         $service->load('category');
+
         $icons = $this->icons;
         sort($icons);
-        return view('admin.page-management.services.edit',compact('service','icons'));
+
+        $tags = $this->tagRepository->query()->select('id','name')->get();
+        return view('admin.page-management.services.edit',compact('service','icons','tags'));
     }
 
     public function update(Request $request)
@@ -140,6 +152,10 @@ class ServiceController extends Controller
         $multimedia = array_merge($existingMediaArr,$additionalMediaArr);
         $multimedia = count($multimedia) != 0 ? json_encode($multimedia) : null;
 
+        $tags = $request->tags ? array_values($request->tags) : [];
+        $newly_tags =  $request->newly_tags ? array_values($request->newly_tags) : [];
+        $store_tags = array_merge($tags,$newly_tags);
+
         $data = [
             'name'              => ucwords($request->name),
             'slug'              => $request->slug,
@@ -151,17 +167,16 @@ class ServiceController extends Controller
             'multimedia'        => $multimedia,
             'files'             => null,
             'published_at'      => $request->publish ? now() : null,
-            'is_featured'       => false
+            'is_featured'       => false,
+            'tags'              => implode (", ", $store_tags)
         ];
 
 
-        try {
-            $this->serviceRepository->update($request->id,$data);
-            return redirect()->route('admin.pages.services.show',$request->id)->with('success', 'Service successfully updated');
-        }
-        catch(\Exception $e) {
-            return redirect()->back()->with('error', $e);
-        }
+
+        $this->tagRepository->saveNewlyCreatedTags($newly_tags);
+        $this->serviceRepository->update($request->id,$data);
+        return redirect()->route('admin.pages.services.show',$request->id)->with('success', 'Service successfully updated');
+
 
     }
 
