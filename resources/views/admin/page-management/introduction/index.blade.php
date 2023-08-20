@@ -71,7 +71,7 @@
                                     <a href="javascript:;" class="text-white btn bg-primary btn-sm" onclick="viewIntro({{$intro->id}})">
                                         View
                                     </a>
-                                    <a href="{{route('admin.pages.introduction.edit',$intro)}}" class="btn btn-outline-secondary btn-sm">
+                                    <a href="{{route('admin.pages.introduction.edit',$intro)}}" class="btn btn-info btn-sm">
                                         Edit
                                     </a>
                                     <button type="button" class="btn btn-outline-secondary btn-sm" onclick="confirmDelete({{$intro->id}})">

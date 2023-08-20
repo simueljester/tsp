@@ -70,6 +70,10 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
             Route::get('/list', ['as' => 'index', 'uses' => 'ArticleController@index']);
             Route::get('/create', ['as' => 'create', 'uses' => 'ArticleController@create']);
             Route::post('/save', ['as' => 'save', 'uses' => 'ArticleController@save']);
+            Route::get('/show/{article}', ['as' => 'show', 'uses' => 'ArticleController@show']);
+            Route::get('/edit/{article}', ['as' => 'edit', 'uses' => 'ArticleController@edit']);
+            Route::post('/update', ['as' => 'update', 'uses' => 'ArticleController@update']);
+            Route::post('/delete', ['as' => 'delete', 'uses' => 'ArticleController@delete']);
         });
 
     });

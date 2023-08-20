@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Article;
 use Illuminate\Http\Request;
 use App\Helpers\UploadHelper;
+use Illuminate\Validation\Rule;
 use App\Http\Repositories\ArticleRepository;
+use App\Http\Repositories\ServiceRepository;
 
 class ArticleController extends Controller
 {
        //
-    public $articleRepository;
+    public $articleRepository,$serviceRepository;
        /**
         * Create a new controller instance.
         *
@@ -20,11 +22,13 @@ class ArticleController extends Controller
     {
         $this->middleware('auth');
         $this->articleRepository = app(ArticleRepository::class);
+        $this->serviceRepository = app(ServiceRepository::class);
     }
     public function index()
     {
         //
-        return view('admin.page-management.articles.index');
+        $articles = $this->articleRepository->query()->select('id','name','published_at','is_featured')->get();
+        return view('admin.page-management.articles.index',compact('articles'));
     }
 
     /**
@@ -35,7 +39,8 @@ class ArticleController extends Controller
     public function create()
     {
         //
-        return view('admin.page-management.articles.create');
+        $services = $this->serviceRepository->query()->select('id','name')->get();
+        return view('admin.page-management.articles.create',compact('services'));
     }
 
     /**
@@ -84,6 +89,7 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         //
+        return view('admin.page-management.articles.show',compact('article'));
     }
 
     /**
@@ -95,6 +101,8 @@ class ArticleController extends Controller
     public function edit(Article $article)
     {
         //
+        $services = $this->serviceRepository->query()->select('id','name')->get();
+        return view('admin.page-management.articles.edit',compact('article','services'));
     }
 
     /**
@@ -104,9 +112,35 @@ class ArticleController extends Controller
      * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Article $article)
+    public function update(Request $request)
     {
         //
+        $request->validate([
+            'name'          => 'required',
+            'description'   => 'required',
+            'slug'          => ['required',Rule::unique('services')->ignore($request->id)]
+        ]);
+
+
+        $thumbnail = $request->thumbnail ? UploadHelper::uploadFile($request->thumbnail) : Article::whereId($request->id)->first()->thumbnail;
+
+        $data = [
+            'name'              => ucwords($request->name),
+            'slug'              => $request->slug,
+            'description'       => $request->description,
+            'thumbnail'         => $thumbnail,
+            'service_id'        => $request->service_id ?? null,
+            'is_featured'       => $request->is_featured ? true : false,
+            'published_at'      => $request->publish ? now() : null,
+        ];
+
+        try {
+            $this->articleRepository->update($request->id,$data);
+            return redirect()->route('admin.pages.articles.index')->with('success', 'Article successfully save');
+        }
+        catch(\Exception $e) {
+            return redirect()->back()->with('error', $e);
+        }
     }
 
     /**
@@ -115,8 +149,13 @@ class ArticleController extends Controller
      * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Article $article)
-    {
-        //
+    public function delete(Request $request){
+        try {
+            $this->articleRepository->delete($request->deleteId);
+            return redirect()->route('admin.pages.articles.index')->with('success', 'Article successfully deleted');
+        }
+        catch(\Exception $e) {
+            return redirect()->back()->with('error', 'Exception occured. Please contact your developer');
+        }
     }
 }

@@ -66,7 +66,7 @@
         <div class="card-footer bg-light">
             <a href="#" class="btn btn-sm btn-primary" onclick="selectCategory({{$service->id}})"> Manage Category </a>
             @if ($service->category)
-                <a href="{{route('admin.pages.services.edit',$service)}}" class="btn btn-sm btn-outline-secondary"> Edit </a>
+                <a href="{{route('admin.pages.services.edit',$service)}}" class="btn btn-sm btn-info"> Edit </a>
             @endif
             <a href="#" class="btn btn-sm btn-outline-secondary" onclick="deleteConfirmation()"> Delete </a>
         </div>

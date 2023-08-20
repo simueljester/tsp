@@ -58,7 +58,7 @@
                                 <a href="{{route('admin.pages.services.index',$category)}}" class="btn btn-primary btn-sm" data-bs-placement="top" title="Services under {{$category->name}} category" data-container="body" data-animation="true">
                                     View Services
                                 </a>
-                                <a href="{{route('admin.pages.services.categories.edit', $category)}}" class="btn btn-outline-secondary btn-sm">
+                                <a href="{{route('admin.pages.services.categories.edit', $category)}}" class="btn btn-info btn-sm">
                                     Edit
                                 </a>
                                 <button type="button" class="btn btn-outline-secondary btn-sm" onclick="confirmDelete({{$category->id}})">

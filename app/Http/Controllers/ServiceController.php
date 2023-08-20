@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Article;
 use App\Service;
 use App\ServiceCategory;
 use App\Helpers\IconHelper;
@@ -186,7 +187,11 @@ class ServiceController extends Controller
 
     public function delete(Request $request){
         try {
+
+            Article::whereServiceId($request->deleteId)->update(['service_id'=>null]); // mark null the articles under this id instead of deleting
+
             $this->serviceRepository->delete($request->deleteId);
+
             if($request->categoryId){
                 return redirect()->route('admin.pages.services.index',$request->categoryId)->with('success', 'Category successfully deleted');
             }else{
