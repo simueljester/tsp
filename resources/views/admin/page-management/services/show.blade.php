@@ -55,7 +55,7 @@
                         <div class="multiple-slider">
                             @foreach (json_decode($service->multimedia,true) as $media)
                             <div class="card-hover-scale" style="cursor: pointer;" onclick="viewGallery({{json_encode($media)}})">
-                                <img class="card-img-top" src="{{asset('/images/dropzone').'/'.$media}}" style="max-height:250px;max-width:250px;">
+                                <img class="card-img-top border-custom" src="{{asset('/images/dropzone').'/'.$media}}" style="height:200px;width:250px;object-fit: cover;">
                             </div>
                             @endforeach
                         </div>

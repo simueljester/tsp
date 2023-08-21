@@ -73,7 +73,6 @@ class ServiceController extends Controller
 
     public function save(Request $request)
     {
-
         $request->validate([
             'name'          => 'required',
             'description'   => 'required',
@@ -176,7 +175,6 @@ class ServiceController extends Controller
         $this->tagRepository->saveNewlyCreatedTags($newly_tags);
         $this->serviceRepository->update($request->id,$data);
         return redirect()->route('admin.pages.services.show',$request->id)->with('success', 'Service successfully updated');
-
 
     }
 

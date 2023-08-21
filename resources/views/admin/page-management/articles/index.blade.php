@@ -73,6 +73,9 @@
                         @endforelse
                     </tbody>
                 </table>
+                <div class="mt-2">
+                    {!! $articles->links() !!}
+                </div>
             </div>
         </div>
     </div>

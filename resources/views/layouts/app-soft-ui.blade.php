@@ -94,9 +94,14 @@
               <span class="nav-link-text ms-1"> <i class="fa-regular fa-newspaper"></i> &nbsp Articles</span>
             </a>
         </li>
-          <li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link {{Route::current()->getName() == 'admin.pages.about.index' ? 'active' : '' }}" href="{{route('admin.pages.about.index')}}">
               <span class="nav-link-text ms-1"> <i class="fa-solid fa-circle-info"></i> &nbsp About </span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{Route::current()->getName() == 'admin.pages.news.index' ? 'active' : '' }}" href="{{route('admin.pages.news.index')}}">
+              <span class="nav-link-text ms-1"> <i class="fa-solid fa-earth-asia"></i> &nbsp News </span>
             </a>
         </li>
         <li class="nav-item mt-3">

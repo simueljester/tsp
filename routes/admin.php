@@ -87,6 +87,18 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
             Route::post('/delete', ['as' => 'delete', 'uses' => 'AboutController@delete']);
         });
 
+        // News
+        Route::group(['prefix'=>'news','as'=>'news.'], function(){
+            Route::get('/list', ['as' => 'index', 'uses' => 'NewsController@index']);
+            Route::get('/create', ['as' => 'create', 'uses' => 'NewsController@create']);
+            Route::post('/save', ['as' => 'save', 'uses' => 'NewsController@save']);
+            Route::get('/show/{news}', ['as' => 'show', 'uses' => 'NewsController@show']);
+            Route::get('/edit/{news}', ['as' => 'edit', 'uses' => 'NewsController@edit']);
+            Route::post('/update', ['as' => 'update', 'uses' => 'NewsController@update']);
+            Route::post('/delete', ['as' => 'delete', 'uses' => 'NewsController@delete']);
+            Route::post('/remove-image', ['as' => 'remove-image', 'uses' => 'NewsController@removeImage']);
+        });
+
     });
 
     //Users

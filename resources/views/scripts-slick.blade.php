@@ -129,11 +129,11 @@
     });
 
     jQuery('.multiple-slider').slick({
-        slidesToShow: 4,
-        slidesToScroll: 4,
+        slidesToShow: 5,
+        slidesToScroll: 5,
         arrows: true,
         dots:true,
-        nextArrow:'<button type="button" class="btn btn-primary btn-sm"> Next </button>',
+        nextArrow:'<button type="button" class="btn btn-primary btn-sm mt-3"> Next </button>',
      });
 
 
