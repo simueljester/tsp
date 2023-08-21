@@ -76,6 +76,17 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
             Route::post('/delete', ['as' => 'delete', 'uses' => 'ArticleController@delete']);
         });
 
+        // About
+        Route::group(['prefix'=>'about','as'=>'about.'], function(){
+            Route::get('/list/{viewingId?}', ['as' => 'index', 'uses' => 'AboutController@index']);
+            Route::get('/create', ['as' => 'create', 'uses' => 'AboutController@create']);
+            Route::post('/save', ['as' => 'save', 'uses' => 'AboutController@save']);
+            Route::get('/show/{about}', ['as' => 'show', 'uses' => 'AboutController@show']);
+            Route::get('/edit/{about}', ['as' => 'edit', 'uses' => 'AboutController@edit']);
+            Route::post('/update', ['as' => 'update', 'uses' => 'AboutController@update']);
+            Route::post('/delete', ['as' => 'delete', 'uses' => 'AboutController@delete']);
+        });
+
     });
 
     //Users

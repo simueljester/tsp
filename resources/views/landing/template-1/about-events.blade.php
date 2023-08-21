@@ -3,16 +3,14 @@
    <div class="row ">
     <div class="col-sm-6 ">
         <div>
-          
             <h2> <b> About TSP </b>  </h2>
             <p class="text-muted">
                 Nulla quis lorem ut libero malesuada feugiat. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Donec sollicitudin molestie malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </p>
             <center>
-                <img class="about" width="250" src="{{ asset('images') }}/tsp3.png"> 
+                <img class="about" width="250" src="{{ asset('images') }}/tsp3.png">
             </center>
         </div>
-      
     </div>
     <div class="col-sm-6 text-left">
         <h2> <b> News & Events </b> </h2>
