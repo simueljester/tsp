@@ -42,7 +42,7 @@
 
                 <div class="card-body pt-2">
                     <div class="mt-1 mb-2">
-                        <a href="#" class="btn btn-primary btn-sm" data-bs-placement="top" data-container="body" data-animation="true">
+                        <a href="{{route('admin.pages.news.show',$_news)}}" class="btn btn-primary btn-sm" data-bs-placement="top" data-container="body" data-animation="true">
                             View
                         </a>
                         <a href="{{route('admin.pages.news.edit',$_news)}}" class="btn btn-info btn-sm">

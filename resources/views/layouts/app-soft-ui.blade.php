@@ -104,6 +104,11 @@
               <span class="nav-link-text ms-1"> <i class="fa-solid fa-earth-asia"></i> &nbsp News </span>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link {{Route::current()->getName() == 'admin.pages.choose-us.index' ? 'active' : '' }}" href="{{route('admin.pages.choose-us.index')}}">
+              <span class="nav-link-text ms-1"> <i class="fa-solid fa-list"></i> &nbsp Choose Us </span>
+            </a>
+        </li>
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6 text-primary"><i class="fa-solid fa-gear fa-lg"></i> Settings</h6>
         </li>

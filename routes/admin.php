@@ -99,6 +99,16 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
             Route::post('/remove-image', ['as' => 'remove-image', 'uses' => 'NewsController@removeImage']);
         });
 
+             // News
+        Route::group(['prefix'=>'choose-us','as'=>'choose-us.'], function(){
+            Route::get('/list', ['as' => 'index', 'uses' => 'ChooseUsController@index']);
+            Route::get('/create', ['as' => 'create', 'uses' => 'ChooseUsController@create']);
+            Route::post('/save', ['as' => 'save', 'uses' => 'ChooseUsController@save']);
+            Route::get('/edit/{choose_us}', ['as' => 'edit', 'uses' => 'ChooseUsController@edit']);
+            Route::post('/update', ['as' => 'update', 'uses' => 'ChooseUsController@update']);
+            Route::post('/delete', ['as' => 'delete', 'uses' => 'ChooseUsController@delete']);
+        });
+
     });
 
     //Users

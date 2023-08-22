@@ -92,8 +92,10 @@ class IntroductionController extends Controller
 
     }
 
-    public function delete(Request $request){
+    public function delete(Request $request)
+    {
         $introduction = $this->introductionRepository->find($request->deleteId);
+
         if($introduction->active == 1){
             return redirect()->back()->with('error', 'This introduction is active, unable to proceed with deletion.');
         }else{
@@ -105,6 +107,5 @@ class IntroductionController extends Controller
                 return redirect()->back()->with('error', 'Exception occured. Please contact your developer');
             }
         }
-
     }
 }

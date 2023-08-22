@@ -107,7 +107,7 @@ class NewsController extends Controller
     public function show(News $news)
     {
         //
-
+        return view('admin.page-management.news.show',compact('news'));
     }
 
     /**

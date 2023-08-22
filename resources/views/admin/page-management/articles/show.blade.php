@@ -39,7 +39,7 @@
                 Edit
             </a>
             <a href="{{route('admin.pages.articles.index')}}" class="btn btn-outline-secondary btn-sm">
-                Cancel
+                Back to list
             </a>
         </div>
     </div>
