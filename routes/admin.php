@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
     //Inquiry
     Route::group(['prefix'=>'inquiry','as'=>'inquiry.'], function(){
         Route::get('/', ['as' => 'index', 'uses' => 'InquiryController@index']);
+        Route::post('/delete', ['as' => 'delete', 'uses' => 'InquiryController@delete']);
     });
 
 
@@ -99,7 +100,7 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
             Route::post('/remove-image', ['as' => 'remove-image', 'uses' => 'NewsController@removeImage']);
         });
 
-             // News
+        // Choose Us
         Route::group(['prefix'=>'choose-us','as'=>'choose-us.'], function(){
             Route::get('/list', ['as' => 'index', 'uses' => 'ChooseUsController@index']);
             Route::get('/create', ['as' => 'create', 'uses' => 'ChooseUsController@create']);
@@ -107,6 +108,16 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
             Route::get('/edit/{choose_us}', ['as' => 'edit', 'uses' => 'ChooseUsController@edit']);
             Route::post('/update', ['as' => 'update', 'uses' => 'ChooseUsController@update']);
             Route::post('/delete', ['as' => 'delete', 'uses' => 'ChooseUsController@delete']);
+        });
+
+        // Reviews
+        Route::group(['prefix'=>'reviews','as'=>'reviews.'], function(){
+            Route::get('/list', ['as' => 'index', 'uses' => 'ReviewController@index']);
+            Route::get('/create', ['as' => 'create', 'uses' => 'ReviewController@create']);
+            Route::post('/save', ['as' => 'save', 'uses' => 'ReviewController@save']);
+            Route::get('/edit/{review}', ['as' => 'edit', 'uses' => 'ReviewController@edit']);
+            Route::post('/update', ['as' => 'update', 'uses' => 'ReviewController@update']);
+            Route::post('/delete', ['as' => 'delete', 'uses' => 'ReviewController@delete']);
         });
 
     });

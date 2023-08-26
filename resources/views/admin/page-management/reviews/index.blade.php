@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-body">
             <div>
-                <h4 class="mt-3"> <i class="fa-solid fa-inbox fa-lg"></i> Inquiry </h4>
+                <h4 class="mt-3"> <i class="fa-solid fa-star-half-stroke"></i> Reviews </h4>
             </div>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
@@ -17,29 +17,27 @@
 
     <div class="card fadeIn mt-3">
         <div class="card-header">
-            <strong> Inquiries </strong>
+            <strong> Reviews </strong>
             <br>
-            <small> Inquiries are created from front end website </small>
+            <small> Reviews are created from front end website </small>
         </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table align-items-center mb-0 table-hover">
                     <thead>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Service </th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Inquiry </th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Name </th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Date </th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Action</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Comment </th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Commented By </th>
                     </thead>
                     <tbody>
-                        @forelse ($inquiries as $inquiry)
+                        @forelse ($reviews as $review)
                             <tr>
                                 <td>
                                     <div class="d-flex flex-column justify-content-center">
                                         <h6 class="mb-0 text-s">
-                                            @if ($inquiry->service)
-                                                <a href="{{route('admin.pages.services.show',$inquiry->service->id)}}" class="text-primary">
-                                                    {{$inquiry->service->name}}
+                                            @if ($review->service)
+                                                <a href="{{route('admin.pages.services.show',$review->service->id)}}" class="text-primary">
+                                                    {{$review->service->name}}
                                                 </a>
                                             @else
                                                 TSP
@@ -49,23 +47,20 @@
                                 </td>
                                 <td>
                                     <p class="text-capitalize" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 500px;">
-                                        {{$inquiry->description}}
+                                          {{$review->comment}}
                                     </p>
                                 </td>
                                 <td>
-                                   {{$inquiry->name}}
+                                    <i class="fa-solid fa-user"></i> {{$review->commented_by}}
                                 </td>
                                 <td>
-                                    {{$inquiry->created_at->format('M d, Y h:i a')}}
-                                </td>
-                                <td>
-                                    <a href="javascript:;" class="text-white btn bg-primary btn-sm" onclick="viewInquiry({{$inquiry}}, {{json_encode($inquiry->created_at->format('M d, Y'))}})">
+                                    <a href="javascript:;" class="text-white btn bg-primary btn-sm" onclick="viewReview({{$review}}, {{json_encode($review->created_at->format('M d, Y'))}})">
                                         View
                                     </a>
-                                    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="confirmDelete({{$inquiry->id}})">
+                                    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="confirmDelete({{$review->id}})">
                                         Delete
                                     </button>
-                                    <form action="{{route('admin.inquiry.delete')}}" method="post" id="deleteForm">
+                                    <form action="{{route('admin.pages.reviews.delete')}}" method="post" id="deleteForm">
                                         @csrf
                                         <input type="hidden" name="deleteId" id="deleteId">
                                     </form>
@@ -73,18 +68,19 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5"> No record found </td>
+                                <td colspan="3"> No record found </td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
                 <div class="mt-2">
-                    {!! $inquiries->links() !!}
+                    {!! $reviews->links() !!}
                 </div>
             </div>
         </div>
     </div>
 
+    {{-- Delete confirmation modal --}}
     <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
@@ -97,7 +93,7 @@
             <div class="modal-body text-center">
                 <i class="fa-solid fa-triangle-exclamation fa-3x text-warning fa-fade"></i>
                 <p>
-                    Are you sure you want to delete this <strong> inquiry </strong> ?
+                    Are you sure you want to delete this <strong> review </strong> ?
                 </p>
             </div>
             <div class="modal-footer">
@@ -106,45 +102,39 @@
             </div>
           </div>
         </div>
-    </div>
+      </div>
 
-       {{-- View Review --}}
-       <div class="modal fade" id="inquiryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- View Review --}}
+    <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">View Inquiry</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Review</h5>
               <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body text-center">
-                <div id="serviceContainer">
-                    <div class="p-3">
-                        <center>
-                            <h1>
-                                <div class="border-custom-circle text-center custom-icon-parent-2 bg-light shadow target-icon mb-3">
-                                    <i class="custom-icon-child-2" id="serviceIcon"></i>
-                                </div>
-                            </h1>
-                        </center>
-                    </div>
-                    <div class="text-center">
-                        <strong id="serviceName"></strong>
-                    </div>
+                <div class="p-3">
+                    <center>
+                        <h1>
+                            <div class="border-custom-circle text-center custom-icon-parent-2 bg-light shadow target-icon mb-3">
+                                <i class="custom-icon-child-2" id="serviceIcon"></i>
+                            </div>
+                        </h1>
+                    </center>
                 </div>
-
-                <div>
-                    <p id="inquiryDescription"></p>
+                <div class="text-center">
+                    <strong id="serviceName"></strong>
                 </div>
                 <div>
-                    <i class="fa-solid fa-user"></i> <strong class="text-uppercase" id="inquiryName"></strong>
+                    <p id="reviewComment"></p>
                 </div>
                 <div>
-                    <small id="inquiryEmail"></small>
+                    <i class="fa-solid fa-user"></i> <strong class="text-uppercase" id="reviewCommentedBy"></strong>
                 </div>
                 <div>
-                    <small id="inquiryDate"></small>
+                    <small id="reviewCommentDate"></small>
                 </div>
             </div>
             <div class="modal-footer">
@@ -168,22 +158,14 @@
         document.getElementById("deleteForm").submit();
     }
 
-    function viewInquiry(inquiry,created_at){
-        if(inquiry.service != null){
-            $('#serviceIcon').removeClass(inquiry.service.icon)
-            $('#serviceIcon').addClass(inquiry.service.icon)
-            $('#serviceName').html(inquiry.service.name)
-            $('#serviceContainer').show()
-        }else{
-            $('#serviceContainer').hide()
-        }
-
-        $('#inquiryEmail').html(inquiry.email)
-
-        $('#inquiryDescription').html(inquiry.description)
-        $('#inquiryName').html(inquiry.name)
-        $('#inquiryDate').html(created_at)
-        $('#inquiryModal').modal('show')
+    function viewReview(review,created_at){
+        $('#serviceIcon').removeClass(review.service.icon)
+        $('#serviceIcon').addClass(review.service.icon)
+        $('#serviceName').html(review.service.name)
+        $('#reviewComment').html( '" <i>' + review.comment + '</i>"')
+        $('#reviewCommentedBy').html(review.commented_by)
+        $('#reviewCommentDate').html(created_at)
+        $('#reviewModal').modal('show')
     }
 
 </script>

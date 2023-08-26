@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Cookie;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,16 @@ Route::get('/', ['as' => 'index', 'uses' => 'PageLandingController@index']);
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/set-cookie', function () {
+    $uuid = (string) Str::uuid();
+
+    Cookie::queue(Cookie::make('uuid', $uuid, 2));
+ });
+
+ Route::get('/view-cookie', function () {
+    dd(request()->cookie('uuid'));
+ });
 
 @include('admin.php');
 

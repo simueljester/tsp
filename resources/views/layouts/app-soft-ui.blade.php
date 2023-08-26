@@ -66,7 +66,7 @@
           </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link {{Route::current()->getName() == 'admin.inquiry.index' ? 'active' : '' }}" href="{{route('admin.inquiry.index')}}">
               <span class="nav-link-text ms-1"> <i class="fa-solid fa-inbox fa-lg"></i>  &nbsp Inquiries</span>
             </a>
         </li>
@@ -107,6 +107,11 @@
         <li class="nav-item">
             <a class="nav-link {{Route::current()->getName() == 'admin.pages.choose-us.index' ? 'active' : '' }}" href="{{route('admin.pages.choose-us.index')}}">
               <span class="nav-link-text ms-1"> <i class="fa-solid fa-list"></i> &nbsp Choose Us </span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{Route::current()->getName() == 'admin.pages.reviews.index' ? 'active' : '' }}" href="{{route('admin.pages.reviews.index')}}">
+              <span class="nav-link-text ms-1"> <i class="fa-solid fa-star-half-stroke"></i> &nbsp Reviews </span>
             </a>
         </li>
         <li class="nav-item mt-3">
