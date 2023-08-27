@@ -3,16 +3,16 @@
 @section('subcontent')
 
 <div class="card p-3" style="border: none;">
-    <strong> Available Resources ({{$introductions->count()}}) </strong> <a href="{{route('admin.pages.introduction.create')}}"> Add New </a>
+    <strong> Available Resources ({{$introductions->count()}}) <small> <a href="{{route('admin.pages.introduction.create')}}"> Add New </a> </small> </strong>
     <hr>
-    <div class="row mt-2">
+    <div class="row">
         @forelse ($introductions as $intro)
             <div class="col-sm-3">
-                <div class="card" style="border: none;">
+                <div class="card " style="border: none;">
                     <div class="card-body">
                         <strong> <i class="fa-solid fa-cube"></i> {{$intro->title}} </strong>
-                        <div>
-                            <a href="javascript:;" onclick="previewIntro({{$intro}})"> Preview </a>
+                        <div class="mt-1">
+                            <a class="btn btn-sm btn-block text-white border-custom" style="background: #b60ca5" href="javascript:;" onclick="previewIntro({{$intro}})"> Preview </a>
                         </div>
                     </div>
                 </div>
@@ -31,21 +31,20 @@
             <div>
                 <small> Logo Here </small>
             </div>
-            <img class="zoomIn" src=" {{ $activeIntro ? asset('images/icons').'/'.$activeIntro->logo : asset('images').'/symbol2.png'}}" width="280" id="logo">
+            <img style="top:50%" class="zoomIn" src=" {{ $activeIntro ? asset('images/icons').'/'.$activeIntro->logo : asset('images').'/symbol2.png'}}" width="280" id="logo">
         </div>
         <div class="col-sm-5 text-left mt-5">
             <h1 class="mt-5 fadeIn">
                 <b id="title"> {{ $activeIntro ? $activeIntro->title : 'Title Here' }} </b>
                 <p class="text-new-warning" style=" font-family: cursive;font-style: oblique;font-size:22px;" id="slogan"> {{ $activeIntro ? $activeIntro->slogan : 'Slogan Here' }} </p>
             </h1>
-            <p class="text-muted fadeIn" id="description">
+            <div class="text-muted fadeIn" id="description">
                 @if ($activeIntro)
                     {!! $activeIntro->description !!}
                 @else
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Vivamus suscipit tortor eget felis porttitor volutpat. Sed porttitor lectus nibh. Sed porttitor lectus nibh.
                 @endif
-            </p>
-
+            </div>
         </div>
     </div>
 </div>
@@ -59,7 +58,7 @@
         <input type="hidden" name="website_id" id="website_id" value="{{$my_website->id}}">
         <input type="hidden" name="content_code" id="content_code" value="introduction">
         <input type="hidden" id="previewData" name="data" id="data" cols="30" rows="10" />
-        <button class="btn btn-primary btn-sm"> Save </button>
+        <button id="saveIntro" class="btn btn-success btn-sm"> Save Introduction </button>
     </div>
 </form>
 
@@ -67,6 +66,10 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script>
+    $( document ).ready(function() {
+      $('#saveIntro').hide()
+    });
+
     function previewIntro(intro){
         $("#logo").attr("src", '/images/icons/' + intro.logo);
         $('#title').html(intro.title)
@@ -74,6 +77,8 @@
         $('#description').html(intro.description)
         $('#breaker').html(intro.breaker)
         $('#previewData').val(JSON.stringify(intro))
+        $('#saveIntro').show()
+
     }
 
 </script>

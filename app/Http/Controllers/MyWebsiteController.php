@@ -48,13 +48,9 @@ class MyWebsiteController extends Controller
             'active'   => 0
         ];
 
-        try {
-            $website = $this->mywebsiteRepository->save($data);
-            return redirect()->route('admin.my-website.manage',$website->id)->with('success', 'Website template successfully created');
-        }
-        catch(\Exception $e) {
-            return redirect()->back()->with('error', 'Exception occured. Please contact your developer');
-        }
+
+        $website = $this->mywebsiteRepository->save($data);
+        return redirect()->route('admin.my-website.manage-content.intro',$website->id)->with('success', 'Website template successfully created');
 
     }
 

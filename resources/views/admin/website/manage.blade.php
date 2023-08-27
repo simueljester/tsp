@@ -29,41 +29,30 @@
     <div>
         <div class="card fadeIn m-5 border-custom shadow">
             <div class="card-body">
-                <div>
-                    <h4 class="mt-3"> <i class="fa-solid fa-globe"></i> My Website </h4>
-                </div>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{route('admin.my-website.index')}}">List</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"> <strong> Manage {{$my_website->name}} </strong></li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-
-        <div class="card fadeIn m-5 border-custom shadow">
-            <div class="card-header text-white" style="background: #d90ac4">
-                <h4> {{$my_website->name}} </h4>
+                <a href="{{route('admin.my-website.index')}}">Back</a>
+                <br>
+                <h4 class="mt-3"> <i class="fa-solid fa-globe"></i> {{$my_website->name}} </h4>
                 <div>
                     Manage contents of this current template
                 </div>
-            </div>
-            <div class="card-body">
-                <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item">
-                        <a href="{{route('admin.my-website.manage-content.intro',$my_website)}}" class="nav-link  {{Route::current()->getName() == 'admin.my-website.manage-content.intro' ? 'active' : '' }}" data-toggle="tab" role="tab"> Introduction </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{route('admin.my-website.manage-content.services',$my_website)}}" class="nav-link  {{Route::current()->getName() == 'admin.my-website.manage-content.services' ? 'active' : '' }}" data-toggle="tab" role="tab"> Services </a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active"  role="tabpanel">
-                        <div class="p-3">
-                            @yield('subcontent')
+                <div class="mt-3">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a href="{{route('admin.my-website.manage-content.intro',$my_website)}}" class="nav-link  {{Route::current()->getName() == 'admin.my-website.manage-content.intro' ? 'active' : '' }}" data-toggle="tab" role="tab"> Introduction </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.my-website.manage-content.services',$my_website)}}" class="nav-link  {{Route::current()->getName() == 'admin.my-website.manage-content.services' ? 'active' : '' }}" data-toggle="tab" role="tab"> Services </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active"  role="tabpanel">
+                            <div class="p-3">
+                                @yield('subcontent')
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

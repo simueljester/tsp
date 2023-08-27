@@ -58,14 +58,22 @@ class MyWebsiteContentController extends Controller
             'data'          => 'required'
         ]);
 
-        MyWebsiteContent::updateOrCreate([
-            'my_website_id' => $request->website_id
-        ], [
-            'content_code' => $request->content_code,
-            'data' => $request->data
-        ]);
+        if($request->content_code == 'introduction'){
+            MyWebsiteContent::updateOrCreate([
+                'my_website_id' => $request->website_id
+            ], [
+                'content_code' => $request->content_code,
+                'data' => $request->data
+            ]);
+        }else{
+            MyWebsiteContent::create([
+                'my_website_id' => $request->website_id,
+                'content_code' => $request->content_code,
+                'data' => $request->data
+            ]);
+        }
 
-        return redirect()->back()->with('success', 'Introduction Selected');
+        return redirect()->back()->with('success', 'Successfuly saved');
     }
 
     /**
@@ -78,7 +86,9 @@ class MyWebsiteContentController extends Controller
     {
 
         $my_website->load('contents');
+
         $introductions = $this->introductionRepository->query()->get();
+
         $getIntroContent = $this->mywebsiteContentRepository->query()
         ->whereMyWebsiteId($my_website->id)
         ->whereContentCode('introduction')
