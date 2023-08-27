@@ -74,9 +74,6 @@
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" id="publish" name="publish" value="1" {{old('publish') == '1' ? 'checked' : '' }}>
                             </div>
-                            <div>
-                                <small> Whether visible to user's end </small>
-                            </div>
                         </div>
                         <div class="form-group">
                             <label class="form-control-label"> Tags </label>

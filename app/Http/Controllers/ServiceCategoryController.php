@@ -49,7 +49,7 @@ class ServiceCategoryController extends Controller
             'name'         => ucwords($request->name),
             'description'  => $request->description,
             'published_at' => $request->publish ? now() : null,
-            'is_featured'  => $request->is_featured ? true : false,
+            'is_featured'  => null,
             'icon'         => null,
         ];
 
@@ -83,7 +83,7 @@ class ServiceCategoryController extends Controller
                 'name'         => $request->name,
                 'description'  => $request->description,
                 'published_at' => $request->publish ? now() : null,
-                'is_featured'  => $request->is_featured ? true : false,
+                'is_featured'  => null,
                 'icon'         => $request->icon,
             ];
 

@@ -1,18 +1,19 @@
 @extends('admin.website.manage')
 
 @section('subcontent')
-
+<p class="m-3 text-muted">
+   Select in the list of created introduction template. The selected list will be the introduction / front page of your website.
+</p>
 <div class="card p-3" style="border: none;">
-    <strong> Available Resources ({{$introductions->count()}}) <small> <a href="{{route('admin.pages.introduction.create')}}"> Add New </a> </small> </strong>
-    <hr>
+    <strong class="text-muted"> Available Resources ({{$introductions->count()}}) <small> <a href="{{route('admin.pages.introduction.create')}}"> Add New </a> </small> </strong>
     <div class="row">
         @forelse ($introductions as $intro)
             <div class="col-sm-3">
                 <div class="card " style="border: none;">
                     <div class="card-body">
-                        <strong> <i class="fa-solid fa-cube"></i> {{$intro->title}} </strong>
+                        <h4> <strong> <i class="fa-solid fa-cube"></i> {{$intro->title}} </strong> </h4>
                         <div class="mt-1">
-                            <a class="btn btn-sm btn-block text-white border-custom" style="background: #b60ca5" href="javascript:;" onclick="previewIntro({{$intro}})"> Preview </a>
+                            <a style="color: #d20abe" href="javascript:;" onclick="previewIntro({{$intro}})"> Preview </a>
                         </div>
                     </div>
                 </div>

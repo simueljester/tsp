@@ -45,7 +45,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" hidden>
                                         <div class="form-group">
                                             <label class="form-control-label">Is Featured</label> <small> Display in homepage </small>
                                             <div class="form-check form-switch">

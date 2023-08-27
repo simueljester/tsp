@@ -8,10 +8,12 @@ use Illuminate\Http\Request;
 use App\Http\Repositories\MyWebsiteRepository;
 use App\Http\Repositories\IntroductionRepository;
 use App\Http\Repositories\MyWebsiteContentRepository;
+use App\Http\Repositories\ServiceCategoryRepository;
+use App\Http\Repositories\ServiceRepository;
 
 class MyWebsiteContentController extends Controller
 {
-    public $introductionRepository, $mywebsiteRepository, $mywebsiteContentRepository;
+    public $introductionRepository, $mywebsiteRepository, $mywebsiteContentRepository, $serviceRepository, $serviceCategoryRepository;
 
     /**
      * Create a new controller instance.
@@ -24,6 +26,8 @@ class MyWebsiteContentController extends Controller
         $this->introductionRepository = app(IntroductionRepository::class);
         $this->mywebsiteRepository = app(MyWebsiteRepository::class);
         $this->mywebsiteContentRepository = app(MyWebsiteContentRepository::class);
+        $this->serviceRepository = app(ServiceRepository::class);
+        $this->serviceCategoryRepository = app(ServiceCategoryRepository::class);
     }
     /**
      * Display a listing of the resource.
@@ -60,16 +64,21 @@ class MyWebsiteContentController extends Controller
 
         if($request->content_code == 'introduction'){
             MyWebsiteContent::updateOrCreate([
-                'my_website_id' => $request->website_id
+                'my_website_id' => $request->website_id,
+                'content_code'  => $request->content_code
             ], [
-                'content_code' => $request->content_code,
-                'data' => $request->data
+                'data'          => $request->data
             ]);
         }else{
-            MyWebsiteContent::create([
+            $ids = explode(',', $request->data);
+
+            $data = $this->serviceRepository->query()->whereIn('id',$ids)->get()->toJson();
+
+            MyWebsiteContent::updateOrCreate([
                 'my_website_id' => $request->website_id,
-                'content_code' => $request->content_code,
-                'data' => $request->data
+                'content_code'  => $request->content_code
+            ], [
+                'data'          => $data
             ]);
         }
 
@@ -104,9 +113,31 @@ class MyWebsiteContentController extends Controller
 
     public function showServices(MyWebsite $my_website)
     {
-
         $my_website->load('contents');
-        return view('admin.website.manage-services',compact('my_website'));
+
+        $selectedServices = $this->mywebsiteContentRepository->query()
+        ->whereMyWebsiteId($my_website->id)
+        ->whereContentCode('services')
+        ->first() ?? null;
+
+        $getIds = [];
+        if($selectedServices){
+            $selectedServices = collect(json_decode($selectedServices->data));
+            $getIds = $selectedServices->pluck('id')->toArray();
+            $getIds = implode (",", $getIds);
+
+        }else{
+            $selectedServices = collect();
+            $getIds = '';
+        }
+
+        $services = $this->serviceRepository->query()
+        ->whereNotNull('published_at')
+        ->select('id','name','description_clean','icon')
+        ->orderBy('name','ASC')
+        ->get();
+
+        return view('admin.website.manage-services',compact('my_website','services','selectedServices','getIds'));
     }
 
 

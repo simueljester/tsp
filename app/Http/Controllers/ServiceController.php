@@ -98,7 +98,7 @@ class ServiceController extends Controller
             'multimedia'        => $multimedia,
             'files'             => null,
             'published_at'      => $request->publish ? now() : null,
-            'is_featured'       => false,
+            'is_featured'       => null,
             'tags'              => implode (", ", $store_tags)
         ];
 
@@ -166,7 +166,7 @@ class ServiceController extends Controller
             'multimedia'        => $multimedia,
             'files'             => null,
             'published_at'      => $request->publish ? now() : null,
-            'is_featured'       => false,
+            'is_featured'       => null,
             'tags'              => implode (", ", $store_tags)
         ];
 

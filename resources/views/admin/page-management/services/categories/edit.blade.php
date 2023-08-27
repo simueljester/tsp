@@ -47,7 +47,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" hidden>
                                         <div class="form-group">
                                             <label class="form-control-label">Is Featured</label><small> Display in homepage </small>
                                             <div>
@@ -55,7 +55,6 @@
                                                     <input class="form-check-input" type="checkbox" id="is_featured" name="is_featured" value="1" {{$category->is_featured ? 'checked' : ''}}>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
