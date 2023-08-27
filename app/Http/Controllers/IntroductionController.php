@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Introduction;
 use Illuminate\Http\Request;
+use App\Helpers\UploadHelper;
 use App\Http\Repositories\IntroductionRepository;
 
 class IntroductionController extends Controller
@@ -39,13 +40,19 @@ class IntroductionController extends Controller
         $request->validate([
             'title'         => 'required',
             'slogan'        => 'required',
-            'description'   => 'required'
+            'description'   => 'required',
+            'breaker'       => 'required'
         ]);
+
+        $logo = $request->logo ? UploadHelper::uploadFile($request->logo) : null;
 
         $data = [
             'title'         => $request->title,
             'slogan'        => $request->slogan,
-            'description'   => $request->description
+            'description'   => $request->description,
+            'logo'          => $logo,
+            'breaker'       => $request->breaker,
+            'active'        => null
         ];
 
         try {
@@ -67,16 +74,23 @@ class IntroductionController extends Controller
         $request->validate([
             'title'         => 'required',
             'slogan'        => 'required',
-            'description'   => 'required'
+            'description'   => 'required',
+            'breaker'       => 'required'
         ]);
 
         $introduction = Introduction::find($request->id);
 
         if($introduction){
+
+            $logo = $request->logo ? UploadHelper::uploadFile($request->logo) : $introduction->logo;
+
             $data = [
                 'title'         => $request->title,
                 'slogan'        => $request->slogan,
-                'description'   => $request->description
+                'description'   => $request->description,
+                'logo'          => $logo,
+                'breaker'       => $request->breaker,
+                'active'        => null
             ];
 
             try {

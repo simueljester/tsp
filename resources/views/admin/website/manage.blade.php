@@ -41,72 +41,31 @@
             </div>
         </div>
 
-        <form action="#" method="POST">
-            @csrf
-            <div class="card fadeIn m-5 border-custom shadow">
-                <div class="card-body">
-
-
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">First Panel</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Second Panel</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Third Panel</a>
-                        </li>
-                    </ul><!-- Tab panes -->
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                            <p>First Panel</p>
-                        </div>
-                        <div class="tab-pane" id="tabs-2" role="tabpanel">
-                            <p>Second Panel</p>
-                        </div>
-                        <div class="tab-pane" id="tabs-3" role="tabpanel">
-                            <p>Third Panel</p>
-                        </div>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col-sm-9">
-                            <div class="container-fluid bg-light p-5 mb-5">
-                                <div class="row ml-3">
-                                    <div class="col-sm-5 text-right mt-5">
-                                        <div>
-                                            <small> Logo Here </small>
-                                        </div>
-                                        <img class="zoomIn" src="{{ asset('images') }}/symbol2.png" width="280">
-                                    </div>
-                                    <div class="col-sm-5 text-left mt-5">
-                                        <h1 class="mt-5 fadeIn">
-                                            <b> Title Here </b>
-                                            <p class="text-new-warning" style=" font-family: cursive;font-style: oblique;font-size:22px;"> Slogan here </p>
-                                        </h1>
-                                        <p class="text-muted fadeIn">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Vivamus suscipit tortor eget felis porttitor volutpat. Sed porttitor lectus nibh. Sed porttitor lectus nibh.
-                                        </p>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="container-fluid p-4 bg-info text-center mt-5" style="background: rgb(247,172,32);
-                            background: linear-gradient(90deg, rgba(247,172,32,1) 0%, rgba(247,136,32,1) 94%);">
-                                <strong> Breaker Here </strong>
-                            </div>
-
-                        </div>
-                        <div class="col-sm-3">
-
+        <div class="card fadeIn m-5 border-custom shadow">
+            <div class="card-header text-white" style="background: #d90ac4">
+                <h4> {{$my_website->name}} </h4>
+                <div>
+                    Manage contents of this current template
+                </div>
+            </div>
+            <div class="card-body">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a href="{{route('admin.my-website.manage-content.intro',$my_website)}}" class="nav-link  {{Route::current()->getName() == 'admin.my-website.manage-content.intro' ? 'active' : '' }}" data-toggle="tab" role="tab"> Introduction </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.my-website.manage-content.services',$my_website)}}" class="nav-link  {{Route::current()->getName() == 'admin.my-website.manage-content.services' ? 'active' : '' }}" data-toggle="tab" role="tab"> Services </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active"  role="tabpanel">
+                        <div class="p-3">
+                            @yield('subcontent')
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
-
+        </div>
     </div>
 </body>
 </html>

@@ -34,8 +34,14 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
         Route::get('/', ['as' => 'index', 'uses' => 'MyWebsiteController@index']);
         Route::get('/create', ['as' => 'create', 'uses' => 'MyWebsiteController@create']);
         Route::post('/save', ['as' => 'save', 'uses' => 'MyWebsiteController@save']);
-        Route::get('/manage/{my_website}', ['as' => 'manage', 'uses' => 'MyWebsiteController@manage']);
         Route::post('/delete', ['as' => 'delete', 'uses' => 'MyWebsiteController@delete']);
+
+        Route::group(['prefix'=>'manage-content','as'=>'manage-content.'], function(){
+            Route::get('/intro/{my_website}', ['as' => 'intro', 'uses' => 'MyWebsiteContentController@showIntro']);
+            Route::get('/services/{my_website}', ['as' => 'services', 'uses' => 'MyWebsiteContentController@showServices']);
+            Route::post('/save', ['as' => 'save', 'uses' => 'MyWebsiteContentController@save']);
+        });
+
     });
 
     //Page Management

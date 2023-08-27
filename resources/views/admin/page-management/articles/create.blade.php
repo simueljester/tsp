@@ -54,7 +54,6 @@
                                 @empty
                                     <option value=""> No record </option>
                                 @endforelse
-
                             </select>
                             <small>If service is selected, this particular article will be displayed when user visited the service. </small>
                         </div>
@@ -91,8 +90,6 @@
 @include('scripts-ck-editor')
 
 <script>
-
-    // A $( document ).ready() block.
     $( document ).ready(function() {
        $('#outputImage').hide()
     });

@@ -17,8 +17,9 @@ class ServiceCategory extends Model
         'published_at',
    ];
 
-   public function services(): HasMany {
-    return $this->hasMany('App\Service', 'category_id','id');
-}
+    public function services(): HasMany
+    {
+        return $this->hasMany('App\Service', 'category_id','id');
+    }
 
 }

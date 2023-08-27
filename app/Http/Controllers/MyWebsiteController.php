@@ -58,13 +58,6 @@ class MyWebsiteController extends Controller
 
     }
 
-
-    public function manage(MyWebsite $my_website)
-    {
-        //
-        return view('admin.website.manage',compact('my_website'));
-    }
-
     public function delete(Request $request)
     {
         //
