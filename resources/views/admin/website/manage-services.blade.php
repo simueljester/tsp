@@ -68,30 +68,33 @@ var service_ids =  $('#previewData').val() != '' ? $('#previewData').val().split
 
 function selectService(service){
 
-    console.log(service);
-    document.querySelector('#rowServiceContainer').insertAdjacentHTML(
-    'afterbegin',
-    `<div class="col-sm-4" id="colId${service.id}">
-        <div class="card fadeIn h-100" style="border:none;">
-            <div class="card-body">
-                <i style="cursor: pointer;" class="fa-regular fa-circle-xmark float-right" onclick="removeFromSelected(${ service.id })"></i>
-                <i class="${service.icon} text-primary fa-2x"></i>
-                <div>
-                    <b>${service.name}</b>
+    if(service_ids.includes(service.id)){
+        alert('already inserted')
+    }else{
+        document.querySelector('#rowServiceContainer').insertAdjacentHTML(
+        'afterbegin',
+        `<div class="col-sm-4" id="colId${service.id}">
+            <div class="card fadeIn h-100" style="border:none;">
+                <div class="card-body">
+                    <i style="cursor: pointer;" class="fa-solid fa-xmark float-right" onclick="removeFromSelected(${ service.id })"></i>
+                    <i class="${service.icon} text-secondary fa-2x"></i>
+                    <div>
+                        <b>${service.name}</b>
+                    </div>
+                    <div class="text-muted char-limit">
+                        ${service.description_clean}
+                    </div>
                 </div>
-                <div class="text-muted char-limit">
-                    ${service.description_clean}
+                <div class="card-footer bg-white">
+                    <span class="text-primary"> Read more </span>
                 </div>
             </div>
-            <div class="card-footer bg-white">
-                <span class="text-primary"> Read more </span>
-            </div>
-        </div>
-    </div>`
-  )
+        </div>`
+        )
 
-  service_ids.push(service.id)
-  $('#previewData').val(service_ids)
+        service_ids.push(service.id)
+        $('#previewData').val(service_ids)
+    }
 
 }
 
