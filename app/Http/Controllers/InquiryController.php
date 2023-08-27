@@ -28,7 +28,7 @@ class InquiryController extends Controller
     public function index()
     {
         $inquiries = $this->inquiryRepository->query()->with('service:id,name,icon')->orderBy('created_at','DESC')->paginate(20);
-        return view('inquiries.index',compact('inquiries'));
+        return view('admin.inquiries',compact('inquiries'));
     }
 
     public function delete(Request $request)

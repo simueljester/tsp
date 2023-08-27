@@ -29,6 +29,14 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
         Route::post('/delete', ['as' => 'delete', 'uses' => 'InquiryController@delete']);
     });
 
+    //My Website
+    Route::group(['prefix'=>'my-website','as'=>'my-website.'], function(){
+        Route::get('/', ['as' => 'index', 'uses' => 'MyWebsiteController@index']);
+        Route::get('/create', ['as' => 'create', 'uses' => 'MyWebsiteController@create']);
+        Route::post('/save', ['as' => 'save', 'uses' => 'MyWebsiteController@save']);
+        Route::get('/manage/{my_website}', ['as' => 'manage', 'uses' => 'MyWebsiteController@manage']);
+        Route::post('/delete', ['as' => 'delete', 'uses' => 'MyWebsiteController@delete']);
+    });
 
     //Page Management
     Route::group(['prefix'=>'pages','as'=>'pages.'], function(){
@@ -41,6 +49,7 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
             Route::get('/edit/{introduction}', ['as' => 'edit', 'uses' => 'IntroductionController@edit']);
             Route::post('/update', ['as' => 'update', 'uses' => 'IntroductionController@update']);
             Route::post('/delete', ['as' => 'delete', 'uses' => 'IntroductionController@delete']);
+            Route::post('/set-active', ['as' => 'set-active', 'uses' => 'IntroductionController@setActive']);
         });
 
         // Services

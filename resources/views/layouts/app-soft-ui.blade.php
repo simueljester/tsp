@@ -71,9 +71,9 @@
             </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
-            <span class="nav-link-text ms-1"> <i class="fa-solid fa-globe fa-lg"></i> &nbsp My Website </span>
-          </a>
+            <a class="nav-link {{Route::current()->getName() == 'admin.my-website.index' ? 'active' : '' }}" href="{{route('admin.my-website.index')}}">
+                <span class="nav-link-text ms-1"> <i class="fa-solid fa-globe fa-lg"></i> &nbsp My Website </span>
+            </a>
         </li>
         <li class="nav-item mt-3" >
             <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6 text-primary"><i class="fa-solid fa-cubes fa-lg"></i> Page Management </h6>
@@ -123,6 +123,7 @@
             <span class="nav-link-text ms-1">  <i class="fa-solid fa-users"></i> &nbsp Users </span>
           </a>
         </li>
+
       </ul>
     </div>
   </aside>

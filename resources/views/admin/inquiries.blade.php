@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-body">
             <div>
-                <h4 class="mt-3"> <i class="fa-solid fa-inbox fa-lg"></i> Inquiry </h4>
+                <h4 class="mt-3"> <i class="fa-solid fa-inbox"></i> Inquiry </h4>
             </div>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
@@ -108,7 +108,7 @@
         </div>
     </div>
 
-       {{-- View Review --}}
+       {{-- View Inquiry --}}
        <div class="modal fade" id="inquiryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">

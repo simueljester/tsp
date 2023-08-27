@@ -108,4 +108,23 @@ class IntroductionController extends Controller
             }
         }
     }
+
+    public function setActive(Request $request){
+
+        $currentActive = Introduction::whereActive(1)->first();
+        $currentActive->active = 0;
+        $currentActive->save();
+        $previousActive = $currentActive;
+
+        $intro = $this->introductionRepository->find($request->introId);
+        $intro->active = 1;
+        $intro->save();
+
+        $data = [
+            'previousActive' => $previousActive,
+            'newActive' => $intro
+        ];
+
+        return $data;
+    }
 }
