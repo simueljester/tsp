@@ -53,7 +53,7 @@
         <input type="hidden" name="website_id" id="website_id" value="{{$my_website->id}}">
         <input type="hidden" name="content_code" id="content_code" value="services">
         <input type="hidden" id="previewData" name="data" id="data" cols="30" rows="10" value="{{$getIds}}">
-        <button id="saveIntro" class="btn btn-success btn-sm"> Save Services </button>
+        <button id="saveService" class="btn btn-success btn-sm fadeIn"> Save Services </button>
     </div>
 </form>
 
@@ -63,6 +63,11 @@
 {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> --}}
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script>
+
+
+$( document ).ready(function() {
+      $('#saveService').hide()
+});
 
 var service_ids =  $('#previewData').val() != '' ? $('#previewData').val().split(',').map(Number) : [] ;
 
@@ -94,6 +99,7 @@ function selectService(service){
 
         service_ids.push(service.id)
         $('#previewData').val(service_ids)
+        $('#saveService').show()
     }
 
 }
@@ -107,6 +113,7 @@ function removeFromSelected(service_id){
     }
 
     $('#previewData').val(service_ids)
+    $('#saveService').show()
 }
 
 </script>

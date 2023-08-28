@@ -2,7 +2,7 @@
 
 @section('subcontent')
 <p class="m-3 text-muted">
-    Select articles you want to show in your website.
+    Select articles in the available resources. The selected list will be the displayed front page of your website <strong> Article Section </strong>.
 </p>
 <div class="card p-3" style="border: none;">
     <strong class="text-muted"> Available Resources ({{$articles->count()}}) <small> <a href="{{route('admin.pages.articles.index')}}"> Add New </a> </small> </strong>
@@ -49,7 +49,7 @@
         <input type="hidden" name="website_id" id="website_id" value="{{$my_website->id}}">
         <input type="hidden" name="content_code" id="content_code" value="articles">
         <input type="hidden" id="previewData" name="data" id="data" cols="30" rows="10" value="{{$getIds}}">
-        <button id="saveIntro" class="btn btn-success btn-sm"> Save Articles </button>
+        <button id="saveArticle" class="btn btn-success btn-sm fadeIn"> Save Articles </button>
     </div>
 </form>
 
@@ -60,6 +60,9 @@
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script>
 
+$( document ).ready(function() {
+      $('#saveArticle').hide()
+});
 var article_ids =  $('#previewData').val() != '' ? $('#previewData').val().split(',').map(Number) : [] ;
 
 function selectArticle(article){
@@ -92,6 +95,7 @@ function selectArticle(article){
 
         article_ids.push(article.id)
         $('#previewData').val(article_ids)
+        $('#saveArticle').show()
     }
 
 }
@@ -105,6 +109,7 @@ function removeFromSelected(article_id){
     }
 
     $('#previewData').val(article_ids)
+    $('#saveArticle').show()
 }
 
 </script>

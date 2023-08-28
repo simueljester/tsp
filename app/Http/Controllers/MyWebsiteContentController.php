@@ -74,7 +74,7 @@ class MyWebsiteContentController extends Controller
                     'data'          => $request->data
                 ]);
 
-              break;
+            break;
             case 'services':
 
                 $ids = explode(',', $request->data);
@@ -87,7 +87,7 @@ class MyWebsiteContentController extends Controller
                     'data'          => $data
                 ]);
 
-              break;
+            break;
             case 'articles':
 
                 $ids = explode(',', $request->data);
@@ -102,8 +102,6 @@ class MyWebsiteContentController extends Controller
 
             break;
         }
-
-
 
         return redirect()->back()->with('success', 'Successfuly saved');
     }

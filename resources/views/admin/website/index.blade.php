@@ -48,7 +48,7 @@
                                     @if ($website->completed_at)
                                         <span class="badge badge-pill bg-gradient-success">Completed</span>
                                     @else
-                                        <span class="badge badge-pill bg-gradient-secondary">On going</span>
+                                        <span class="badge badge-pill bg-gradient-secondary"> In Progress </span>
                                     @endif
                                 </td>
                                 <td>

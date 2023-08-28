@@ -59,7 +59,7 @@
         <input type="hidden" name="website_id" id="website_id" value="{{$my_website->id}}">
         <input type="hidden" name="content_code" id="content_code" value="introduction">
         <input type="hidden" id="previewData" name="data" id="data" cols="30" rows="10" />
-        <button id="saveIntro" class="btn btn-success btn-sm"> Save Introduction </button>
+        <button id="saveIntro" class="btn btn-success btn-sm fadeIn"> Save Introduction </button>
     </div>
 </form>
 
