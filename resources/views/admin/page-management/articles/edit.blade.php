@@ -40,7 +40,7 @@
                         </div>
                         <div class="form-group">
                             <div class="mt-2 mb-2">
-                                <img id="outputImage" src="{{asset('images/icons').'/'.$article->thumbnail}}" class="border-custom shadow" style="width: 200px;height:150px;" />
+                                <img id="outputImage" src="{{asset('images/icons').'/'.$article->thumbnail}}" class="border-custom shadow" style="width: 200px;height:150px;object-fit:contain" />
                             </div>
                             <label class="form-control-label">Thumbnail</label>
                             <input type="file" class="form-control" name="thumbnail" accept="image/*" onchange="loadFile(event)">
@@ -66,7 +66,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6" hidden>
                                 <div class="form-group">
                                     <label class="form-control-label">Is Featured</label> <small> Display in homepage </small>
                                     <div class="form-check form-switch">

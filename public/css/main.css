@@ -112,6 +112,14 @@
     -webkit-box-orient: vertical;
 }
 
+.char-article-limit{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 5; /* number of lines to show */
+            line-clamp: 5;
+    -webkit-box-orient: vertical;
+}
+
 .element-to-hide {
     visibility: hidden;
 }

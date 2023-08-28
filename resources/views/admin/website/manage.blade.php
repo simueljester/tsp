@@ -27,7 +27,7 @@
 </head>
 <body>
     <div>
-        <div class="card fadeIn m-5 border-custom shadow">
+        <div class="card m-5 border-custom shadow">
             <div class="card-body">
                 <a href="{{route('admin.my-website.index')}}">Back</a>
                 <br>
@@ -42,6 +42,9 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{route('admin.my-website.manage-content.services',$my_website)}}" class="nav-link  {{Route::current()->getName() == 'admin.my-website.manage-content.services' ? 'active' : '' }}" data-toggle="tab" role="tab"> Services </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.my-website.manage-content.articles',$my_website)}}" class="nav-link  {{Route::current()->getName() == 'admin.my-website.manage-content.articles' ? 'active' : '' }}" data-toggle="tab" role="tab"> Articles </a>
                         </li>
                     </ul>
                     <div class="tab-content">

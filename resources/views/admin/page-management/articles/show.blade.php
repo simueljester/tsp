@@ -18,7 +18,7 @@
 
     <div class="card fadeIn mt-3">
         <div class="card-header">
-            <img id="outputImage" src="{{asset('images/icons').'/'.$article->thumbnail}}" class="border-custom " style="width: 180px;height:150px;" />
+            <img id="outputImage" src="{{asset('images/icons').'/'.$article->thumbnail}}" class="border-custom " style="width: 180px;height:150px;object-fit:contain" />
             <h2 class="mt-3"> {{$article->name}} </h2>
             <div>
 

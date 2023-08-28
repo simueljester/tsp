@@ -30,7 +30,7 @@
                                 <i style="cursor: pointer;" class="fa-solid fa-xmark float-right" onclick="removeFromSelected({{ $service->id }})"></i>
                                 <i class="{{$service->icon}} text-primary fa-2x"></i>
                                 <div>
-                                    <b>{{$service->name}} <i class="fa-regular fa-circle-check text-success"></i> </b>
+                                    <b> <i class="fa-regular fa-circle-check text-success"></i>  {{$service->name}} </b>
                                 </div>
                                 <div class="text-muted char-limit">
                                     {{$service->description_clean}}
@@ -69,7 +69,7 @@ var service_ids =  $('#previewData').val() != '' ? $('#previewData').val().split
 function selectService(service){
 
     if(service_ids.includes(service.id)){
-        alert('already inserted')
+        alert('Service already selected')
     }else{
         document.querySelector('#rowServiceContainer').insertAdjacentHTML(
         'afterbegin',

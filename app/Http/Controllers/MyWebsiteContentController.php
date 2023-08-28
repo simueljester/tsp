@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Repositories\ArticleRepository;
 use App\MyWebsite;
 use App\MyWebsiteContent;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ use App\Http\Repositories\ServiceRepository;
 
 class MyWebsiteContentController extends Controller
 {
-    public $introductionRepository, $mywebsiteRepository, $mywebsiteContentRepository, $serviceRepository, $serviceCategoryRepository;
+    public $introductionRepository, $mywebsiteRepository, $mywebsiteContentRepository, $serviceRepository, $serviceCategoryRepository, $articleRepository;
 
     /**
      * Create a new controller instance.
@@ -28,6 +29,7 @@ class MyWebsiteContentController extends Controller
         $this->mywebsiteContentRepository = app(MyWebsiteContentRepository::class);
         $this->serviceRepository = app(ServiceRepository::class);
         $this->serviceCategoryRepository = app(ServiceCategoryRepository::class);
+        $this->articleRepository = app(ArticleRepository::class);
     }
     /**
      * Display a listing of the resource.
@@ -62,25 +64,46 @@ class MyWebsiteContentController extends Controller
             'data'          => 'required'
         ]);
 
-        if($request->content_code == 'introduction'){
-            MyWebsiteContent::updateOrCreate([
-                'my_website_id' => $request->website_id,
-                'content_code'  => $request->content_code
-            ], [
-                'data'          => $request->data
-            ]);
-        }else{
-            $ids = explode(',', $request->data);
+        switch ($request->content_code) {
+            case 'introduction':
 
-            $data = $this->serviceRepository->query()->whereIn('id',$ids)->get()->toJson();
+                MyWebsiteContent::updateOrCreate([
+                    'my_website_id' => $request->website_id,
+                    'content_code'  => $request->content_code
+                ], [
+                    'data'          => $request->data
+                ]);
 
-            MyWebsiteContent::updateOrCreate([
-                'my_website_id' => $request->website_id,
-                'content_code'  => $request->content_code
-            ], [
-                'data'          => $data
-            ]);
+              break;
+            case 'services':
+
+                $ids = explode(',', $request->data);
+                $data = $this->serviceRepository->query()->whereIn('id',$ids)->get()->toJson();
+
+                MyWebsiteContent::updateOrCreate([
+                    'my_website_id' => $request->website_id,
+                    'content_code'  => $request->content_code
+                ], [
+                    'data'          => $data
+                ]);
+
+              break;
+            case 'articles':
+
+                $ids = explode(',', $request->data);
+                $data = $this->articleRepository->query()->whereIn('id',$ids)->get()->toJson();
+
+                MyWebsiteContent::updateOrCreate([
+                    'my_website_id' => $request->website_id,
+                    'content_code'  => $request->content_code
+                ], [
+                    'data'          => $data
+                ]);
+
+            break;
         }
+
+
 
         return redirect()->back()->with('success', 'Successfuly saved');
     }
@@ -138,6 +161,35 @@ class MyWebsiteContentController extends Controller
         ->get();
 
         return view('admin.website.manage-services',compact('my_website','services','selectedServices','getIds'));
+    }
+
+    public function showArticles(MyWebsite $my_website)
+    {
+
+        $my_website->load('contents');
+
+        $selectedArticles = $this->mywebsiteContentRepository->query()
+        ->whereMyWebsiteId($my_website->id)
+        ->whereContentCode('articles')
+        ->first() ?? null;
+
+        $getIds = [];
+        if($selectedArticles){
+            $selectedArticles = collect(json_decode($selectedArticles->data));
+            $getIds = $selectedArticles->pluck('id')->toArray();
+            $getIds = implode (",", $getIds);
+        }else{
+            $selectedArticles = collect();
+            $getIds = '';
+        }
+
+        $articles = $this->articleRepository->query()
+        ->whereNotNull('published_at')
+        ->select('id','name','description','thumbnail')
+        ->orderBy('name','ASC')
+        ->get();
+
+        return view('admin.website.mange-articles',compact('my_website','articles','selectedArticles','getIds'));
     }
 
 

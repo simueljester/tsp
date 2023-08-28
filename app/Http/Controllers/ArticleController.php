@@ -27,7 +27,7 @@ class ArticleController extends Controller
     public function index()
     {
         //
-        $articles = $this->articleRepository->query()->select('id','name','published_at','is_featured')->paginate(10);
+        $articles = $this->articleRepository->query()->select('id','name','published_at','is_featured')->orderBy('created_at','DESC')->paginate(10);
         return view('admin.page-management.articles.index',compact('articles'));
     }
 
@@ -67,7 +67,7 @@ class ArticleController extends Controller
             'description'       => $request->description,
             'thumbnail'         => $thumbnail,
             'service_id'        => $request->service_id,
-            'is_featured'       => $request->is_featured ? true : false,
+            'is_featured'       => null,
             'published_at'      => $request->publish ? now() : null,
         ];
 
@@ -130,7 +130,7 @@ class ArticleController extends Controller
             'description'       => $request->description,
             'thumbnail'         => $thumbnail,
             'service_id'        => $request->service_id ?? null,
-            'is_featured'       => $request->is_featured ? true : false,
+            'is_featured'       => null,
             'published_at'      => $request->publish ? now() : null,
         ];
 
