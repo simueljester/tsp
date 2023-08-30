@@ -26,7 +26,6 @@
                 <table class="table align-items-center mb-0 table-hover">
                     <thead>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Title </th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Active</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Action</th>
                     </thead>
                     <tbody>
@@ -38,16 +37,15 @@
                                             <i class="{{$data->icon}}"> </i>
                                             {{$data->name}}
                                         </h6>
+                                        <div class="text-muted char-article-limit">
+                                            {{ substr(strip_tags($data->description),0,110) }}
+                                        </div>
                                     </div>
                                 </td>
                                 <td>
-                                    @if ($data->active == true)
-                                        <span class="badge badge-pill bg-gradient-success">Active</span>
-                                    @else
-                                        <span class="badge badge-pill bg-gradient-secondary">Inactive</span>
-                                    @endif
-                                </td>
-                                <td>
+                                    <a href="{{route('admin.pages.choose-us.show',$data)}}" class="text-white btn bg-primary btn-sm">
+                                        View
+                                    </a>
                                     <a href="{{route('admin.pages.choose-us.edit',$data)}}" class="btn btn-info btn-sm">
                                         Edit
                                     </a>

@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
             Route::get('/articles/{my_website}', ['as' => 'articles', 'uses' => 'MyWebsiteContentController@showArticles']);
             Route::get('/about/{my_website}', ['as' => 'about', 'uses' => 'MyWebsiteContentController@showAbout']);
             Route::get('/news/{my_website}', ['as' => 'news', 'uses' => 'MyWebsiteContentController@showNews']);
+            Route::get('/choose-us/{my_website}', ['as' => 'choose-us', 'uses' => 'MyWebsiteContentController@showChooseUs']);
             Route::post('/save', ['as' => 'save', 'uses' => 'MyWebsiteContentController@save']);
         });
 
@@ -123,6 +124,7 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
             Route::get('/list', ['as' => 'index', 'uses' => 'ChooseUsController@index']);
             Route::get('/create', ['as' => 'create', 'uses' => 'ChooseUsController@create']);
             Route::post('/save', ['as' => 'save', 'uses' => 'ChooseUsController@save']);
+            Route::get('/show/{choose_us}', ['as' => 'show', 'uses' => 'ChooseUsController@show']);
             Route::get('/edit/{choose_us}', ['as' => 'edit', 'uses' => 'ChooseUsController@edit']);
             Route::post('/update', ['as' => 'update', 'uses' => 'ChooseUsController@update']);
             Route::post('/delete', ['as' => 'delete', 'uses' => 'ChooseUsController@delete']);

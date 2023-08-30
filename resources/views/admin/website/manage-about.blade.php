@@ -5,14 +5,14 @@
 <p class="m-3 text-muted">
    Select in the list of created about template. The selected list will be the about page of your website.
 </p>
-<div class="card p-3" style="border: none;">
+<div class="card p-3" style="border: none;background:transparent">
     <strong class="text-muted"> Available Resources ({{$abouts->count()}}) <small> <a href="{{route('admin.pages.about.create')}}"> Add New </a> </small> </strong>
     <div class="row">
         @forelse ($abouts as $about)
             <div class="col-sm-3">
-                <div class="card " style="border: none;">
+                <div class="card " style="border: none;background:transparent">
                     <div class="card-body">
-                        <h4> <strong> <i class="fa-solid fa-cube"></i> {{$about->title}} </strong> </h4>
+                        <h4> <strong> <i class="fa-solid fa-circle-info"></i> {{$about->title}} </strong> </h4>
                         <div class="mt-1">
                             <a style="color: #d20abe" href="javascript:;" onclick="previewAbout({{$about}})"> Preview </a>
                         </div>

@@ -4,7 +4,7 @@
 <p class="m-3 text-muted">
     Select services you want to show in your website. <strong> Published Services </strong> will still be visible in your website <a href="#"> catalog page. </a>
 </p>
-<div class="card p-3" style="border: none;">
+<div class="card p-3" style="border: none;background:transparent">
     <strong class="text-muted"> Available Resources ({{$services->count()}}) <small> <a href="{{route('admin.pages.services.categories.index')}}"> Add New </a> </small> </strong>
     <div class="mt-3">
         <ul>
@@ -17,15 +17,15 @@
     </div>
 </div>
 
-<div class="container-fluid bg-white text-center">
-    <div class="card pt-5" style="border:none;">
+<div class="container-fluid text-center">
+    <div class="card pt-5" style="border:none;background:transparent">
         <div class="card-body">
             <h2> <b> Featured Services </b> </h2>
             <div> <a href=""> Browse Catalog </a>  </div>
             <div class="row" id="rowServiceContainer">
                 @foreach ($selectedServices as $service)
                     <div class="col-sm-4" id="colId{{$service->id}}">
-                        <div class="card fadeIn h-100" style="border:none;">
+                        <div class="card fadeIn h-100" style="border:none;background:transparent;">
                             <div class="card-body">
                                 <i style="cursor: pointer;" class="fa-solid fa-xmark float-right" onclick="removeFromSelected({{ $service->id }})"></i>
                                 <i class="{{$service->icon}} text-primary fa-2x"></i>
@@ -83,7 +83,7 @@ function selectService(service){
         document.querySelector('#rowServiceContainer').insertAdjacentHTML(
         'afterbegin',
         `<div class="col-sm-4" id="colId${service.id}">
-            <div class="card fadeIn h-100" style="border:none;">
+            <div class="card fadeIn h-100" style="border:none;background:transparent">
                 <div class="card-body">
                     <i style="cursor: pointer;" class="fa-solid fa-xmark float-right" onclick="removeFromSelected(${ service.id })"></i>
                     <i class="${service.icon} text-secondary fa-2x"></i>

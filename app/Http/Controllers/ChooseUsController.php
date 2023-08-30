@@ -27,7 +27,7 @@ class ChooseUsController extends Controller
     public function index()
     {
         //
-        $datas = $this->chooseUsRepository->query()->select('id','name','active','icon')->orderBy('active','DESC')->paginate(10);
+        $datas = $this->chooseUsRepository->query()->select('id','name','description','icon')->orderBy('active','DESC')->paginate(10);
         return view('admin.page-management.choose-us.index',compact('datas'));
     }
 
@@ -59,6 +59,11 @@ class ChooseUsController extends Controller
         catch(\Exception $e) {
             return redirect()->back()->with('error', 'Exception occured. Please contact your developer');
         }
+    }
+
+    public function show(ChooseUs $choose_us)
+    {
+        return view('admin.page-management.choose-us.show',compact('choose_us'));
     }
 
     public function edit(ChooseUs $choose_us)

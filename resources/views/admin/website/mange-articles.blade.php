@@ -4,7 +4,7 @@
 <p class="m-3 text-muted">
     Select articles in the available resources. The selected list will be the displayed front page of your website <strong> Article Section </strong>.
 </p>
-<div class="card p-3" style="border: none;">
+<div class="card p-3" style="border: none;background:transparent">
     <strong class="text-muted"> Available Resources ({{$articles->count()}}) <small> <a href="{{route('admin.pages.articles.index')}}"> Add New </a> </small> </strong>
     <div class="mt-3">
         <ul>
@@ -17,12 +17,12 @@
     </div>
 </div>
 
-<div class="container-fluid bg-light p-5 text-center mb-5 fadeIn">
+<div class="container-fluid p-5 text-center mb-5 fadeIn">
     <h2> <b> Articles </b> </h2>
     <div class="row" id="rowArticleContainer">
         @foreach ($selectedArticles as $article)
             <div class="col-sm-4" id="colId{{$article->id}}">
-                <div class="card bg-light articles" style="border:none;cursor:pointer">
+                <div class="card articles" style="border:none;cursor:pointer;background:transparent">
                     <div class="card-body">
                         <i style="cursor: pointer;" class="fa-solid fa-xmark float-right" onclick="removeFromSelected({{ $article->id }})"></i>
                         <div class="row">
@@ -35,7 +35,7 @@
                                         <a href="{{route('admin.pages.articles.show',$article->id)}}" style="color: #d20abe;" target="_blank"> {{$article->name}} </a>
                                     </b>
                                 </h6>
-                                <div class="text-muted char-article-limi">
+                                <div class="text-muted char-article-limit">
                                     {{ substr(strip_tags($article->description),0,110) }}
                                 </div>
                             </div>

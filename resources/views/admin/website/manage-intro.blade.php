@@ -4,12 +4,12 @@
 <p class="m-3 text-muted">
    Select in the list of created introduction template. The selected list will be the introduction / front page of your website.
 </p>
-<div class="card p-3" style="border: none;">
+<div class="card p-3" style="border: none;background:transparent">
     <strong class="text-muted"> Available Resources ({{$introductions->count()}}) <small> <a href="{{route('admin.pages.introduction.create')}}"> Add New </a> </small> </strong>
     <div class="row">
         @forelse ($introductions as $intro)
             <div class="col-sm-3">
-                <div class="card " style="border: none;">
+                <div class="card " style="border: none;background:transparent">
                     <div class="card-body">
                         <h4> <strong> <i class="fa-solid fa-cube"></i> {{$intro->title}} </strong> </h4>
                         <div class="mt-1">
@@ -26,7 +26,7 @@
     </div>
 </div>
 
-<div class="container-fluid bg-light mt-3">
+<div class="container-fluid mt-3 bg-white">
     <div class="row ml-3">
         <div class="col-sm-5 text-right mt-5">
             <div>

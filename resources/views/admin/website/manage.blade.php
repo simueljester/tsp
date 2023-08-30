@@ -27,7 +27,10 @@
 </head>
 <body>
     <div>
-        <div class="card m-5 border-custom shadow">
+        <div class="square_box box_three"></div>
+        <div class="square_box box_four"></div>
+
+        <div class="card m-5 border-custom shadow" style="background:transparent">
             <div class="card-body">
                 <a href="{{route('admin.my-website.index')}}">Back</a>
                 <br>
@@ -52,10 +55,44 @@
                         <li class="nav-item">
                             <a href="{{route('admin.my-website.manage-content.news',$my_website)}}" class="nav-link  {{Route::current()->getName() == 'admin.my-website.manage-content.news' ? 'active' : '' }}" data-toggle="tab" role="tab"> News </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.my-website.manage-content.choose-us',$my_website)}}" class="nav-link  {{Route::current()->getName() == 'admin.my-website.manage-content.choose-us' ? 'active' : '' }}" data-toggle="tab" role="tab"> Choose Us </a>
+                        </li>
                     </ul>
-                    <div class="tab-content">
+                    <div class="tab-content" style="background:transparent">
                         <div class="tab-pane active"  role="tabpanel">
                             <div class="p-3">
+                                <div style="position: absolute; top:20; right:0;" class="text-right">
+                                    @if(session()->has('success'))
+                                        <div class="alert alert-success alert-dismissible fade show fadeInDown close-alert" role="alert" style="z-index:1">
+                                            <i class="fa-solid fa-circle-check fa-lg text-dark fa-beat-fade"></i>
+                                            <span class="alert-text text-dark"><strong>Success!</strong> {{ session()->get('success') }} </span>
+                                            <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="closeAlert()">
+                                                <span aria-hidden="true"><i class="fa-regular fa-circle-xmark"></i></span>
+                                            </button>
+                                        </div>
+                                    @endif
+                                    @if(session()->has('error'))
+                                        <div class="alert alert-warning alert-dismissible fade show fadeInDown close-alert" role="alert" style="z-index:1">
+                                            <i class="fa-solid fa-triangle-exclamation fa-lg text-dark fa-beat-fade"></i>
+                                            <span class="alert-text text-dark"><strong>Notice!</strong>  {{session()->get('error') }} </span>
+                                            <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="closeAlert()">
+                                                <span aria-hidden="true"><i class="fa-regular fa-circle-xmark"></i></span>
+                                            </button>
+                                        </div>
+                                    @endif
+                                    @if ($errors->any())
+                                        @foreach ($errors->all() as $error)
+                                            <div class="alert alert-warning alert-dismissible fade show fadeInDown close-alert" role="alert" style="z-index:1">
+                                                <i class="fa-solid fa-triangle-exclamation fa-lg text-dark fa-beat-fade"></i>
+                                                <span class="alert-text text-dark"><strong>Notice!</strong> {{$error}} </span>
+                                                <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="closeAlert()">
+                                                    <span aria-hidden="true"><i class="fa-regular fa-circle-xmark"></i></span>
+                                                </button>
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                </div>
                                 @yield('subcontent')
                             </div>
                         </div>
@@ -72,5 +109,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
 <script>
-
+function closeAlert(){
+    $('.close-alert').hide()
+}
 </script>

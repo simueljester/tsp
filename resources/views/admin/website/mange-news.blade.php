@@ -5,25 +5,25 @@
 <p class="m-3 text-muted">
     Select news in the available resources. The selected list will be the displayed front page of your website <strong> News Section </strong>.
 </p>
-<div class="card p-3" style="border: none;">
+<div class="card p-3" style="border: none;background:transparent">
     <strong class="text-muted"> Available Resources ({{$news->count()}}) <small> <a href="{{route('admin.pages.news.index')}}"> Add New </a> </small> </strong>
     <div class="mt-3">
         <ul>
             @foreach ($news as $_news)
                 <li class="m-1" style="display: inline-block;">
-                    <a href="javascript:;" style="color: #d20abe;" onclick="selectNews({{$_news}})"> <i class="fa-regular fa-newspaper"></i> {{$_news->name}} </a>
+                    <a href="javascript:;" style="color: #d20abe;" onclick="selectNews({{$_news}})"> <i class="fa-solid fa-earth-asia"></i> {{$_news->name}} </a>
                 </li>
             @endforeach
         </ul>
     </div>
 </div>
 
-<div class="container-fluid bg-light p-5 text-center mb-5 fadeIn">
+<div class="container-fluid p-5 text-center mb-5 fadeIn">
     <h2> <b> News </b> </h2>
     <div class="row" id="rowNewsContainer">
         @foreach ($selectedNews as $news)
             <div class="col-sm-4" id="colId{{$news->id}}">
-                <div class="card bg-light articles" style="border:none;cursor:pointer">
+                <div class="card articles" style="border:none;cursor:pointer;background:transparent">
                     <div class="card-body">
                         <i style="cursor: pointer;" class="fa-solid fa-xmark float-right" onclick="removeFromSelected({{ $news->id }})"></i>
                         <div class="row">
@@ -72,7 +72,7 @@ function selectNews(news){
         'afterbegin',
         `
             <div class="col-sm-4" id="colId${news.id}">
-                <div class="card bg-light articles" style="border:none;cursor:pointer">
+                <div class="card articles" style="border:none;cursor:pointer;background:transparent">
                     <div class="card-body">
                         <i style="cursor: pointer;" class="fa-solid fa-xmark float-right" onclick="removeFromSelected(${ news.id })"></i>
                         <div class="row">

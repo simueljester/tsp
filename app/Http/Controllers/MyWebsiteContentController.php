@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Repositories\AboutRepository;
-use App\Http\Repositories\ArticleRepository;
+
 use App\MyWebsite;
 use App\MyWebsiteContent;
 use Illuminate\Http\Request;
@@ -13,11 +12,14 @@ use App\Http\Repositories\MyWebsiteContentRepository;
 use App\Http\Repositories\NewsRepository;
 use App\Http\Repositories\ServiceCategoryRepository;
 use App\Http\Repositories\ServiceRepository;
+use App\Http\Repositories\AboutRepository;
+use App\Http\Repositories\ArticleRepository;
+use App\Http\Repositories\ChooseUsRepository;
 
 class MyWebsiteContentController extends Controller
 {
     public $introductionRepository, $mywebsiteRepository, $mywebsiteContentRepository, $serviceRepository, $serviceCategoryRepository, $articleRepository;
-    public $aboutRepository, $newsRepository;
+    public $aboutRepository, $newsRepository, $chooseUsRepository;
     /**
      * Create a new controller instance.
      *
@@ -34,6 +36,7 @@ class MyWebsiteContentController extends Controller
         $this->articleRepository = app(ArticleRepository::class);
         $this->aboutRepository = app(AboutRepository::class);
         $this->newsRepository = app(NewsRepository::class);
+        $this->chooseUsRepository = app(ChooseUsRepository::class);
     }
     /**
      * Display a listing of the resource.
@@ -79,7 +82,7 @@ class MyWebsiteContentController extends Controller
             break;
             case 'services':
                 $ids = explode(',', $request->data);
-                $data = $this->serviceRepository->query()->whereIn('id',$ids)->get()->toJson();
+                $data = $this->serviceRepository->query()->whereIn('id',$ids)->orderBy('created_at','DESC')->get()->toJson();
                 MyWebsiteContent::updateOrCreate([
                     'my_website_id' => $request->website_id,
                     'content_code'  => $request->content_code
@@ -89,7 +92,7 @@ class MyWebsiteContentController extends Controller
             break;
             case 'articles':
                 $ids = explode(',', $request->data);
-                $data = $this->articleRepository->query()->whereIn('id',$ids)->get()->toJson();
+                $data = $this->articleRepository->query()->whereIn('id',$ids)->orderBy('created_at','DESC')->get()->toJson();
                 MyWebsiteContent::updateOrCreate([
                     'my_website_id' => $request->website_id,
                     'content_code'  => $request->content_code
@@ -107,7 +110,17 @@ class MyWebsiteContentController extends Controller
             break;
             case 'news':
                 $ids = explode(',', $request->data);
-                $data = $this->newsRepository->query()->whereIn('id',$ids)->get()->toJson();
+                $data = $this->newsRepository->query()->whereIn('id',$ids)->orderBy('created_at','DESC')->get()->toJson();
+                MyWebsiteContent::updateOrCreate([
+                    'my_website_id' => $request->website_id,
+                    'content_code'  => $request->content_code
+                ], [
+                    'data'          => $data
+                ]);
+            break;
+            case 'choose_us':
+                $ids = explode(',', $request->data);
+                $data = $this->chooseUsRepository->query()->whereIn('id',$ids)->orderBy('created_at','DESC')->get()->toJson();
                 MyWebsiteContent::updateOrCreate([
                     'my_website_id' => $request->website_id,
                     'content_code'  => $request->content_code
@@ -251,6 +264,34 @@ class MyWebsiteContentController extends Controller
         ->get();
 
         return view('admin.website.mange-news',compact('my_website','news','selectedNews','getIds'));
+    }
+
+    public function showChooseUs(MyWebsite $my_website)
+    {
+
+        $my_website->load('contents');
+
+        $selectedData = $this->mywebsiteContentRepository->query()
+        ->whereMyWebsiteId($my_website->id)
+        ->whereContentCode('choose_us')
+        ->first() ?? null;
+
+        $getIds = [];
+        if($selectedData){
+            $selectedData = collect(json_decode($selectedData->data));
+            $getIds = $selectedData->pluck('id')->toArray();
+            $getIds = implode (",", $getIds);
+        }else{
+            $selectedData = collect();
+            $getIds = '';
+        }
+
+        $choose_us_data = $this->chooseUsRepository->query()
+        ->select('id','name','icon','description')
+        ->orderBy('name','ASC')
+        ->get();
+
+        return view('admin.website.manage-choose-us',compact('my_website','choose_us_data','selectedData','getIds'));
     }
 
 
