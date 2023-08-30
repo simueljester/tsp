@@ -32,6 +32,9 @@
             </div>
         </div>
         <div class="card-footer">
+            <a href="{{route('admin.pages.choose-us.edit',$choose_us)}}" class="btn btn-info btn-sm">
+                Edit
+            </a>
             <a href="{{route('admin.pages.choose-us.index')}}" class="btn btn-sm btn-outline-secondary"> Back to list </a>
         </div>
     </div>

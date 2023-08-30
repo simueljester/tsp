@@ -30,18 +30,21 @@
         <div class="square_box box_three"></div>
         <div class="square_box box_four"></div>
 
-        <div class="card m-5 border-custom shadow" style="background:transparent">
+        <div class="card m-5 " style="background:transparent;border:none;">
             <div class="card-body">
-                <a href="{{route('admin.my-website.index')}}">Back</a>
-                <br>
-                <h4 class="mt-3"> <i class="fa-solid fa-globe"></i> {{$my_website->name}} </h4>
-                <div>
-                    Manage contents of this current template
+                <div class=" p-3 border-custom">
+                    <a href="{{route('admin.my-website.index')}}">Back</a>
+                    <br>
+                    <h4 class="mt-3"> <i class="fa-solid fa-globe"></i> <strong> {{$my_website->name}}</strong> </h4>
+                    <div>
+                        Manage contents of this current template
+                    </div>
                 </div>
+
                 <div class="mt-3">
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
-                            <a href="{{route('admin.my-website.manage-content.intro',$my_website)}}" class="nav-link  {{Route::current()->getName() == 'admin.my-website.manage-content.intro' ? 'active' : '' }}" data-toggle="tab" role="tab"> Introduction </a>
+                            <a href="{{route('admin.my-website.manage-content.introduction',$my_website)}}" class="nav-link  {{Route::current()->getName() == 'admin.my-website.manage-content.introduction' ? 'active' : '' }}" data-toggle="tab" role="tab"> Introduction </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('admin.my-website.manage-content.services',$my_website)}}" class="nav-link  {{Route::current()->getName() == 'admin.my-website.manage-content.services' ? 'active' : '' }}" data-toggle="tab" role="tab"> Services </a>
@@ -56,10 +59,13 @@
                             <a href="{{route('admin.my-website.manage-content.news',$my_website)}}" class="nav-link  {{Route::current()->getName() == 'admin.my-website.manage-content.news' ? 'active' : '' }}" data-toggle="tab" role="tab"> News </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('admin.my-website.manage-content.choose-us',$my_website)}}" class="nav-link  {{Route::current()->getName() == 'admin.my-website.manage-content.choose-us' ? 'active' : '' }}" data-toggle="tab" role="tab"> Choose Us </a>
+                            <a href="{{route('admin.my-website.manage-content.choose_us',$my_website)}}" class="nav-link  {{Route::current()->getName() == 'admin.my-website.manage-content.choose_us' ? 'active' : '' }}" data-toggle="tab" role="tab"> Choose Us </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.my-website.manage-content.finish',$my_website)}}" class="nav-link  {{Route::current()->getName() == 'admin.my-website.manage-content.finish' ? 'active' : '' }}" data-toggle="tab" role="tab"> Contents Summary </a>
                         </li>
                     </ul>
-                    <div class="tab-content" style="background:transparent">
+                    <div class="tab-content bg-white border-custom">
                         <div class="tab-pane active"  role="tabpanel">
                             <div class="p-3">
                                 <div style="position: absolute; top:20; right:0;" class="text-right">
@@ -92,6 +98,7 @@
                                             </div>
                                         @endforeach
                                     @endif
+                                    <div id="containerAlertSelected"></div>
                                 </div>
                                 @yield('subcontent')
                             </div>
@@ -109,6 +116,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
 <script>
+    $('.alert-selected').hide()
 function closeAlert(){
     $('.close-alert').hide()
 }

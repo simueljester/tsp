@@ -294,6 +294,15 @@ class MyWebsiteContentController extends Controller
         return view('admin.website.manage-choose-us',compact('my_website','choose_us_data','selectedData','getIds'));
     }
 
+    public function finish(MyWebsite $my_website)
+    {
+        $my_website->load('contents');
+        $contents_created = $my_website->contents->keyBy('content_code');
+        $content_keys = array_keys($contents_created->toArray());
+        // dd($contents_created);
+        return view('admin.website.finish',compact('my_website','content_keys','contents_created'));
+    }
+
 
 
     public function show(MyWebsiteContent $myWebsiteContent)

@@ -21,11 +21,11 @@
     <div class="card pt-5" style="border:none;background:transparent">
         <div class="card-body">
             <h2> <b> Featured Services </b> </h2>
-            <div> <a href=""> Browse Catalog </a>  </div>
+            <div> <a href="#"> Browse Catalog </a>  </div>
             <div class="row" id="rowServiceContainer">
                 @foreach ($selectedServices as $service)
-                    <div class="col-sm-4" id="colId{{$service->id}}">
-                        <div class="card fadeIn h-100" style="border:none;background:transparent;">
+                    <div class="col-sm-4 mt-3" id="colId{{$service->id}}">
+                        <div class="card fadeIn bg-light h-100 p-3 border-custom" style="background:transparent;">
                             <div class="card-body">
                                 <i style="cursor: pointer;" class="fa-solid fa-xmark float-right" onclick="removeFromSelected({{ $service->id }})"></i>
                                 <i class="{{$service->icon}} text-primary fa-2x"></i>
@@ -40,9 +40,7 @@
                                     {{$service->description_clean}}
                                 </div>
                             </div>
-                            <div class="card-footer bg-white">
-                                <span class="text-primary"> Read more </span>
-                            </div>
+
                         </div>
                     </div>
                 @endforeach
@@ -77,13 +75,22 @@ var service_ids =  $('#previewData').val() != '' ? $('#previewData').val().split
 
 function selectService(service){
 
-    if(service_ids.includes(service.id)){
-        alert('Service already selected')
+    if(service_ids.includes(service.id)){ // if already selected
+        document.querySelector('#containerAlertSelected').insertAdjacentHTML(
+        'afterbegin',
+        `<div class="alert alert-info alert-dismissible fade show fadeInDown close-alert alert-selected bg-warning" role="alert" style="z-index:1000">
+            <i class="fa-solid fa-triangle-exclamation fa-lg text-dark fa-beat-fade"></i>
+            <span class="alert-text text-dark"><strong>Notice! ${service.name}</strong>  already selected </span>
+            <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="closeAlert()">
+                <span aria-hidden="true"><i class="fa-regular fa-circle-xmark"></i></span>
+            </button>
+        </div>`
+        )
     }else{
         document.querySelector('#rowServiceContainer').insertAdjacentHTML(
         'afterbegin',
-        `<div class="col-sm-4" id="colId${service.id}">
-            <div class="card fadeIn h-100" style="border:none;background:transparent">
+        `<div class="col-sm-4 mt-3" id="colId${service.id}">
+            <div class="card bg-light fadeIn h-100 p-3 border-custom" style="background:transparent">
                 <div class="card-body">
                     <i style="cursor: pointer;" class="fa-solid fa-xmark float-right" onclick="removeFromSelected(${ service.id })"></i>
                     <i class="${service.icon} text-secondary fa-2x"></i>
@@ -95,9 +102,6 @@ function selectService(service){
                     <div class="text-muted char-limit">
                         ${service.description_clean}
                     </div>
-                </div>
-                <div class="card-footer bg-white">
-                    <span class="text-primary"> Read more </span>
                 </div>
             </div>
         </div>`

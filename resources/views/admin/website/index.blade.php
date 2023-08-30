@@ -59,7 +59,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{route('admin.my-website.manage-content.intro',$website)}}" class="text-white btn bg-primary btn-sm">
+                                    <a href="{{route('admin.my-website.manage-content.introduction',$website)}}" class="text-white btn bg-primary btn-sm">
                                         Manage
                                     </a>
                                     <button type="button" class="btn btn-outline-secondary btn-sm" onclick="confirmDelete({{$website->id}})">

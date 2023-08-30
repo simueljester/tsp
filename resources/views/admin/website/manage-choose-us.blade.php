@@ -69,7 +69,16 @@ var ids =  $('#previewData').val() != '' ? $('#previewData').val().split(',').ma
 
 function selectChooseUs(data){
     if(ids.includes(data.id)){
-        alert('Choose us data already selected')
+        document.querySelector('#containerAlertSelected').insertAdjacentHTML(
+        'afterbegin',
+        `<div class="alert alert-info alert-dismissible fade show fadeInDown close-alert alert-selected bg-warning" role="alert" style="z-index:1000">
+            <i class="fa-solid fa-triangle-exclamation fa-lg text-dark fa-beat-fade"></i>
+            <span class="alert-text text-dark"><strong>Notice! ${data.name}</strong>  already selected </span>
+            <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="closeAlert()">
+                <span aria-hidden="true"><i class="fa-regular fa-circle-xmark"></i></span>
+            </button>
+        </div>`
+        )
     }else{
         document.querySelector('#chooseUsContainer').insertAdjacentHTML(
         'afterbegin',

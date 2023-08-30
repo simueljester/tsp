@@ -70,4 +70,20 @@ class MyWebsiteController extends Controller
             }
         }
     }
+
+    public function markComplete(Request $request){
+        $website = $this->mywebsiteRepository->find($request->website_id);
+        $website->completed_at = now();
+        $website->save();
+        return redirect()->back()->with('success', 'Website template successfully marked as completed');
+    }
+
+    public function activate(Request $request){
+        MyWebsite::whereActive(1)->update(['active' => 0]);
+        $website = $this->mywebsiteRepository->find($request->website_id);
+        $website->active = 1;
+        $website->save();
+        return redirect()->back()->with('success', 'Website template successfully marked as completed');
+    }
+
 }

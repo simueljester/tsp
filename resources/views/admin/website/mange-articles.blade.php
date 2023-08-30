@@ -71,7 +71,16 @@ var article_ids =  $('#previewData').val() != '' ? $('#previewData').val().split
 
 function selectArticle(article){
     if(article_ids.includes(article.id)){
-        alert('Article already selected')
+        document.querySelector('#containerAlertSelected').insertAdjacentHTML(
+        'afterbegin',
+        `<div class="alert alert-info alert-dismissible fade show fadeInDown close-alert alert-selected bg-warning" role="alert" style="z-index:1000">
+            <i class="fa-solid fa-triangle-exclamation fa-lg text-dark fa-beat-fade"></i>
+            <span class="alert-text text-dark"><strong>Notice! ${article.name}</strong>  already selected </span>
+            <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="closeAlert()">
+                <span aria-hidden="true"><i class="fa-regular fa-circle-xmark"></i></span>
+            </button>
+        </div>`
+        )
     }else{
         document.querySelector('#rowArticleContainer').insertAdjacentHTML(
         'afterbegin',

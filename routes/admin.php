@@ -35,14 +35,17 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
         Route::get('/create', ['as' => 'create', 'uses' => 'MyWebsiteController@create']);
         Route::post('/save', ['as' => 'save', 'uses' => 'MyWebsiteController@save']);
         Route::post('/delete', ['as' => 'delete', 'uses' => 'MyWebsiteController@delete']);
+        Route::post('/mark-complete', ['as' => 'mark-complete', 'uses' => 'MyWebsiteController@markComplete']);
+        Route::post('/activate', ['as' => 'activate', 'uses' => 'MyWebsiteController@activate']);
 
         Route::group(['prefix'=>'manage-content','as'=>'manage-content.'], function(){
-            Route::get('/intro/{my_website}', ['as' => 'intro', 'uses' => 'MyWebsiteContentController@showIntro']);
+            Route::get('/introduction/{my_website}', ['as' => 'introduction', 'uses' => 'MyWebsiteContentController@showIntro']);
             Route::get('/services/{my_website}', ['as' => 'services', 'uses' => 'MyWebsiteContentController@showServices']);
             Route::get('/articles/{my_website}', ['as' => 'articles', 'uses' => 'MyWebsiteContentController@showArticles']);
             Route::get('/about/{my_website}', ['as' => 'about', 'uses' => 'MyWebsiteContentController@showAbout']);
             Route::get('/news/{my_website}', ['as' => 'news', 'uses' => 'MyWebsiteContentController@showNews']);
-            Route::get('/choose-us/{my_website}', ['as' => 'choose-us', 'uses' => 'MyWebsiteContentController@showChooseUs']);
+            Route::get('/choose_us/{my_website}', ['as' => 'choose_us', 'uses' => 'MyWebsiteContentController@showChooseUs']);
+            Route::get('/finish/{my_website}', ['as' => 'finish', 'uses' => 'MyWebsiteContentController@finish']);
             Route::post('/save', ['as' => 'save', 'uses' => 'MyWebsiteContentController@save']);
         });
 

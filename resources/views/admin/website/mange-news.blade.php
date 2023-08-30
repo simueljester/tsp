@@ -23,7 +23,7 @@
     <div class="row" id="rowNewsContainer">
         @foreach ($selectedNews as $news)
             <div class="col-sm-4" id="colId{{$news->id}}">
-                <div class="card articles" style="border:none;cursor:pointer;background:transparent">
+                <div class="card articles" style="border:none;background:transparent">
                     <div class="card-body">
                         <i style="cursor: pointer;" class="fa-solid fa-xmark float-right" onclick="removeFromSelected({{ $news->id }})"></i>
                         <div class="row">
@@ -66,13 +66,22 @@ var news_ids =  $('#previewData').val() != '' ? $('#previewData').val().split(',
 
 function selectNews(news){
     if(news_ids.includes(news.id)){
-        alert('News already selected')
+        document.querySelector('#containerAlertSelected').insertAdjacentHTML(
+        'afterbegin',
+        `<div class="alert alert-info alert-dismissible fade show fadeInDown close-alert alert-selected bg-warning" role="alert" style="z-index:1000">
+            <i class="fa-solid fa-triangle-exclamation fa-lg text-dark fa-beat-fade"></i>
+            <span class="alert-text text-dark"><strong>Notice! ${news.name}</strong>  already selected </span>
+            <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="closeAlert()">
+                <span aria-hidden="true"><i class="fa-regular fa-circle-xmark"></i></span>
+            </button>
+        </div>`
+        )
     }else{
         document.querySelector('#rowNewsContainer').insertAdjacentHTML(
         'afterbegin',
         `
             <div class="col-sm-4" id="colId${news.id}">
-                <div class="card articles" style="border:none;cursor:pointer;background:transparent">
+                <div class="card articles" style="border:none;background:transparent">
                     <div class="card-body">
                         <i style="cursor: pointer;" class="fa-solid fa-xmark float-right" onclick="removeFromSelected(${ news.id })"></i>
                         <div class="row">
