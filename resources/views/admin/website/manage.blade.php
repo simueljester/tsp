@@ -46,6 +46,9 @@
                         <li class="nav-item">
                             <a href="{{route('admin.my-website.manage-content.articles',$my_website)}}" class="nav-link  {{Route::current()->getName() == 'admin.my-website.manage-content.articles' ? 'active' : '' }}" data-toggle="tab" role="tab"> Articles </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.my-website.manage-content.about',$my_website)}}" class="nav-link  {{Route::current()->getName() == 'admin.my-website.manage-content.about' ? 'active' : '' }}" data-toggle="tab" role="tab"> About </a>
+                        </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active"  role="tabpanel">

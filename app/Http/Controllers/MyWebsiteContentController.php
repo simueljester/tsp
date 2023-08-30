@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Repositories\AboutRepository;
 use App\Http\Repositories\ArticleRepository;
 use App\MyWebsite;
 use App\MyWebsiteContent;
@@ -15,7 +16,7 @@ use App\Http\Repositories\ServiceRepository;
 class MyWebsiteContentController extends Controller
 {
     public $introductionRepository, $mywebsiteRepository, $mywebsiteContentRepository, $serviceRepository, $serviceCategoryRepository, $articleRepository;
-
+    public $aboutRepository;
     /**
      * Create a new controller instance.
      *
@@ -30,6 +31,7 @@ class MyWebsiteContentController extends Controller
         $this->serviceRepository = app(ServiceRepository::class);
         $this->serviceCategoryRepository = app(ServiceCategoryRepository::class);
         $this->articleRepository = app(ArticleRepository::class);
+        $this->aboutRepository = app(AboutRepository::class);
     }
     /**
      * Display a listing of the resource.
@@ -66,40 +68,40 @@ class MyWebsiteContentController extends Controller
 
         switch ($request->content_code) {
             case 'introduction':
-
                 MyWebsiteContent::updateOrCreate([
                     'my_website_id' => $request->website_id,
                     'content_code'  => $request->content_code
                 ], [
                     'data'          => $request->data
                 ]);
-
             break;
             case 'services':
-
                 $ids = explode(',', $request->data);
                 $data = $this->serviceRepository->query()->whereIn('id',$ids)->get()->toJson();
-
                 MyWebsiteContent::updateOrCreate([
                     'my_website_id' => $request->website_id,
                     'content_code'  => $request->content_code
                 ], [
                     'data'          => $data
                 ]);
-
             break;
             case 'articles':
-
                 $ids = explode(',', $request->data);
                 $data = $this->articleRepository->query()->whereIn('id',$ids)->get()->toJson();
-
                 MyWebsiteContent::updateOrCreate([
                     'my_website_id' => $request->website_id,
                     'content_code'  => $request->content_code
                 ], [
                     'data'          => $data
                 ]);
-
+            break;
+            case 'about':
+                MyWebsiteContent::updateOrCreate([
+                    'my_website_id' => $request->website_id,
+                    'content_code'  => $request->content_code
+                ], [
+                    'data'          => $request->data
+                ]);
             break;
         }
 
@@ -117,7 +119,7 @@ class MyWebsiteContentController extends Controller
 
         $my_website->load('contents');
 
-        $introductions = $this->introductionRepository->query()->get();
+        $introductions = $this->introductionRepository->query()->orderBy('created_at','DESC')->get();
 
         $getIntroContent = $this->mywebsiteContentRepository->query()
         ->whereMyWebsiteId($my_website->id)
@@ -188,6 +190,26 @@ class MyWebsiteContentController extends Controller
         ->get();
 
         return view('admin.website.mange-articles',compact('my_website','articles','selectedArticles','getIds'));
+    }
+
+    public function showAbout(MyWebsite $my_website)
+    {
+
+        $my_website->load('contents');
+
+        $abouts = $this->aboutRepository->query()->orderBy('created_at','DESC')->get();
+
+        $getAboutContent = $this->mywebsiteContentRepository->query()
+        ->whereMyWebsiteId($my_website->id)
+        ->whereContentCode('about')
+        ->first() ?? null;
+
+        if($getAboutContent){
+            $activeAbout = json_decode($getAboutContent->data);
+        }else{
+            $activeAbout = null;
+        }
+        return view('admin.website.manage-about',compact('my_website','abouts','activeAbout'));
     }
 
 

@@ -45,7 +45,6 @@
                 <table class="table align-items-center mb-0 table-hover">
                     <thead>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Title </th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Active</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Action</th>
                     </thead>
                     <tbody>
@@ -58,14 +57,6 @@
                                         </h6>
                                     </div>
                                 </td>
-                                <td>
-                                    @if ($about->active == true)
-                                        <span class="badge badge-pill bg-gradient-success">Active</span>
-                                    @else
-                                        <span class="badge badge-pill bg-gradient-secondary">Inactive</span>
-                                    @endif
-                                </td>
-
                                 <td>
                                     <a href="javascript:;" class="text-white btn bg-primary btn-sm" onclick="viewAbout({{$about->id}})">
                                         View

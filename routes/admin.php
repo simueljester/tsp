@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
             Route::get('/intro/{my_website}', ['as' => 'intro', 'uses' => 'MyWebsiteContentController@showIntro']);
             Route::get('/services/{my_website}', ['as' => 'services', 'uses' => 'MyWebsiteContentController@showServices']);
             Route::get('/articles/{my_website}', ['as' => 'articles', 'uses' => 'MyWebsiteContentController@showArticles']);
+            Route::get('/about/{my_website}', ['as' => 'about', 'uses' => 'MyWebsiteContentController@showAbout']);
             Route::post('/save', ['as' => 'save', 'uses' => 'MyWebsiteContentController@save']);
         });
 
