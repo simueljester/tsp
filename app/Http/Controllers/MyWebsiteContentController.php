@@ -10,13 +10,14 @@ use Illuminate\Http\Request;
 use App\Http\Repositories\MyWebsiteRepository;
 use App\Http\Repositories\IntroductionRepository;
 use App\Http\Repositories\MyWebsiteContentRepository;
+use App\Http\Repositories\NewsRepository;
 use App\Http\Repositories\ServiceCategoryRepository;
 use App\Http\Repositories\ServiceRepository;
 
 class MyWebsiteContentController extends Controller
 {
     public $introductionRepository, $mywebsiteRepository, $mywebsiteContentRepository, $serviceRepository, $serviceCategoryRepository, $articleRepository;
-    public $aboutRepository;
+    public $aboutRepository, $newsRepository;
     /**
      * Create a new controller instance.
      *
@@ -32,6 +33,7 @@ class MyWebsiteContentController extends Controller
         $this->serviceCategoryRepository = app(ServiceCategoryRepository::class);
         $this->articleRepository = app(ArticleRepository::class);
         $this->aboutRepository = app(AboutRepository::class);
+        $this->newsRepository = app(NewsRepository::class);
     }
     /**
      * Display a listing of the resource.
@@ -101,6 +103,16 @@ class MyWebsiteContentController extends Controller
                     'content_code'  => $request->content_code
                 ], [
                     'data'          => $request->data
+                ]);
+            break;
+            case 'news':
+                $ids = explode(',', $request->data);
+                $data = $this->newsRepository->query()->whereIn('id',$ids)->get()->toJson();
+                MyWebsiteContent::updateOrCreate([
+                    'my_website_id' => $request->website_id,
+                    'content_code'  => $request->content_code
+                ], [
+                    'data'          => $data
                 ]);
             break;
         }
@@ -210,6 +222,35 @@ class MyWebsiteContentController extends Controller
             $activeAbout = null;
         }
         return view('admin.website.manage-about',compact('my_website','abouts','activeAbout'));
+    }
+
+    public function showNews(MyWebsite $my_website)
+    {
+
+        $my_website->load('contents');
+
+        $selectedNews = $this->mywebsiteContentRepository->query()
+        ->whereMyWebsiteId($my_website->id)
+        ->whereContentCode('news')
+        ->first() ?? null;
+
+        $getIds = [];
+        if($selectedNews){
+            $selectedNews = collect(json_decode($selectedNews->data));
+            $getIds = $selectedNews->pluck('id')->toArray();
+            $getIds = implode (",", $getIds);
+        }else{
+            $selectedNews = collect();
+            $getIds = '';
+        }
+
+        $news = $this->newsRepository->query()
+        ->whereNotNull('published_at')
+        ->select('id','name','headline','description','thumbnail')
+        ->orderBy('name','ASC')
+        ->get();
+
+        return view('admin.website.mange-news',compact('my_website','news','selectedNews','getIds'));
     }
 
 

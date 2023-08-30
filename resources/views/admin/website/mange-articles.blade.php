@@ -30,7 +30,11 @@
                                 <img src="{{asset('images/icons').'/'.$article->thumbnail}}" alt="" style="width: 100%;height: 150px;object-fit:cover;border-radius:12px;">
                             </div>
                             <div class="col-sm-6 text-left">
-                                <h6> <b> {{$article->name}} </b> </h6>
+                                <h6>
+                                    <b>
+                                        <a href="{{route('admin.pages.articles.show',$article->id)}}" style="color: #d20abe;" target="_blank"> {{$article->name}} </a>
+                                    </b>
+                                </h6>
                                 <div class="text-muted char-article-limi">
                                     {{ substr(strip_tags($article->description),0,110) }}
                                 </div>
@@ -81,7 +85,9 @@ function selectArticle(article){
                                 <img src="{{url('/images/icons/${article.thumbnail} ')}}" alt="" style="width: 100%;height: 150px;object-fit: cover;border-radius:12px;">
                             </div>
                             <div class="col-sm-6 text-left">
-                                <h6> <b> ${article.name} </b> </h6>
+                                <h6>
+                                    <a href="/admin/pages/articles/show/${article.id}" style="color: #d20abe;" target="_blank"> <b> ${article.name} </b>  </a>
+                                </h6>
                                 <div class="text-muted char-article-limit">
                                     ${article.description.replace(/<\/?[^>]+(>|$)/g, "")}
                                 </div>

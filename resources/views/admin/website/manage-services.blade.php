@@ -30,7 +30,11 @@
                                 <i style="cursor: pointer;" class="fa-solid fa-xmark float-right" onclick="removeFromSelected({{ $service->id }})"></i>
                                 <i class="{{$service->icon}} text-primary fa-2x"></i>
                                 <div>
-                                    <b> <i class="fa-regular fa-circle-check text-success"></i>  {{$service->name}} </b>
+                                    <b>
+                                        <a href="{{route('admin.pages.services.show',$service->id)}}" style="color: #d20abe;" target="_blank">
+                                            <i class="fa-regular fa-circle-check text-success"></i>  {{$service->name}}
+                                        </a>
+                                    </b>
                                 </div>
                                 <div class="text-muted char-limit">
                                     {{$service->description_clean}}
@@ -84,7 +88,9 @@ function selectService(service){
                     <i style="cursor: pointer;" class="fa-solid fa-xmark float-right" onclick="removeFromSelected(${ service.id })"></i>
                     <i class="${service.icon} text-secondary fa-2x"></i>
                     <div>
-                        <b>${service.name}</b>
+                        <b>
+                            <a href="/admin/pages/services/show/${service.id}" style="color: #d20abe;" target="_blank"> ${service.name} </a>
+                        </b>
                     </div>
                     <div class="text-muted char-limit">
                         ${service.description_clean}

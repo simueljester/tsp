@@ -84,7 +84,7 @@ class NewsController extends Controller
             'thumbnail'         => $thumbnail,
             'headline'          => $request->headline,
             'description'       => $request->description,
-            'is_featured'       =>  $request->is_featured ? true : false,
+            'is_featured'       => null,
             'published_at'      => $request->publish ? now() : null,
             'multimedia'        => $multimedia,
             'tags'              => implode (", ", $store_tags)
@@ -159,7 +159,7 @@ class NewsController extends Controller
             'thumbnail'         => $thumbnail,
             'headline'          => $request->headline,
             'description'       => $request->description,
-            'is_featured'       => $request->is_featured ? true : false,
+            'is_featured'       => null,
             'published_at'      => $request->publish ? now() : null,
             'multimedia'        => $multimedia,
             'tags'              => implode (", ", $store_tags)
