@@ -47,9 +47,9 @@
 <form action="{{route('admin.my-website.manage-content.save')}}" method="POST">
     @CSRF
     <div class="mt-3">
-        <input type="text" name="website_id" id="website_id" value="{{$my_website->id}}">
-        <input type="text" name="content_code" id="content_code" value="news">
-        <input type="text" id="previewData" name="data" id="data" cols="30" rows="10" value="{{$getIds}}">
+        <input type="hidden" name="website_id" id="website_id" value="{{$my_website->id}}">
+        <input type="hidden" name="content_code" id="content_code" value="news">
+        <input type="hidden" id="previewData" name="data" id="data" cols="30" rows="10" value="{{$getIds}}">
         <button id="saveNews" class="btn btn-success btn-sm fadeIn"> Save News </button>
     </div>
 </form>
