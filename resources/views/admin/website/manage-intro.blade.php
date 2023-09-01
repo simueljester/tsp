@@ -1,30 +1,37 @@
 @extends('admin.website.manage')
 
 @section('subcontent')
-<p class="m-3 text-muted">
-   Select in the list of created introduction template. The selected list will be the introduction / front page of your website.
-</p>
-<div class="card p-3" style="border: none;background:transparent">
-    <strong class="text-muted"> Available Resources ({{$introductions->count()}}) <small> <a href="{{route('admin.pages.introduction.create')}}"> Add New </a> </small> </strong>
-    <div class="row">
-        @forelse ($introductions as $intro)
-            <div class="col-sm-3">
-                <div class="card " style="border: none;background:transparent">
-                    <div class="card-body">
-                        <h4> <strong> <i class="fa-solid fa-cube"></i> {{$intro->title}} </strong> </h4>
-                        <div class="mt-1">
-                            <a style="color: #d20abe" href="javascript:;" onclick="previewIntro({{$intro}})"> Preview </a>
+
+
+@if ($my_website->completed_at == null)
+    <p class="m-3 text-muted">
+        Select in the list of created introduction template. The selected list will be the introduction / front page of your website.
+    </p>
+    <div class="card p-3" style="border: none;background:transparent">
+        <strong class="text-muted"> Available Resources ({{$introductions->count()}}) <small> <a href="{{route('admin.pages.introduction.create')}}"> Add New </a> </small> </strong>
+        <div class="row">
+            @forelse ($introductions as $intro)
+                <div class="col-sm-3">
+                    <div class="card " style="border: none;background:transparent">
+                        <div class="card-body">
+                            <h4> <strong> <i class="fa-solid fa-cube"></i> {{$intro->title}} </strong> </h4>
+                            <div class="mt-1">
+                                <a style="color: #d20abe" href="javascript:;" onclick="previewIntro({{$intro}})"> Preview </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        @empty
-            <div class="col-sm-12">
-                No records found.
-            </div>
-        @endforelse
+            @empty
+                <div class="col-sm-12">
+                    No records found.
+                </div>
+            @endforelse
+        </div>
     </div>
-</div>
+@else
+    <span class="text-muted"> Your content is currently completed, Please set to <strong class="text-dark"> In Progress </strong> to continue customizing. </span>
+@endif
+
 
 <div class="container-fluid mt-3 bg-white">
     <div class="row ml-3">

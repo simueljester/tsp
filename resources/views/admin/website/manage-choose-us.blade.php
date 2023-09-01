@@ -2,21 +2,25 @@
 
 @section('subcontent')
 
-<p class="m-3 text-muted">
-    Select choose us data in the available resources. The selected list will be the displayed front page of your website <strong> Choose Us Section </strong>.
-</p>
-<div class="card p-3" style="border: none;background:transparent">
-    <strong class="text-muted"> Available Resources ({{$choose_us_data->count()}}) <small> <a href="{{route('admin.pages.choose-us.index')}}"> Add New </a> </small> </strong>
-    <div class="mt-3">
-        <ul>
-            @foreach ($choose_us_data as $data)
-                <li class="m-1" style="display: inline-block;">
-                    <a href="javascript:;" style="color: #d20abe;" onclick="selectChooseUs({{$data}})"> <i class="{{$data->icon}}"></i> {{$data->name}} </a>
-                </li>
-            @endforeach
-        </ul>
+@if ($my_website->completed_at == null)
+    <p class="m-3 text-muted">
+        Select choose us data in the available resources. The selected list will be the displayed front page of your website <strong> Choose Us Section </strong>.
+    </p>
+    <div class="card p-3" style="border: none;background:transparent">
+        <strong class="text-muted"> Available Resources ({{$choose_us_data->count()}}) <small> <a href="{{route('admin.pages.choose-us.index')}}"> Add New </a> </small> </strong>
+        <div class="mt-3">
+            <ul>
+                @foreach ($choose_us_data as $data)
+                    <li class="m-1" style="display: inline-block;">
+                        <a href="javascript:;" style="color: #d20abe;" onclick="selectChooseUs({{$data}})"> <i class="{{$data->icon}}"></i> {{$data->name}} </a>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
     </div>
-</div>
+@else
+    <span class="text-muted"> Your content is currently completed, Please set to <strong class="text-dark"> In Progress </strong> to continue customizing. </span>
+@endif
 
 
 <div class="container-fluid p-5">
@@ -26,7 +30,9 @@
             @forelse ($selectedData as $data)
             <div class="card" style="background: transparent; border:none;background:transparent" id="rowId{{$data->id}}">
                 <div class="card-body">
-                    <span style="cursor: pointer;" onclick="removeFromSelected({{ $data->id }})" class="float-right"> Remove <i class="fa-solid fa-xmark" ></i> </span>
+                    @if ($my_website->completed_at == null)
+                        <span style="cursor: pointer;" onclick="removeFromSelected({{ $data->id }})" class="float-right"> Remove <i class="fa-solid fa-xmark" ></i> </span>
+                    @endif
                     <div class="row">
                         <div class="col-sm-2 p-5 border-custom background-orange" style="position: relative;">
                             <div style="width: 50px;height: 50px;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);" class="zoomIn">

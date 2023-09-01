@@ -64,7 +64,7 @@
             @endif
 
             @foreach ($service->tags as $tag)
-                <span class="badge badge-pill bg-primary" style="border-radius: 20px;">{{$tag}}</span>
+                <span class="badge badge-pill bg-light text-dark" style="border-radius: 20px;">{{$tag}}</span>
             @endforeach
         </div>
         <div class="card-footer bg-light">
@@ -142,7 +142,12 @@
                     <div class="row mt-3">
                         @forelse ($categories as $category)
                         <div class="col-sm-12">
-                            <button value="{{$category->id}}" name="categoryId" class="btn {{$service->category->id == $category->id ? 'btn-primary' : 'btn-outline-primary' }} btn-sm w-100" {{$service->category->id == $category->id ? 'disabled' : '' }}> {{$category->name}} </button>
+                            @if ($service->category)
+                                <button value="{{$category->id}}" name="categoryId" class="btn {{$service->category->id == $category->id ? 'btn-primary' : 'btn-outline-primary' }} btn-sm w-100" {{$service->category->id == $category->id ? 'disabled' : '' }}> {{$category->name}} </button>
+                            @else
+                                <button value="{{$category->id}}" name="categoryId" class="btn btn-outline-primary btn-sm w-100"> {{$category->name}} </button>
+                            @endif
+
                         </div>
                         @empty
                         <div>

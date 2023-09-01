@@ -2,32 +2,36 @@
 
 @section('subcontent')
 
-<p class="m-3 text-muted">
-   Select in the list of created about template. The selected list will be the about page of your website.
-</p>
-<div class="card p-3" style="border: none;background:transparent">
-    <strong class="text-muted"> Available Resources ({{$abouts->count()}}) <small> <a href="{{route('admin.pages.about.create')}}"> Add New </a> </small> </strong>
-    <div class="row">
-        @forelse ($abouts as $about)
-            <div class="col-sm-3">
-                <div class="card " style="border: none;background:transparent">
-                    <div class="card-body">
-                        <h4> <strong> <i class="fa-solid fa-circle-info"></i> {{$about->title}} </strong> </h4>
-                        <div class="mt-1">
-                            <a style="color: #d20abe" href="javascript:;" onclick="previewAbout({{$about}})"> Preview </a>
+@if ($my_website->completed_at == null)
+    <p class="m-3 text-muted">
+    Select in the list of created about template. The selected list will be the about page of your website.
+    </p>
+    <div class="card p-3" style="border: none;background:transparent">
+        <strong class="text-muted"> Available Resources ({{$abouts->count()}}) <small> <a href="{{route('admin.pages.about.create')}}"> Add New </a> </small> </strong>
+        <div class="row">
+            @forelse ($abouts as $about)
+                <div class="col-sm-3">
+                    <div class="card " style="border: none;background:transparent">
+                        <div class="card-body">
+                            <h4> <strong> <i class="fa-solid fa-circle-info"></i> {{$about->title}} </strong> </h4>
+                            <div class="mt-1">
+                                <a style="color: #d20abe" href="javascript:;" onclick="previewAbout({{$about}})"> Preview </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        @empty
-            <div class="col-sm-12">
-                No records found.
-            </div>
-        @endforelse
+            @empty
+                <div class="col-sm-12">
+                    No records found.
+                </div>
+            @endforelse
+        </div>
     </div>
-</div>
+@else
+    <span class="text-muted"> Your content is currently completed, Please set to <strong class="text-dark"> In Progress </strong> to continue customizing. </span>
+@endif
 
-<div class="fadeIn">
+<div class="fadeIn mt-3">
     <h2> <b id="title"> {{$activeAbout ? $activeAbout->title : 'Title here'}} </b>  </h2>
     <div class="text-muted" id="description">
         @if ($activeAbout)

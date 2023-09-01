@@ -72,18 +72,50 @@ class MyWebsiteController extends Controller
     }
 
     public function markComplete(Request $request){
+        $request->validate([
+            'name' => 'required',
+        ]);
         $website = $this->mywebsiteRepository->find($request->website_id);
+        $website->name = $request->name;
         $website->completed_at = now();
         $website->save();
         return redirect()->back()->with('success', 'Website template successfully marked as completed');
     }
 
+    public function markInprogress(Request $request){
+        $request->validate([
+            'name' => 'required',
+        ]);
+        $website = $this->mywebsiteRepository->find($request->website_id);
+        $website->name = $request->name;
+        $website->completed_at = null;
+        $website->active = 0;
+        $website->save();
+        return redirect()->back()->with('success', 'Website template successfully marked as in progress');
+    }
+
     public function activate(Request $request){
+        $request->validate([
+            'name' => 'required',
+        ]);
         MyWebsite::whereActive(1)->update(['active' => 0]);
         $website = $this->mywebsiteRepository->find($request->website_id);
+        $website->name = $request->name;
         $website->active = 1;
         $website->save();
-        return redirect()->back()->with('success', 'Website template successfully marked as completed');
+        return redirect()->back()->with('success', 'Website template successfully activated');
     }
+
+    public function deactivate(Request $request){
+        $request->validate([
+            'name' => 'required',
+        ]);
+        $website = $this->mywebsiteRepository->find($request->website_id);
+        $website->name = $request->name;
+        $website->active = 0;
+        $website->save();
+        return redirect()->back()->with('success', 'Website template successfully deactivated');
+    }
+
 
 }

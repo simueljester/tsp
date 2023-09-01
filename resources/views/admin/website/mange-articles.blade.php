@@ -1,21 +1,26 @@
 @extends('admin.website.manage')
 
 @section('subcontent')
-<p class="m-3 text-muted">
-    Select articles in the available resources. The selected list will be the displayed front page of your website <strong> Article Section </strong>.
-</p>
-<div class="card p-3" style="border: none;background:transparent">
-    <strong class="text-muted"> Available Resources ({{$articles->count()}}) <small> <a href="{{route('admin.pages.articles.index')}}"> Add New </a> </small> </strong>
-    <div class="mt-3">
-        <ul>
-            @foreach ($articles as $article)
-                <li class="m-1" style="display: inline-block;">
-                    <a href="javascript:;" style="color: #d20abe;" onclick="selectArticle({{$article}})"> <i class="fa-regular fa-newspaper"></i> {{$article->name}} </a>
-                </li>
-            @endforeach
-        </ul>
+
+@if ($my_website->completed_at == null)
+    <p class="m-3 text-muted">
+        Select articles in the available resources. The selected list will be the displayed front page of your website <strong> Article Section </strong>.
+    </p>
+    <div class="card p-3" style="border: none;background:transparent">
+        <strong class="text-muted"> Available Resources ({{$articles->count()}}) <small> <a href="{{route('admin.pages.articles.index')}}"> Add New </a> </small> </strong>
+        <div class="mt-3">
+            <ul>
+                @foreach ($articles as $article)
+                    <li class="m-1" style="display: inline-block;">
+                        <a href="javascript:;" style="color: #d20abe;" onclick="selectArticle({{$article}})"> <i class="fa-regular fa-newspaper"></i> {{$article->name}} </a>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
     </div>
-</div>
+@else
+    <span class="text-muted"> Your content is currently completed, Please set to <strong class="text-dark"> In Progress </strong> to continue customizing. </span>
+@endif
 
 <div class="container-fluid p-5 text-center mb-5 fadeIn">
     <h2> <b> Articles </b> </h2>
@@ -24,7 +29,9 @@
             <div class="col-sm-4" id="colId{{$article->id}}">
                 <div class="card articles" style="border:none;cursor:pointer;background:transparent">
                     <div class="card-body">
-                        <i style="cursor: pointer;" class="fa-solid fa-xmark float-right" onclick="removeFromSelected({{ $article->id }})"></i>
+                        @if ($my_website->completed_at == null)
+                            <i style="cursor: pointer;" class="fa-solid fa-xmark float-right" onclick="removeFromSelected({{ $article->id }})"></i>
+                        @endif
                         <div class="row">
                             <div class="col-sm-6">
                                 <img src="{{asset('images/icons').'/'.$article->thumbnail}}" alt="" style="width: 100%;height: 150px;object-fit:cover;border-radius:12px;">

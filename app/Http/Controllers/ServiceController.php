@@ -116,6 +116,7 @@ class ServiceController extends Controller
 
     public function show(Service $service)
     {
+
         $service->load('category');
         $categories = $this->categoryRepository->query()->get();
         $service->tags = explode(',', $service->tags);

@@ -1,21 +1,26 @@
 @extends('admin.website.manage')
 
 @section('subcontent')
-<p class="m-3 text-muted">
-    Select services you want to show in your website. <strong> Published Services </strong> will still be visible in your website <a href="#"> catalog page. </a>
-</p>
-<div class="card p-3" style="border: none;background:transparent">
-    <strong class="text-muted"> Available Resources ({{$services->count()}}) <small> <a href="{{route('admin.pages.services.categories.index')}}"> Add New </a> </small> </strong>
-    <div class="mt-3">
-        <ul>
-            @foreach ($services as $service)
-                <li class="m-1" style="display: inline-block;">
-                    <a href="javascript:;" style="color: #d20abe;" onclick="selectService({{$service}})"> <i class="{{$service->icon}}"></i> {{$service->name}} </a>
-                </li>
-            @endforeach
-        </ul>
+
+@if ($my_website->completed_at == null)
+    <p class="m-3 text-muted">
+        Select services you want to show in your website. <strong> Published Services </strong> will still be visible in your website <a href="#"> catalog page. </a>
+    </p>
+    <div class="card p-3" style="border: none;background:transparent">
+        <strong class="text-muted"> Available Resources ({{$services->count()}}) <small> <a href="{{route('admin.pages.services.categories.index')}}"> Add New </a> </small> </strong>
+        <div class="mt-3">
+            <ul>
+                @foreach ($services as $service)
+                    <li class="m-1" style="display: inline-block;">
+                        <a href="javascript:;" style="color: #d20abe;" onclick="selectService({{$service}})"> <i class="{{$service->icon}}"></i> {{$service->name}} </a>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
     </div>
-</div>
+@else
+    <span class="text-muted"> Your content is currently completed, Please set to <strong class="text-dark"> In Progress </strong> to continue customizing. </span>
+@endif
 
 <div class="container-fluid text-center">
     <div class="card pt-5" style="border:none;background:transparent">
@@ -27,7 +32,9 @@
                     <div class="col-sm-4 mt-3" id="colId{{$service->id}}">
                         <div class="card fadeIn bg-light h-100 p-3 border-custom" style="background:transparent;">
                             <div class="card-body">
-                                <i style="cursor: pointer;" class="fa-solid fa-xmark float-right" onclick="removeFromSelected({{ $service->id }})"></i>
+                                @if ($my_website->completed_at == null)
+                                    <i style="cursor: pointer;" class="fa-solid fa-xmark float-right" onclick="removeFromSelected({{ $service->id }})"></i>
+                                @endif
                                 <i class="{{$service->icon}} text-primary fa-2x"></i>
                                 <div>
                                     <b>

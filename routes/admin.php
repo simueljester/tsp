@@ -36,7 +36,9 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
         Route::post('/save', ['as' => 'save', 'uses' => 'MyWebsiteController@save']);
         Route::post('/delete', ['as' => 'delete', 'uses' => 'MyWebsiteController@delete']);
         Route::post('/mark-complete', ['as' => 'mark-complete', 'uses' => 'MyWebsiteController@markComplete']);
+        Route::post('/mark-inprogress', ['as' => 'mark-inprogress', 'uses' => 'MyWebsiteController@markInprogress']);
         Route::post('/activate', ['as' => 'activate', 'uses' => 'MyWebsiteController@activate']);
+        Route::post('/deactivate', ['as' => 'deactivate', 'uses' => 'MyWebsiteController@deactivate']);
 
         Route::group(['prefix'=>'manage-content','as'=>'manage-content.'], function(){
             Route::get('/introduction/{my_website}', ['as' => 'introduction', 'uses' => 'MyWebsiteContentController@showIntro']);

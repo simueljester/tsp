@@ -45,7 +45,7 @@
                         @forelse ($services as $service)
                         <tr>
                             <td style="width:60%;">
-                                <a href="{{route('admin.pages.services.show',$service)}}" style="text-decoration: none">
+                                <a href="{{route('admin.pages.services.show',$service)}}" class="text-primary" style="text-decoration: none">
                                     <div class="d-flex flex-column justify-content-center">
                                         <h6 class="mb-0 text-s">
                                             <i class="{{$service->icon}}"></i>
