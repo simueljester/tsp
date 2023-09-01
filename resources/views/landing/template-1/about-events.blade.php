@@ -1,46 +1,39 @@
 
 <div class="container-fluid bg-white p-5">
    <div class="row ">
-    <div class="col-sm-6 ">
-        <div>
-            <h2> <b> About TSP </b>  </h2>
-            <p class="text-muted">
-                Nulla quis lorem ut libero malesuada feugiat. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Donec sollicitudin molestie malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </p>
+    <div class="col-sm-5">
+        <div class="text-left">
             <center>
-                <img class="about" width="250" src="{{ asset('images') }}/tsp3.png">
+                <img class="about-image" width="250" src="{{ asset('images') }}/tsp3.png">
+                <h2> <b> {{$contents['about']['title']}} </b> </h2>
             </center>
+            <p class="text-muted">
+                {!! $contents['about']['description'] !!}
+            </p>
+
         </div>
     </div>
-    <div class="col-sm-6 text-left">
-        <h2> <b> News & Events </b> </h2>
-        <div class="column small-11 small-centered">
-			<div class="slider slider-single">
-				<div><h3>1a</h3></div>
-				<div><h3>2</h3></div>
-				<div><h3>3</h3></div>
-				<div><h3>4</h3></div>
-				<div><h3>5</h3></div>
-				<div><h3>6</h3></div>
-				<div><h3>7</h3></div>
-				<div><h3>8</h3></div>
-				<div><h3>9</h3></div>
-				<div><h3>10</h3></div>
-			</div>
-			<div class="slider slider-nav">
-				<div><h3><span>12</span></h3></div>
-				<div><h3><span>2</span></h3></div>
-				<div><h3><span>3</span></h3></div>
-				<div><h3><span>4</span></h3></div>
-				<div><h3><span>5</span></h3></div>
-				<div><h3><span>6</span></h3></div>
-				<div><h3><span>7</span></h3></div>
-				<div><h3><span>8</span></h3></div>
-				<div><h3><span>9</span></h3></div>
-				<div><h3><span>10</span></h3></div>
-			</div>
-		</div>
-
+    <div class="col-sm-7 text-left">
+        <h2> <b> News </b>  </h2>
+        <div class="single-item">
+            @foreach ($contents['news'] as $news)
+            <div class="card text-white border-custom parallax">
+                <div class="border-custom" style="background-image: url('{{ asset('/images/icons/' . $news->thumbnail) }}');
+                    background-attachment: fixed;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: cover;height:500px;">
+                  <div class="p-3 border-custom" style="background:rgba(0, 0, 0, 0.5);">
+                        <h3 class="card-title"> <strong> <a href="" style="text-decoration: none;" class="text-white"> {{$news->headline}} </a> </strong> </h3>
+                        <p style="color: rgb(255, 145, 0)"> {{$news->name}} </p>
+                        <div>
+                            <small> <i class="fa-solid fa-earth-asia"></i> {{ Carbon\Carbon::parse( $news->published_at)->format('M d, Y')}} </small>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            @endforeach
+        </div>
     </div>
    </div>
 </div>

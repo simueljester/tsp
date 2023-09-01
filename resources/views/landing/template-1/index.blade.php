@@ -45,10 +45,10 @@
     </div>
 
 
+
     @include('landing.template-1.intro')
     @include('landing.template-1.service')
     @include('landing.template-1.articles')
-    @include('landing.template-1.brands')
     @include('landing.template-1.about-events')
     @include('landing.template-1.choose-us')
     @include('landing.template-1.contact')
@@ -61,10 +61,12 @@
         // Slick Start
         $('.single-item').slick({
             autoplay:true,
-            arrows:false,
+            arrows:true,
             fade:true,
             adaptiveHeight: true,
             dots: true,
+            nextArrow:'<button type="button" class="btn btn-lg mt-3" style="background:transparent"> Next <i class="fa-solid fa-circle-chevron-right" style="color: #ff9100;"></i> </button>',
+
         });
 
         $('.slick-center').slick({
@@ -159,7 +161,7 @@
     $(window).on('scroll', function (e) {
         var top = $(window).scrollTop() + $(window).height(),
         isVisibleArticles = top > $('.articles').offset().top;
-        $('.articles').toggleClass('fadeInDown', isVisibleArticles);
+        $('.articles').toggleClass('fadeIn', isVisibleArticles);
     });
 
     $(window).on('scroll', function (e) {
@@ -167,6 +169,22 @@
         isVisibleChoose = top > $('.choose-item').offset().top;
         $('.choose-item').toggleClass('zoomIn', isVisibleChoose);
     });
+
+
+    $(window).on('scroll', function (e) {
+        var top = $(window).scrollTop() + $(window).height(),
+        isVisibleChoose = top > $('.about-image').offset().top;
+        $('.about-image').toggleClass('fadeIn', isVisibleChoose);
+    });
+
+    $(window).on('scroll', function (e) {
+        var top = $(window).scrollTop() + $(window).height(),
+        isVisibleChoose = top > $('.contact').offset().top;
+        $('.contact').toggleClass('fadeIn', isVisibleChoose);
+    });
+
+
+
 
 </script>
 </body>

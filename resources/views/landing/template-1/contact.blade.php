@@ -1,11 +1,11 @@
 
-<div class="container-fluid bg-white p-5 text-center mb-5">
+<div class="container-fluid bg-white p-5 text-center mb-5 ">
     <div class="row ml-3">
         <div class="col-sm-6 text-right mt-5">
             {{-- <img class="zoomIn" src="{{ asset('images') }}/symbol2.png" width="280"> --}}
-          
+
         </div>
-        <div class="col-sm-6 text-left mt-3">
+        <div class="col-sm-6 text-left mt-3 contact">
             <h1 class="mt-5 fadeIn"> <b><i class="fa-solid fa-phone"></i> Reach Us! Start your inquiries </b> </h1>
             <div class="form-group">
                 <small class="text-muted"> Name: </small>

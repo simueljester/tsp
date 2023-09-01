@@ -39,7 +39,7 @@
                             </div>
                             <div class="col-sm-6 text-left">
                                 <h6> <b> <a href="{{route('admin.pages.news.show',$news->id)}}" style="color: #d20abe;" target="_blank"> {{$news->name}} </a> </b> </h6>
-                                <div class="text-muted char-article-limi">
+                                <div class="text-muted char-article-limit">
                                     {{ substr(strip_tags($news->description),0,110) }}
                                 </div>
                             </div>
