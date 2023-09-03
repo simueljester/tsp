@@ -40,7 +40,7 @@ class ServiceController extends Controller
         $services = $this->serviceRepository->query()
         ->whereCategoryId($category->id)
         ->with('category:id,name,icon')
-        ->select('id','name','type','icon','description_clean','published_at','category_id','created_at')
+        ->select('id','name','type','icon','description_clean','published_at','category_id','created_at','slug')
         ->orderBy('created_at','DESC')
         ->get();
         return view('admin.page-management.services.index',compact('services','category'));
@@ -52,7 +52,7 @@ class ServiceController extends Controller
         $services = $this->serviceRepository->query()
         ->whereCategoryId(null)
         ->with('category:id,name,icon')
-        ->select('id','name','type','icon','description_clean','published_at','category_id','created_at')
+        ->select('id','name','type','icon','description_clean','published_at','category_id','created_at','slug')
         ->orderBy('created_at','DESC')
         ->get();
 
@@ -116,7 +116,6 @@ class ServiceController extends Controller
 
     public function show(Service $service)
     {
-
         $service->load('category');
         $categories = $this->categoryRepository->query()->get();
         $service->tags = explode(',', $service->tags);

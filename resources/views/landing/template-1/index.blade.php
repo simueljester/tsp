@@ -75,7 +75,6 @@
             adaptiveHeight: true,
             dots: true,
             nextArrow:'<button type="button" class="btn btn-lg mt-3" style="background:transparent"> Next <i class="fa-solid fa-circle-chevron-right" style="color: #ff9100;"></i> </button>',
-
         });
 
         $('.slick-center').slick({

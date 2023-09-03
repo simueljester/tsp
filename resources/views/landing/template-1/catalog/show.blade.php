@@ -76,45 +76,85 @@
               <button class="btn btn-success" style="border-top-right-radius: 12px; border-bottom-right-radius:12px;" type="button"> <i class="fa-solid fa-magnifying-glass"></i> Search</button>
             </div>
         </div>
+    </div>
 
-        @foreach ($categories as $category)
-            <div class="mt-5">
-                <h3> <strong class="text-muted"> {{$category->name}} </strong> </h3>
-                <hr>
-                <div class="row" id="dataRow">
-                    @foreach ($category->services as $service)
-                        <div class="col-sm-6 mt-3">
-                            <a href="{{route('page-landing-show-service',$service)}}" style="text-decoration: none;">
-                                <div class="d-flex m-1 h-100 border-custom serviceCard" >
-                                    <div class="d-flex flex-column">
-                                        <div class=" p-3">
-                                            <div class="d-flex flex-row user-info">
-                                                <h1> <i class="{{$service->icon}}" style="color:rgba(247,136,32,1)" id="showicon"></i> </h1>
-                                                <div class="d-flex flex-column justify-content-start ml-2">
-                                                <span class="d-block font-weight-bold name text-dark"> {{$service->name}} </span>
-                                                <span class="date text-black-50">
-                                                    @if ($service->type == 'service')
-                                                        <span class="badge badge-pill badge-primary">Service</span>
-                                                    @else
-                                                        <span class="badge badge-pill badge-warning">For Sale</span>
-                                                    @endif
-                                                </span>
-                                            </div>
-                                            </div>
-                                            <div class="text-muted char-limit text-left">
-                                                <small> {!! $service->description_clean !!} </small>
-                                            </div>
+    <div class="m-5">
+        <div class="row">
+            <div class="col-sm-3 p-3">
+                <strong> Client's reviews about this service </strong>
+            </div>
+            <div class="col-sm-6">
+                <div class="card fadeIn border-custom " style="background: transparent;border:none;">
+                    <div class="card-body">
+                        <span class="h3"> <i class="{{$service->icon}}"></i> <strong> {{$service->name}} </strong>  </span>
+                        @if ($service->type == 'service')
+                            <span class="badge badge-pill badge-primary">Service</span>
+                        @else
+                            <span class="badge badge-pill badge-warning">For Sale</span>
+                        @endif
+
+                        <div class="p-2" >
+                            <a href="#" style="color:rgba(247,136,32,1);text-decoration:none;" > <i class="fa-solid fa-pen-to-square"></i> Inquire </a> &nbsp
+                            <a href="#" style="color:rgba(247,136,32,1);text-decoration:none" > <i class="fa-solid fa-star-half-stroke"></i> Write a review </a>
+                        </div>
+                        @if ($service->multimedia)
+                        <div>
+                            <div class="mt-2">
+                                <div class="single-item">
+                                    @foreach (json_decode($service->multimedia,true) as $media)
+                                    <div class="card-hover-scale" style="cursor: pointer;" onclick="viewGallery({{json_encode($media)}})">
+                                        <img class="card-img-top border-custom" src="{{asset('/images/dropzone').'/'.$media}}" style="max-height:500px;width:100%;object-fit: cover;">
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                        <div>
+                            @foreach ($service->tags as $tag)
+                            <span class="badge badge-pill badge-light p-2">{{$tag}}</span>
+                            @endforeach
+                        </div>
+                        <div class="mt-5">
+                            {!! $service->description !!}
+                        </div>
+                        <hr>
+
+                    </div>
+                </div>
+            </div>
+            @if ($service->articles->count() != 0)
+                <div class="col-sm-3 p-3">
+                    <strong> Related Articles </strong>
+                    <div class="p-3 bg-light border-custom mt-3">
+                        @foreach ($service->articles as $article)
+                        <div class="card articles " style="border:none;cursor:pointer;background:transparent">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="card-hover-scale">
+                                            <img src="{{asset('images/icons').'/'.$article->thumbnail}}" class="" style="width: 100%;height: 150px;object-fit:cover;border-radius:12px;">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 text-left">
+                                        <h6>
+                                            <b>
+                                                <a href="#" target="_blank" style="color: rgb(255, 145, 0)"> {{$article->name}} </a>
+                                            </b>
+                                        </h6>
+                                        <div class="text-muted char-article-limit">
+                                            {!! substr(strip_tags($article->description),0,110) !!}
                                         </div>
                                     </div>
                                 </div>
-                            </a>
-
+                            </div>
                         </div>
-                    @endforeach
-
+                        @endforeach
+                    </div>
                 </div>
-            </div>
-        @endforeach
+            @endif
+
+        </div>
     </div>
 
     @include('landing.template-1.footer')
@@ -179,6 +219,7 @@
 
     var data = {!! $categories->toJson() !!}; // from controller
 
+    // Toogle
     var toogleVal = 1;
 
 
@@ -202,8 +243,16 @@
 
     }
 
+    // Slick
 
-
+    $('.single-item').slick({
+        autoplay:true,
+        arrows:true,
+        fade:true,
+        adaptiveHeight: true,
+        dots: true,
+        nextArrow:'<button type="button" class="btn btn-lg mt-3" style="background:transparent"> Next <i class="fa-solid fa-circle-chevron-right" style="color: #ff9100;"></i> </button>',
+    });
 
     </script>
 

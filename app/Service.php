@@ -4,6 +4,7 @@ namespace App;
 
 use App\ServiceCategory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Service extends Model
@@ -19,11 +20,21 @@ class Service extends Model
         'published_at',
    ];
 
+   public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     // Relations
 
    public function category(): BelongsTo
    {
        return $this->belongsTo(ServiceCategory::class);
+   }
+
+   public function articles(): HasMany
+   {
+       return $this->hasMany('App\Article', 'service_id','id');
    }
 
 }

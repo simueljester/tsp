@@ -9,7 +9,9 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <img src="{{asset('images/icons').'/'.$article->thumbnail}}" class="" style="width: 100%;height: 150px;object-fit:cover;border-radius:12px;">
+                                    <div class="card-hover-scale">
+                                        <img src="{{asset('images/icons').'/'.$article->thumbnail}}" class="" style="width: 100%;height: 150px;object-fit:cover;border-radius:12px;">
+                                    </div>
                                 </div>
                                 <div class="col-sm-6 text-left">
                                     <h6>
