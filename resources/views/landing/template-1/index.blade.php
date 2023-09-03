@@ -28,6 +28,16 @@
 </head>
 <body class="bg-light">
     <div class="bg-light sticky">
+        @if(session()->has('success'))
+            <div class="alert alert-success mt-3" role="alert">
+                {{ session()->get('success') }}
+            </div>
+        @endif
+        @if(session()->has('error'))
+            <div class="alert alert-danger mt-3" role="alert">
+                {{ session()->get('error') }}
+            </div>
+        @endif
         <div class="container p-4 ">
             <div>
                 <a href="/homepage" style="text-decoration: none;">
@@ -43,7 +53,6 @@
             </div>
         </div>
     </div>
-
 
 
     @include('landing.template-1.intro')

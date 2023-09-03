@@ -24,6 +24,8 @@ Route::get('/', ['as' => 'index', 'uses' => 'PageLandingController@index']);
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/save-inquiry', ['as' => 'save-inquiry', 'uses' => 'PageLandingController@saveInquiry']);
+Route::get('/list-catalog', ['as' => 'list-catalog', 'uses' => 'PageLandingController@showCatalog']);
 
 Route::get('/set-cookie', function () {
     $uuid = (string) Str::uuid();

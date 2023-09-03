@@ -53,7 +53,8 @@
                                     </p>
                                 </td>
                                 <td>
-                                   {{$inquiry->name}}
+                                   {{$inquiry->name}} <br>
+                                   <small class="text-muted"> {{$inquiry->email}} / {{$inquiry->contact}} </small>
                                 </td>
                                 <td>
                                     {{$inquiry->created_at->format('M d, Y h:i a')}}
@@ -178,7 +179,7 @@
             $('#serviceContainer').hide()
         }
 
-        $('#inquiryEmail').html(inquiry.email)
+        $('#inquiryEmail').html(inquiry.email + ' / ' + inquiry.contact)
 
         $('#inquiryDescription').html(inquiry.description)
         $('#inquiryName').html(inquiry.name)
