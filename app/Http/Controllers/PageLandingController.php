@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Repositories\ArticleRepository;
+use App\Article;
 use App\Service;
 use Illuminate\Http\Request;
+use App\Http\Repositories\ReviewRepository;
+use App\Http\Repositories\ArticleRepository;
 use App\Http\Repositories\InquiryRepository;
 use App\Http\Repositories\ServiceRepository;
 use App\Http\Repositories\MyWebsiteRepository;
-use App\Http\Repositories\ReviewRepository;
 use App\Http\Repositories\ServiceCategoryRepository;
 
 class PageLandingController extends Controller
@@ -48,7 +49,7 @@ class PageLandingController extends Controller
             'name'           => $request->name,
             'email'          => $request->email,
             'description'    => $request->description,
-            'service_id'     => null,
+            'service_id'     => $request->service_id ?? null,
             'contact'        => $request->contact,
         ];
 
@@ -85,12 +86,10 @@ class PageLandingController extends Controller
         ->select('id','name','description','published_at')
         ->get();
 
-
         $service->tags = explode(',', $service->tags);
         $service->load('category','articles:id,name,slug,thumbnail,service_id,description','reviews:id,comment,commented_by,rating,service_id,created_at');
 
         $reviewArray = $service->reviews->pluck('rating')->toArray();
-
         $averageReview = !$reviewArray ? 0 : round(array_sum($reviewArray)/count($reviewArray));
 
         return view('landing.template-1.catalog.show',compact('service','categories','averageReview'));
@@ -109,4 +108,25 @@ class PageLandingController extends Controller
         $this->reviewRepository->save($data);
         return redirect()->back()->with('success', 'Review added! Thank you for the feedback!');
     }
+
+    public function showArticleList(Request $request)
+    {
+        $keyword = $request->keyword ?? null;
+        $articles = $this->articleRepository->query()
+        ->when($keyword, function ($query) use ($keyword) {
+            $query->where('name', 'like', '%' . $keyword . '%');
+        })
+        ->whereNotNull('published_at')
+        ->orderBy('published_at', 'DESC')
+        ->paginate(10);
+        return view('landing.template-1.articles.list',compact('articles','keyword'));
+    }
+
+    public function showArticle(Article $article){
+        $article->load('service');
+        $reviewArray = $article->service ? $article->service->reviews->pluck('rating')->toArray() : [];
+        $averageReview = !$reviewArray ? 0 : round(array_sum($reviewArray)/count($reviewArray));
+        return view('landing.template-1.articles.show',compact('article','averageReview'));
+    }
+
 }

@@ -28,6 +28,8 @@ Route::post('/save-inquiry', ['as' => 'save-inquiry', 'uses' => 'PageLandingCont
 Route::post('/save-review', ['as' => 'save-review', 'uses' => 'PageLandingController@saveReview']);
 Route::get('/service-list', ['as' => 'list-catalog', 'uses' => 'PageLandingController@showCatalog']);
 Route::get('/service-list/{service}', ['as' => 'page-landing-show-service', 'uses' => 'PageLandingController@showService']);
+Route::get('/article-list', ['as' => 'list-article', 'uses' => 'PageLandingController@showArticleList']);
+Route::get('/article-list/{article}', ['as' => 'page-landing-show-article', 'uses' => 'PageLandingController@showArticle']);
 
 Route::get('/set-cookie', function () {
     $uuid = (string) Str::uuid();

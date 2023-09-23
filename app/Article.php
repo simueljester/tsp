@@ -19,6 +19,12 @@ class Article extends Model
         'published_at',
    ];
 
+
+   public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function service(): BelongsTo
     {
         return $this->belongsTo(Service::class);

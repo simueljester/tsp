@@ -1,5 +1,5 @@
 
-<div class="container-fluid bg-white p-5 text-center mb-5 ">
+<div class="container-fluid bg-white p-5 text-center mb-5" id="containerContact">
     <div class="row ml-3">
         <div class="col-sm-6 text-right mt-5">
             {{-- <img class="zoomIn" src="{{ asset('images') }}/symbol2.png" width="280"> --}}

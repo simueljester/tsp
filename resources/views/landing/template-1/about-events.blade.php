@@ -1,5 +1,5 @@
 
-<div class="container-fluid bg-white p-5">
+<div class="container-fluid bg-white p-5" id="containerAboutEvents">
    <div class="row ">
         @if (array_key_exists("about",$contents))
             <div class="col-sm-5">

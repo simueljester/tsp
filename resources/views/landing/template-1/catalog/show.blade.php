@@ -47,12 +47,8 @@
                     <strong> <img class="zoomIn" src="{{ asset('images') }}/symbol2.png" width="30"> <b class="text-muted">TSP</b> </strong>
                 </a>
                 <button id="openNv" class="btn" style="background: transparent; border:none;color:rgba(247,136,32,1);" onclick="toggleNav()"><i class="fa-solid fa-bars"></i></button>
-                <span class="float-right">
-                    <span> Home </span>
-                    <span class="ml-2"> Services </span>
-                    <span class="ml-2"> About </span>
-                    <span class="ml-2"> Gallery </span>
-                    <span class="ml-2"> Contact </span>
+                <span class="float-right" >
+                    <span class="ml-2"> <a href="/" class="text-dark" style="text-decoration: none;"> <i class="fa-solid fa-house"></i> Home </a>  </span>
                 </span>
             </div>
         </div>
@@ -94,7 +90,7 @@
                             @endfor
                         @endif
                         <div class="p-2" >
-                            <a href="#" style="color:rgba(247,136,32,1);text-decoration:none;" > <i class="fa-solid fa-pen-to-square"></i> Inquire </a> &nbsp
+                            <a href="#inquiryForm" style="color:rgba(247,136,32,1);text-decoration:none;" > <i class="fa-solid fa-pen-to-square"></i> Inquire </a> &nbsp
                             <a href="#reviewForm" style="color:rgba(247,136,32,1);text-decoration:none" > <i class="fa-solid fa-star-half-stroke"></i> Write a review </a>
                         </div>
                         @if ($service->multimedia)
@@ -124,8 +120,9 @@
                                 <form action="{{route('save-review')}}" method="post">
                                     @csrf
                                     <div class="mt-3 p-4 bg-light border-custom shadow" id="reviewForm">
+                                        <strong> Add Review </strong>
+                                        <hr>
                                         <div class="form-group">
-                                            <label> Add Review </label>
                                             <textarea required class="form-control border-custom bg-white" id="comment" name="comment" rows="5" style="background: transparent;"></textarea>
                                         </div>
                                         <div class="form-group">
@@ -150,7 +147,43 @@
                                         <button class="btn btn-primary btn-sm"> Add Review </button>
                                     </div>
                                 </form>
+
+                                <form action="{{route('save-inquiry')}}" method="POST">
+                                    @csrf
+                                    <div class="mt-3 p-4 bg-light border-custom shadow" id="inquiryForm">
+                                        <strong> Inquire to this service </strong>
+                                        <hr>
+                                        <div class="form-group">
+                                            <small class="text-muted"> Name: </small> <strong class="text-danger"> * </strong>
+                                            <input type="text" name="name" id="name" class="form-control" required>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <small class="text-muted"> Email Address: </small> <strong class="text-danger"> * </strong>
+                                                    <input type="email" name="email" id="email" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <small class="text-muted"> Contact #: </small> <strong class="text-danger"> * </strong>
+                                                    <input type="text" name="contact" id="contact" class="form-control" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <small class="text-muted"> Inquiry: </small> <strong class="text-danger"> * </strong>
+                                            <textarea name="description" id="description" cols="30" rows="10" class="form-control"></textarea>
+                                        </div>
+                                        <div>
+                                            <input type="hidden" name="service_id" id="service_id" value="{{$service->id}}">
+                                            <button class="btn btn-primary"> Send Inquiry </button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
+
                             <div class="col-sm-6">
                                 @if ($service->reviews)
                                 <div class="mt-3">
@@ -197,7 +230,7 @@
                             <div class="card fadeIn mt-3" style="background:transparent;border:none;">
                                 <img src="{{asset('images/icons').'/'.$article->thumbnail}}" class="" style="width: 100%;height: 120px;object-fit:cover;border-radius:12px;">
                                 <div class="card-body">
-                                    <a href="#" target="_blank" style="color: rgb(255, 145, 0)"> {{$article->name}} </a>
+                                    <a href="{{route('page-landing-show-article',$article)}}" style="color: rgb(255, 145, 0)"> {{$article->name}} </a>
                                     <div class="text-muted char-article-limit">
                                         {!! substr(strip_tags($article->description),0,110) !!}
                                     </div>

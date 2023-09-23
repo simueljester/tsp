@@ -1,5 +1,5 @@
 
-<div class="container-fluid bg-light p-5">
+<div class="container-fluid bg-light p-5" id="containerChooseUs">
     <div class="row">
         @if (array_key_exists("choose_us",$contents))
             <div class="col-sm-8">
@@ -26,7 +26,7 @@
             </div>
         @endif
         <div class="col-sm-4">
-            <h2> <b> What Out Client Says </b> </h2> <a href="https://www.facebook.com/TSPnConsultancy" target="_blank"> <i class="fa-brands fa-facebook"></i> Visit our fb page</a>
+            <h2> <b> What Our Client Says </b> </h2> <a href="https://www.facebook.com/TSPnConsultancy" target="_blank"> <i class="fa-brands fa-facebook"></i> Visit our fb page</a>
             <div class="container mt-5">
                 <div class="d-flex justify-content-center row">
                     <div class="d-flex flex-column comment-section">

@@ -1,7 +1,8 @@
 
 @if (array_key_exists("services",$contents))
-    <div class="container-fluid bg-light p-5 text-center mb-5">
+    <div class="container-fluid bg-light p-5 text-center mb-5" id="containerArticles">
         <h2> <b> Articles </b> </h2>
+        <a href="{{route('list-article')}}"> Browse All Articles </a>
         <div class="row">
             @foreach ($contents['articles'] as $article)
                 <div class="col-sm-4" id="colId{{$article->id}}">

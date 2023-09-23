@@ -27,7 +27,7 @@ class ArticleController extends Controller
     public function index()
     {
         //
-        $articles = $this->articleRepository->query()->select('id','name','published_at','is_featured')->orderBy('created_at','DESC')->paginate(10);
+        $articles = $this->articleRepository->query()->select('id','name','published_at','slug','is_featured')->orderBy('created_at','DESC')->paginate(10);
         return view('admin.page-management.articles.index',compact('articles'));
     }
 

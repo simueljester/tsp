@@ -47,12 +47,8 @@
                     <strong> <img class="zoomIn" src="{{ asset('images') }}/symbol2.png" width="30"> <b class="text-muted">TSP</b> </strong>
                 </a>
                 <button id="openNv" class="btn" style="background: transparent; border:none;color:rgba(247,136,32,1);" onclick="toggleNav()"><i class="fa-solid fa-bars"></i></button>
-                <span class="float-right">
-                    <span> Home </span>
-                    <span class="ml-2"> Services </span>
-                    <span class="ml-2"> About </span>
-                    <span class="ml-2"> Gallery </span>
-                    <span class="ml-2"> Contact </span>
+                <span class="float-right" >
+                    <span class="ml-2"> <a href="/" class="text-dark" style="text-decoration: none;"> <i class="fa-solid fa-house"></i> Home </a>  </span>
                 </span>
             </div>
         </div>
@@ -68,8 +64,6 @@
     </div>
 
     <div class="container mt-3 fadeIn">
-        {{-- <div class="square_box box_three"></div>
-        <div class="square_box box_four"></div> --}}
         <nav aria-label="breadcrumb" style="z-index: 9999;">
             <ol class="breadcrumb">
               <li class="breadcrumb-item" aria-current="page">Catalog</li>

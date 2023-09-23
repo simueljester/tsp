@@ -40,15 +40,16 @@
         @endif
         <div class="container p-4 ">
             <div>
-                <a href="/homepage" style="text-decoration: none;">
+                <a href="/" style="text-decoration: none;">
                     <strong> <img class="zoomIn" src="{{ asset('images') }}/symbol2.png" width="30"> <b class="text-muted">TSP</b> </strong>
                 </a>
-                <span class="float-right">
-                    <span> Home </span>
-                    <span class="ml-2"> Services </span>
-                    <span class="ml-2"> About </span>
-                    <span class="ml-2"> Gallery </span>
-                    <span class="ml-2"> Contact </span>
+                <span class="float-right" >
+                    <span class="ml-2"> <a href="{{route('list-catalog')}}" class="text-dark" style="text-decoration: none;"> Services </a>  </span>
+                    <span class="ml-2"> <a href="#containerArticles" class="text-dark" style="text-decoration: none;"> Articles </a> </span>
+                    <span class="ml-2"> <a href="#containerAboutEvents" class="text-dark" style="text-decoration: none;"> About </a> </span>
+                    <span class="ml-2"> <a href="#containerAboutEvents" class="text-dark" style="text-decoration: none;"> Events </a> </span>
+                    <span class="ml-2"> <a href="#containerChooseUs" class="text-dark" style="text-decoration: none;"> Why Choose Us </a> </span>
+                    <span class="ml-2"> <a href="#containerContact" class="text-dark" style="text-decoration: none;"> Contact </a> </span>
                 </span>
             </div>
         </div>
