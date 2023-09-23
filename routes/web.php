@@ -25,6 +25,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/save-inquiry', ['as' => 'save-inquiry', 'uses' => 'PageLandingController@saveInquiry']);
+Route::post('/save-review', ['as' => 'save-review', 'uses' => 'PageLandingController@saveReview']);
 Route::get('/service-list', ['as' => 'list-catalog', 'uses' => 'PageLandingController@showCatalog']);
 Route::get('/service-list/{service}', ['as' => 'page-landing-show-service', 'uses' => 'PageLandingController@showService']);
 

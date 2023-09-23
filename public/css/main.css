@@ -134,6 +134,13 @@
     }
   }
 
+  .allButFooter {
+    position:fixed;
+    bottom: 0;
+}
+
+
+
 /* Animations Start */
 
 .zoomIn {

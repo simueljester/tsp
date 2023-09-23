@@ -8,11 +8,12 @@ use Illuminate\Http\Request;
 use App\Http\Repositories\InquiryRepository;
 use App\Http\Repositories\ServiceRepository;
 use App\Http\Repositories\MyWebsiteRepository;
+use App\Http\Repositories\ReviewRepository;
 use App\Http\Repositories\ServiceCategoryRepository;
 
 class PageLandingController extends Controller
 {
-    public $myWebsiteRepository,$inquiryRepository,$serviceRepository, $serviceCategoryRepository, $articleRepository;
+    public $myWebsiteRepository,$inquiryRepository,$serviceRepository, $serviceCategoryRepository, $articleRepository, $reviewRepository;
 
     public function __construct()
     {
@@ -21,6 +22,7 @@ class PageLandingController extends Controller
         $this->serviceRepository = app(ServiceRepository::class);
         $this->serviceCategoryRepository = app(ServiceCategoryRepository::class);
         $this->articleRepository = app(ArticleRepository::class);
+        $this->reviewRepository = app(ReviewRepository::class);
     }
 
     public function index()
@@ -56,28 +58,55 @@ class PageLandingController extends Controller
 
     public function showCatalog(Request $request)
     {
+        $keyword = $request->keyword ?? null;
 
-        $categories = $this->serviceCategoryRepository->query()
-        ->with('services:id,name,description_clean,category_id,icon,slug,type')
+        $grouped = $this->serviceRepository->query()
+        ->when($keyword, function ($query) use ($keyword) {
+            $query->where('name', 'like', '%' . $keyword . '%')
+            ->orWhere('description_clean', 'like', '%' . $keyword . '%');
+        })
+        ->whereNotNull('category_id')
         ->whereNotNull('published_at')
-        ->select('id','name','description','published_at')
-        ->get();
+        ->select('id','name','description','description_clean','published_at','category_id','icon','slug','type')
+        ->get()
+        ->groupBy('category_id');
 
-        // dd($categories);
+        $categories = $this->serviceCategoryRepository->query()->select('id','name','description')
+        ->has('services')->get()->keyBy('id');
 
-        return view('landing.template-1.catalog.services',compact('categories'));
+        return view('landing.template-1.catalog.services',compact('grouped','keyword','categories'));
     }
 
     public function showService(Service $service)
     {
+
         $categories = $this->serviceCategoryRepository->query()
         ->whereNotNull('published_at')
         ->select('id','name','description','published_at')
         ->get();
 
+
         $service->tags = explode(',', $service->tags);
-        $service->load('category','articles:id,name,slug,thumbnail,service_id,description');
-        // dd($service);
-        return view('landing.template-1.catalog.show',compact('service','categories'));
+        $service->load('category','articles:id,name,slug,thumbnail,service_id,description','reviews:id,comment,commented_by,rating,service_id,created_at');
+
+        $reviewArray = $service->reviews->pluck('rating')->toArray();
+
+        $averageReview = !$reviewArray ? 0 : round(array_sum($reviewArray)/count($reviewArray));
+
+        return view('landing.template-1.catalog.show',compact('service','categories','averageReview'));
+    }
+
+    public function saveReview(Request $request)
+    {
+
+        $data = [
+            'comment'        => $request->comment,
+            'commented_by'   => $request->commented_by ?? 'Client',
+            'service_id'     => $request->service_id,
+            'rating'         => $request->rating,
+        ];
+
+        $this->reviewRepository->save($data);
+        return redirect()->back()->with('success', 'Review added! Thank you for the feedback!');
     }
 }

@@ -68,21 +68,39 @@
     </div>
 
     <div class="container mt-3 fadeIn">
-        <div class="square_box box_three"></div>
-        <div class="square_box box_four"></div>
-        <div class="input-group mb-3 mt-3">
-            <input type="text" style="border-top-left-radius: 12px; border-bottom-left-radius:12px;" class="form-control form-control-lg" placeholder="Search service" aria-label="Recipient's username" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-              <button class="btn btn-success" style="border-top-right-radius: 12px; border-bottom-right-radius:12px;" type="button"> <i class="fa-solid fa-magnifying-glass"></i> Search</button>
+        {{-- <div class="square_box box_three"></div>
+        <div class="square_box box_four"></div> --}}
+        <nav aria-label="breadcrumb" style="z-index: 9999;">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item" aria-current="page">Catalog</li>
+            </ol>
+        </nav>
+        <form action="">
+            <div class="row">
+                <div class="col-sm-10">
+                    <div class="input-group mb-3 mt-3">
+                        <input type="text" style="border-top-left-radius: 12px; border-bottom-left-radius:12px;" value="{{$keyword}}" class="form-control form-control-lg" name="keyword" id="keyword" placeholder="Search service">
+                        <div class="input-group-append">
+                            <button class="btn btn-success" style="border-top-right-radius: 12px; border-bottom-right-radius:12px;"> <i class="fa-solid fa-magnifying-glass"></i> Search</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    @if ($keyword)
+                        <div class="input-group-append mt-4">
+                            <a href="{{route('list-catalog')}}" class="btn btn-outline-secondary border-custom"> Clear Keyword </a>
+                        </div>
+                    @endif
+                </div>
             </div>
-        </div>
+        </form>
 
-        @foreach ($categories as $category)
+        @forelse ($grouped as $key => $group)
             <div class="mt-5">
-                <h3> <strong class="text-muted"> {{$category->name}} </strong> </h3>
+                <h3> <strong class="text-muted"> {{$categories[$key]->name}} </strong> </h3>
                 <hr>
                 <div class="row" id="dataRow">
-                    @foreach ($category->services as $service)
+                    @foreach ($group as $service)
                         <div class="col-sm-6 mt-3">
                             <a href="{{route('page-landing-show-service',$service)}}" style="text-decoration: none;">
                                 <div class="d-flex m-1 h-100 border-custom serviceCard" >
@@ -111,12 +129,23 @@
 
                         </div>
                     @endforeach
-
                 </div>
             </div>
-        @endforeach
-    </div>
+            @empty
 
+            <div class="flex-container">
+                <div class="inner-element" style="margin: 180px;">
+
+
+                    <center>
+                        <i class="fa-solid fa-magnifying-glass fa-10x text-muted"></i>
+                        <h2 class="text-muted"> No services found </h2>
+                    </center>
+                </div>
+            </div>
+
+        @endforelse
+    </div>
     @include('landing.template-1.footer')
 
 <style>
@@ -165,11 +194,26 @@
     }
 
 
+
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
   .sidebar {padding-top: 15px;}
   .sidebar a {font-size: 18px;}
 }
+
+.flex-container{
+  display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  display: -ms-flexbox;  /* TWEENER - IE 10 */
+  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+}
+
 </style>
 
 
@@ -177,7 +221,7 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script type="text/javascript">
 
-    var data = {!! $categories->toJson() !!}; // from controller
+
 
     var toogleVal = 1;
 

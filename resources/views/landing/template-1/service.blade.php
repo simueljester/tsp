@@ -9,7 +9,7 @@
                     @foreach ($contents['services'] as $service)
                         <div class="card h-100 card-hover-scale" style="border:none;">
                             <div class="card-body">
-                                <i class="{{$service->icon}} text-primary fa-2x "></i>
+                                <i class="{{$service->icon}} fa-2x " style="color:rgba(247,136,32,1);text-decoration:none;"></i>
                                 <div>
                                     <b> {{$service->name}} </b>
                                 </div>

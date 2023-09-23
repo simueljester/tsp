@@ -67,23 +67,19 @@
         @endforeach
     </div>
 
+
     <div class="container mt-3 fadeIn">
-        <div class="square_box box_three"></div>
-        <div class="square_box box_four"></div>
-        <div class="input-group mb-3 mt-3">
-            <input type="text" style="border-top-left-radius: 12px; border-bottom-left-radius:12px;" class="form-control form-control-lg" placeholder="Search service" aria-label="Recipient's username" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-              <button class="btn btn-success" style="border-top-right-radius: 12px; border-bottom-right-radius:12px;" type="button"> <i class="fa-solid fa-magnifying-glass"></i> Search</button>
-            </div>
-        </div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{{route('list-catalog')}}">Catalog</a></li>
+              <li class="breadcrumb-item active" aria-current="page">{{$service->name}}</li>
+            </ol>
+          </nav>
     </div>
 
-    <div class="m-5">
+    <div class="container mt-3 fadeIn">
         <div class="row">
-            <div class="col-sm-3 p-3">
-                <strong> Client's reviews about this service </strong>
-            </div>
-            <div class="col-sm-6">
+            <div class="col-sm-9">
                 <div class="card fadeIn border-custom " style="background: transparent;border:none;">
                     <div class="card-body">
                         <span class="h3"> <i class="{{$service->icon}}"></i> <strong> {{$service->name}} </strong>  </span>
@@ -92,10 +88,14 @@
                         @else
                             <span class="badge badge-pill badge-warning">For Sale</span>
                         @endif
-
+                        @if ($averageReview > 0)
+                            @for ($i = 1; $i <= $averageReview; $i++)
+                                <i class="fa-solid fa-star text-warning"></i>
+                            @endfor
+                        @endif
                         <div class="p-2" >
                             <a href="#" style="color:rgba(247,136,32,1);text-decoration:none;" > <i class="fa-solid fa-pen-to-square"></i> Inquire </a> &nbsp
-                            <a href="#" style="color:rgba(247,136,32,1);text-decoration:none" > <i class="fa-solid fa-star-half-stroke"></i> Write a review </a>
+                            <a href="#reviewForm" style="color:rgba(247,136,32,1);text-decoration:none" > <i class="fa-solid fa-star-half-stroke"></i> Write a review </a>
                         </div>
                         @if ($service->multimedia)
                         <div>
@@ -119,41 +119,94 @@
                             {!! $service->description !!}
                         </div>
                         <hr>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <form action="{{route('save-review')}}" method="post">
+                                    @csrf
+                                    <div class="mt-3 p-4 bg-light border-custom shadow" id="reviewForm">
+                                        <div class="form-group">
+                                            <label> Add Review </label>
+                                            <textarea required class="form-control border-custom bg-white" id="comment" name="comment" rows="5" style="background: transparent;"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label> Name (optional) </label>
+                                            <input type="text" name="commented_by" id="commented_by" class="form-control border-custom">
+                                        </div>
+                                        <div class="form-group">
+                                            <label> Raring </label>
+                                            <div class="rating">
+                                                <span class="rating__result"></span>
+                                                <i class="rating__star far fa-star"></i>
+                                                <i class="rating__star far fa-star"></i>
+                                                <i class="rating__star far fa-star"></i>
+                                                <i class="rating__star far fa-star"></i>
+                                                <i class="rating__star far fa-star"></i>
+                                            </div>
+                                        </div>
 
+                                        <br>
+                                        <input type="hidden" name="rating" id="rating">
+                                        <input type="hidden" name="service_id" id="service_id" value="{{$service->id}}">
+                                        <button class="btn btn-primary btn-sm"> Add Review </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-sm-6">
+                                @if ($service->reviews)
+                                <div class="mt-3">
+                                    <strong> Client's reviews about this service </strong>
+                                    <hr>
+                                </div>
+                                @endif
+                                @forelse ($service->reviews as $review)
+                                    <div class="d-flex row">
+                                        <div class="d-flex flex-column comment-section">
+
+                                            <div class="bg-white p-2">
+                                                <div class="d-flex flex-row user-info">
+                                                    <img class="rounded-circle" src="{{ asset('images') }}/user.png" width="45" height="45">
+                                                    <div class="d-flex flex-column justify-content-start ml-2">
+                                                    <span class="d-block font-weight-bold name"> {{$review->commented_by}}
+                                                        @for ($i = 1; $i <= (int)$review->rating; $i++)
+                                                            <i class="fa-solid fa-star text-warning"></i>
+                                                        @endfor
+                                                    </span>
+                                                    <span class="date text-black-50"><i class="fa-solid fa-earth-asia"></i> {{$review->created_at->format('M d, Y')}}</span>
+                                                </div>
+                                                </div>
+                                                <div class="mt-2">
+                                                    <p class="comment-text">{{$review->comment}}</p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                @empty
+                                    <span class="text-muted"> No review yet </span>
+                                @endforelse
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            @if ($service->articles->count() != 0)
-                <div class="col-sm-3 p-3">
+            <div class="col-sm-3 p-3">
+                @if ($service->articles->count() != 0)
                     <strong> Related Articles </strong>
                     <div class="p-3 bg-light border-custom mt-3">
                         @foreach ($service->articles as $article)
-                        <div class="card articles " style="border:none;cursor:pointer;background:transparent">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="card-hover-scale">
-                                            <img src="{{asset('images/icons').'/'.$article->thumbnail}}" class="" style="width: 100%;height: 150px;object-fit:cover;border-radius:12px;">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 text-left">
-                                        <h6>
-                                            <b>
-                                                <a href="#" target="_blank" style="color: rgb(255, 145, 0)"> {{$article->name}} </a>
-                                            </b>
-                                        </h6>
-                                        <div class="text-muted char-article-limit">
-                                            {!! substr(strip_tags($article->description),0,110) !!}
-                                        </div>
+                            <div class="card fadeIn mt-3" style="background:transparent;border:none;">
+                                <img src="{{asset('images/icons').'/'.$article->thumbnail}}" class="" style="width: 100%;height: 120px;object-fit:cover;border-radius:12px;">
+                                <div class="card-body">
+                                    <a href="#" target="_blank" style="color: rgb(255, 145, 0)"> {{$article->name}} </a>
+                                    <div class="text-muted char-article-limit">
+                                        {!! substr(strip_tags($article->description),0,110) !!}
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         @endforeach
                     </div>
-                </div>
-            @endif
-
+                @endif
+            </div>
         </div>
     </div>
 
@@ -205,11 +258,47 @@
     }
 
 
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-  .sidebar {padding-top: 15px;}
-  .sidebar a {font-size: 18px;}
-}
+    /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+    @media screen and (max-height: 450px) {
+        .sidebar {padding-top: 15px;}
+        .sidebar a {font-size: 18px;}
+    }
+
+    .rating {
+        position: relative;
+        width: 180px;
+        background: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: .3em;
+        padding: 5px;
+        overflow: hidden;
+        border-radius: 20px;
+        box-shadow: 0 0 2px #b3acac;
+    }
+
+    .rating__result {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translateY(-10px) translateX(-5px);
+        z-index: -9;
+        font: 3em Arial, Helvetica, sans-serif;
+        color: #ebebeb8e;
+        pointer-events: none;
+    }
+
+    .rating__star {
+        font-size: 1.3em;
+        cursor: pointer;
+        color: #dabd18b2;
+        transition: filter linear .3s;
+    }
+
+    .rating__star:hover {
+        filter: drop-shadow(1px 1px 4px gold);
+    }
 </style>
 
 
@@ -221,7 +310,6 @@
 
     // Toogle
     var toogleVal = 1;
-
 
     function toggleNav(){
 
@@ -243,6 +331,8 @@
 
     }
 
+
+
     // Slick
 
     $('.single-item').slick({
@@ -253,6 +343,40 @@
         dots: true,
         nextArrow:'<button type="button" class="btn btn-lg mt-3" style="background:transparent"> Next <i class="fa-solid fa-circle-chevron-right" style="color: #ff9100;"></i> </button>',
     });
+
+    // Rating
+
+    const ratingStars = [...document.getElementsByClassName("rating__star")];
+    const ratingResult = document.querySelector(".rating__result");
+
+    printRatingResult(ratingResult);
+
+    function executeRating(stars, result) {
+        const starClassActive = "rating__star fas fa-star";
+        const starClassUnactive = "rating__star far fa-star";
+        const starsLength = stars.length;
+        let i;
+        stars.map((star) => {
+            star.onclick = () => {
+                i = stars.indexOf(star);
+
+                if (star.className.indexOf(starClassUnactive) !== -1) {
+                    printRatingResult(result, i + 1);
+                    for (i; i >= 0; --i) stars[i].className = starClassActive;
+                } else {
+                    printRatingResult(result, i);
+                    for (i; i < starsLength; ++i) stars[i].className = starClassUnactive;
+                }
+            };
+        });
+    }
+
+    function printRatingResult(result, num = 0) {
+        // console.log(num);
+        $('#rating').val(num)
+    }
+
+    executeRating(ratingStars, ratingResult);
 
     </script>
 

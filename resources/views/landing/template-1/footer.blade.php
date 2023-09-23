@@ -1,6 +1,6 @@
-<footer>
+
     <div class="container-fluid p-4 bg-info text-center mt-5" style="background: rgb(247,172,32);
-    background: linear-gradient(90deg, rgba(247,172,32,1) 0%, rgba(247,136,32,1) 94%);">
+    background: linear-gradient(90deg, rgba(247,172,32,1) 0%, rgba(247,136,32,1) 94%);margin-top:calc(5% + 60px);">
         <div class="row">
             <div class="col-sm-6 text-right">
 
@@ -21,5 +21,5 @@
             </div>
         </div>
     </div>
-</footer>
+
 

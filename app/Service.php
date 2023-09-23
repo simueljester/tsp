@@ -37,4 +37,9 @@ class Service extends Model
        return $this->hasMany('App\Article', 'service_id','id');
    }
 
+   public function reviews(): HasMany
+   {
+       return $this->hasMany('App\Review', 'service_id','id');
+   }
+
 }
