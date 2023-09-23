@@ -59,7 +59,7 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <strong class="p-3"> Categories </strong>
         @foreach ($categories as $category)
-            <a href="#">{{$category->name}}</a>
+            <a href="{{ '#'.$category->name.'Container' }}">{{$category->name}}</a>
         @endforeach
     </div>
 
@@ -90,7 +90,7 @@
         </form>
 
         @forelse ($grouped as $key => $group)
-            <div class="mt-5">
+            <div class="mt-5" id="{{$categories[$key]->name.'Container'}}">
                 <h3> <strong class="text-muted"> {{$categories[$key]->name}} </strong> </h3>
                 <hr>
                 <div class="row" id="dataRow">
@@ -129,8 +129,6 @@
 
             <div class="flex-container">
                 <div class="inner-element" style="margin: 180px;">
-
-
                     <center>
                         <i class="fa-solid fa-magnifying-glass fa-10x text-muted"></i>
                         <h2 class="text-muted"> No services found </h2>

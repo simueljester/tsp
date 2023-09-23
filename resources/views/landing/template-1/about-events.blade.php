@@ -17,7 +17,7 @@
         @endif
         @if (array_key_exists("news",$contents))
             <div class="col-sm-7 text-left">
-                <h2> <b> News </b>  </h2>
+                <h2> <b> News & Events </b>  </h2>
                 <div class="single-item">
                     @foreach ($contents['news'] as $news)
                     <div class="card text-white border-custom parallax">

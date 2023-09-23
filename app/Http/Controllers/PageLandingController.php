@@ -82,6 +82,7 @@ class PageLandingController extends Controller
     {
 
         $categories = $this->serviceCategoryRepository->query()
+        ->has('services')
         ->whereNotNull('published_at')
         ->select('id','name','description','published_at')
         ->get();

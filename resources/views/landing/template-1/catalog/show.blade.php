@@ -59,7 +59,7 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <strong class="p-3"> Categories </strong>
         @foreach ($categories as $category)
-            <a href="#">{{$category->name}}</a>
+        <a href="{{'/service-list#'.$category->name.'Container' }}">{{$category->name}}</a>
         @endforeach
     </div>
 
@@ -119,7 +119,7 @@
                             <div class="col-sm-6">
                                 <form action="{{route('save-review')}}" method="post">
                                     @csrf
-                                    <div class="mt-3 p-4 bg-light border-custom shadow" id="reviewForm">
+                                    <div class="mt-3 p-4 bg-light border-custom" id="reviewForm">
                                         <strong> Add Review </strong>
                                         <hr>
                                         <div class="form-group">
@@ -150,7 +150,7 @@
 
                                 <form action="{{route('save-inquiry')}}" method="POST">
                                     @csrf
-                                    <div class="mt-3 p-4 bg-light border-custom shadow" id="inquiryForm">
+                                    <div class="mt-3 p-4 bg-light border-custom" id="inquiryForm">
                                         <strong> Inquire to this service </strong>
                                         <hr>
                                         <div class="form-group">
@@ -194,7 +194,6 @@
                                 @forelse ($service->reviews as $review)
                                     <div class="d-flex row">
                                         <div class="d-flex flex-column comment-section">
-
                                             <div class="bg-white p-2">
                                                 <div class="d-flex flex-row user-info">
                                                     <img class="rounded-circle" src="{{ asset('images') }}/user.png" width="45" height="45">

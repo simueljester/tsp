@@ -78,6 +78,7 @@
             </div>
             @if ($article->service)
                 <div class="col-sm-4">
+                    <br>
                     <strong> Related Service </strong>
                     <div class="p-3 bg-light border-custom mt-3">
                         <a href="{{route('page-landing-show-service',$article->service)}}" style="text-decoration: none;">
@@ -87,7 +88,7 @@
                                         <div class="d-flex flex-row user-info">
                                             <h1> <i class="{{$article->service->icon}}" style="color:rgba(247,136,32,1)" id="showicon"></i> </h1>
                                             <div class="d-flex flex-column justify-content-start ml-2">
-                                                <span class="d-block font-weight-bold name text-dark"> {{$article->service->name}} </span>
+                                                <span class="d-block font-weight-bold name" style="color:rgba(247,136,32,1)"> {{$article->service->name}} </span>
                                             </div>
                                         </div>
                                         <div class="text-muted char-limit text-left">
