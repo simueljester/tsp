@@ -43,7 +43,7 @@
                                     </b>
                                 </h6>
                                 <div class="text-muted char-article-limit">
-                                    {{ substr(strip_tags($article->description),0,110) }}
+                                    {{ strip_tags($article->description),0,110 }}
                                 </div>
                             </div>
                         </div>
@@ -92,15 +92,15 @@ function selectArticle(article){
         document.querySelector('#rowArticleContainer').insertAdjacentHTML(
         'afterbegin',
         `
-            <div class="col-sm-4" id="colId${article.id}">
+            <div class="col-sm-6" id="colId${article.id}">
                 <div class="card bg-light articles" style="border:none;cursor:pointer">
                     <div class="card-body">
                         <i style="cursor: pointer;" class="fa-solid fa-xmark float-right" onclick="removeFromSelected(${ article.id })"></i>
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <img src="{{url('/images/icons/${article.thumbnail} ')}}" alt="" style="width: 100%;height: 150px;object-fit: cover;border-radius:12px;">
                             </div>
-                            <div class="col-sm-6 text-left">
+                            <div class="col-sm-8 text-left">
                                 <h6>
                                     <a href="/admin/pages/articles/show/${article.id}" style="color: #d20abe;" target="_blank"> <b> ${article.name} </b>  </a>
                                 </h6>

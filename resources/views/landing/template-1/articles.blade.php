@@ -23,7 +23,7 @@
                                         </b>
                                     </h6>
                                     <div class="text-muted char-article-limit">
-                                        {{ substr(strip_tags($article->description),0,110) }}
+                                        {{ strip_tags($article->description),0,110 }}
                                     </div>
                                 </div>
                             </div>

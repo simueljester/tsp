@@ -25,37 +25,31 @@
             <div class="table-responsive">
                 <table class="table align-items-center mb-0 table-hover">
                     <thead>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Service </th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Inquiry </th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Name </th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Date </th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Action</th>
                     </thead>
                     <tbody>
                         @forelse ($inquiries as $inquiry)
                             <tr>
+
                                 <td>
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-s">
-                                            @if ($inquiry->service)
-                                                <a href="{{route('admin.pages.services.show',$inquiry->service->id)}}" class="text-primary">
-                                                    {{$inquiry->service->name}}
-                                                </a>
-                                            @else
-                                                TSP
-                                            @endif
-                                        </h6>
-                                    </div>
-                                </td>
-                                <td>
+                                    <h6 class="mb-0 text-s">
+                                        @if ($inquiry->service)
+                                            <a href="{{route('admin.pages.services.show',$inquiry->service->id)}}" class="text-primary">
+                                                {{$inquiry->service->name}}
+                                            </a>
+                                        @else
+                                            TSP
+                                        @endif
+                                    </h6>
+                                    <i class="fa-solid fa-user"></i> {{$inquiry->name}} <br>
+                                    <small class="text-muted"> {{$inquiry->email}} / {{$inquiry->contact}} </small>
                                     <p class="text-capitalize" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 500px;">
                                         {{$inquiry->description}}
                                     </p>
                                 </td>
-                                <td>
-                                   {{$inquiry->name}} <br>
-                                   <small class="text-muted"> {{$inquiry->email}} / {{$inquiry->contact}} </small>
-                                </td>
+
                                 <td>
                                     {{$inquiry->created_at->format('M d, Y h:i a')}}
                                 </td>

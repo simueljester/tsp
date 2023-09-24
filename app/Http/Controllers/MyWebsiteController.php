@@ -50,7 +50,7 @@ class MyWebsiteController extends Controller
 
 
         $website = $this->mywebsiteRepository->save($data);
-        return redirect()->route('admin.my-website.manage-content.intro',$website->id)->with('success', 'Website template successfully created');
+        return redirect()->route('admin.my-website.manage-content.introduction',$website->id)->with('success', 'Website template successfully created');
 
     }
 

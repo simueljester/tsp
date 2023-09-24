@@ -98,8 +98,8 @@
                             <div class="mt-2">
                                 <div class="single-item">
                                     @foreach (json_decode($service->multimedia,true) as $media)
-                                    <div class="card-hover-scale" style="cursor: pointer;" onclick="viewGallery({{json_encode($media)}})">
-                                        <img class="card-img-top border-custom" src="{{asset('/images/dropzone').'/'.$media}}" style="max-height:500px;width:100%;object-fit: cover;">
+                                    <div>
+                                        <img class="card-img-top border-custom" src="{{asset('/images/dropzone').'/'.$media}}" style="max-height:500px;width:100%;object-fit: contain;">
                                     </div>
                                     @endforeach
                                 </div>
@@ -363,7 +363,9 @@
 
     }
 
+    function viewGallery(){
 
+    }
 
     // Slick
 
