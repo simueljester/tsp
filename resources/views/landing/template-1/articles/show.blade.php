@@ -77,34 +77,36 @@
                 </div>
             </div>
             @if ($article->service)
-                <div class="col-sm-4">
-                    <br>
-                    <strong> Related Service </strong>
-                    <div class="p-3 bg-light border-custom mt-3">
-                        <a href="{{route('page-landing-show-service',$article->service)}}" style="text-decoration: none;">
-                            <div class="d-flex m-1 h-100 border-custom serviceCard" >
-                                <div class="d-flex flex-column">
-                                    <div class=" p-3">
-                                        <div class="d-flex flex-row user-info">
-                                            <h1> <i class="{{$article->service->icon}}" style="color:rgba(247,136,32,1)" id="showicon"></i> </h1>
-                                            <div class="d-flex flex-column justify-content-start ml-2">
-                                                <span class="d-block font-weight-bold name" style="color:rgba(247,136,32,1)"> {{$article->service->name}} </span>
+                <div class="col-sm-4 ">
+                    <div class="sticky-service">
+                        <br>
+                        <strong> Related Service </strong>
+                        <div class="p-4 bg-white border-custom mt-3">
+                            <a href="{{route('page-landing-show-service',$article->service)}}" style="text-decoration: none;">
+                                <div class="d-flex m-1 h-100 border-custom serviceCard" >
+                                    <div class="d-flex flex-column">
+                                        <div class=" p-3">
+                                            <div class="d-flex flex-row user-info">
+                                                <h1> <i class="{{$article->service->icon}}" style="color:rgba(247,136,32,1)" id="showicon"></i> </h1>
+                                                <div class="d-flex flex-column justify-content-start ml-2">
+                                                    <span class="d-block font-weight-bold name" style="color:rgba(247,136,32,1)"> {{$article->service->name}} </span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="text-muted char-limit text-left">
-                                            <small> {!! $article->service->description_clean !!} </small>
-                                        </div>
-                                        <div class="mt-3">
-                                            @if ($averageReview > 0)
-                                                @for ($i = 1; $i <= $averageReview; $i++)
-                                                    <i class="fa-solid fa-star text-warning"></i>
-                                                @endfor
-                                            @endif
+                                            <div class="text-muted char-limit text-left">
+                                                <small> {!! $article->service->description_clean !!} </small>
+                                            </div>
+                                            <div class="mt-3">
+                                                @if ($averageReview > 0)
+                                                    @for ($i = 1; $i <= $averageReview; $i++)
+                                                        <i class="fa-solid fa-star text-warning"></i>
+                                                    @endfor
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     </div>
                 </div>
             @endif

@@ -18,9 +18,10 @@
         @if (array_key_exists("news",$contents))
             <div class="col-sm-7 text-left">
                 <h2> <b> News & Events </b>  </h2>
+                <a href="{{route('list-news')}}" class="mb-2"> Browse All Events </a>
                 <div class="single-item">
                     @foreach ($contents['news'] as $news)
-                    <div class="card text-white border-custom parallax">
+                    <div class="card text-white border-custom parallax mt-3">
                         <div class="border-custom" style="background-image: url('{{ asset('/images/icons/' . $news->thumbnail) }}');
                             background-attachment: fixed;
                             background-position: center;

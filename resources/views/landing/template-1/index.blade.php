@@ -47,7 +47,7 @@
                     <span class="ml-2"> <a href="{{route('list-catalog')}}" class="text-dark" style="text-decoration: none;"> Services </a>  </span>
                     <span class="ml-2"> <a href="#containerArticles" class="text-dark" style="text-decoration: none;"> Articles </a> </span>
                     <span class="ml-2"> <a href="#containerAboutEvents" class="text-dark" style="text-decoration: none;"> About </a> </span>
-                    <span class="ml-2"> <a href="#containerAboutEvents" class="text-dark" style="text-decoration: none;"> Events </a> </span>
+                    {{-- <span class="ml-2"> <a href="#containerAboutEvents" class="text-dark" style="text-decoration: none;"> Events </a> </span> --}}
                     <span class="ml-2"> <a href="#containerChooseUs" class="text-dark" style="text-decoration: none;"> Why Choose Us </a> </span>
                     <span class="ml-2"> <a href="#containerContact" class="text-dark" style="text-decoration: none;"> Contact </a> </span>
                 </span>

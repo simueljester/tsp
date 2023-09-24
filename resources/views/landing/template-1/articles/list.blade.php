@@ -79,6 +79,7 @@
                 </div>
             </div>
         </form>
+        <h2> Articles </h2>
         <div class="row mt-3">
             @forelse ($articles as $article)
                 <div class="col-sm-12">

@@ -73,7 +73,13 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="form-control-label"> <i class="fa-brands fa-youtube text-danger"></i> Embed Youtube </label>
+                            <textarea name="youtube" id="youtube" class="form-control bg-light" cols="30" rows="5"></textarea>
+                            <small style="cursor: pointer;" onclick="showEmbedInfo()" class="text-primary"> <i class="fa-solid fa-circle-info"></i> How to embed? </small>
+                        </div>
                     </div>
+
                     <div class="card-footer">
                         <input type="hidden" name="multimedia" id="multimedia">
                         <button class="btn btn-sm btn-primary"> Save </button>
@@ -102,6 +108,31 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="howToEmbedYoutube" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"> Embed Youtube Video </h5>
+          <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-left">
+            <ul>
+                <li> Go to <a href="https://www.youtube.com/" target="_blank" class="text-primary"> Youtube.com </a> </li>
+                <li> Find the video you want to embed and <strong> right click </strong> on a video </li>
+                <li> Select <strong> <> Copy embed code </strong> </li>
+                <li> You can modify the iframe source <strong> width </strong> and <strong> height </strong> </li>
+                <li> Standard size is  560 pixels width and 315 pixels height </li>
+            </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <style>
 
@@ -133,6 +164,10 @@
     }
 
     createTag()
+
+    function showEmbedInfo(){
+        $('#howToEmbedYoutube').modal('show')
+    }
 
 </script>
 

@@ -41,6 +41,9 @@
             </div>
             <div class="card-body pt-2">
                 {!! $news->description !!}
+                <div class="mt-2">
+                    {!! $news->youtube_embed !!}
+                </div>
             </div>
             @if ($news->multimedia)
             <div>

@@ -3,12 +3,11 @@
     <div class="row ml-3">
         <div class="col-sm-6 text-right mt-5">
             {{-- <img class="zoomIn" src="{{ asset('images') }}/symbol2.png" width="280"> --}}
-
         </div>
         <div class="col-sm-6 text-left mt-3 contact">
             <form action="{{route('save-inquiry')}}" method="POST">
                 @csrf
-                <h1 class="mt-5 fadeIn"> <b><i class="fa-solid fa-phone"></i> Reach Us! Start your inquiries </b> </h1>
+                <h2 class="mt-5 fadeIn"> <b> <i class="fa-regular fa-paper-plane"></i> Inquiries </b> </h2>
                 <div class="form-group">
                     <small class="text-muted"> Name: </small> <strong class="text-danger"> * </strong>
                     <input type="text" name="name" id="name" class="form-control" required>
@@ -36,6 +35,25 @@
                     <button class="btn btn-primary"> Send Inquiry </button>
                 </div>
             </form>
+            <hr>
+            <div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div>
+                            <i class="fa-brands fa-facebook text-primary"></i> <a href="https://www.facebook.com/TSPnConsultancy" target="_blank" style="color:rgba(247,136,32,1)"> TSP - Technology Solutions Provider & Consultancy </a>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-phone"></i> 0927-251-1739
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-at"></i> tsp.consult2021@gmail.com
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

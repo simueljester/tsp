@@ -67,7 +67,7 @@
     <div class="container mt-3 fadeIn">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="{{route('list-catalog')}}">Catalog</a></li>
+              <li class="breadcrumb-item"><a href="{{route('list-catalog')}}">Services</a></li>
               <li class="breadcrumb-item active" aria-current="page">{{$service->name}}</li>
             </ol>
           </nav>

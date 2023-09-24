@@ -25,32 +25,45 @@
                 @endforeach
             </div>
         @endif
+
         <div class="col-sm-4">
-            <h2> <b> What Our Client Says </b> </h2> <a href="https://www.facebook.com/TSPnConsultancy" target="_blank"> <i class="fa-brands fa-facebook"></i> Visit our fb page</a>
-            <div class="container mt-5">
-                <div class="d-flex justify-content-center row">
-                    <div class="d-flex flex-column comment-section">
-                        <div class="single-item">
-                            <div class="bg-light p-2">
-                                <div class="d-flex flex-row user-info">
-                                    <img class="rounded-circle" src="{{ asset('images') }}/user.png" width="45">
-                                    <div class="d-flex flex-column justify-content-start ml-2">
-                                    <span class="d-block font-weight-bold name"> Adrian Par </span>
-                                    <span class="date text-black-50">Shared publicly - Jan 2020</span>
-                                </div>
-                                </div>
-                                <div class="mt-2">
-                                    <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            @if ($featuredReviews->isNotEmpty())
+                <h2> <b> What Our Client Says </b> </h2> <a href="https://www.facebook.com/TSPnConsultancy" target="_blank"> <i class="fa-brands fa-facebook"></i> Visit our fb page</a>
+                <div class="container mt-5">
+
+                    <div class="single-item ">
+                        @foreach ($featuredReviews as $review)
+                        <div class="d-flex row">
+                            <div class="d-flex flex-column comment-section">
+                                <div class="bg-light p-4">
+                                    <div class="d-flex flex-row user-info">
+                                        <img class="rounded-circle" src="{{ asset('images') }}/user.png" width="45" height="45">
+                                        <div class="d-flex flex-column justify-content-start ml-2">
+                                        <span class="d-block font-weight-bold name"> {{$review->commented_by}}
+                                            @for ($i = 1; $i <= (int)$review->rating; $i++)
+                                                <i class="fa-solid fa-star text-warning"></i>
+                                            @endfor
+                                        </span>
+                                        <span class="date text-black-50"><i class="fa-solid fa-earth-asia"></i> {{$review->created_at->format('M d, Y')}}</span>
+                                    </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <p class="comment-text">{{$review->comment}}</p>
+                                    </div>
+                                    <div class="mt-2">
+                                        <a href="{{route('page-landing-show-service',$review->service)}}" class="btn btn-sm background-orange text-white border-custom">
+                                            {{$review->service->name}} <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        @endforeach
                     </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
-
-
 </div>
 
 

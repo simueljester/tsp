@@ -30,6 +30,7 @@ Route::get('/service-list', ['as' => 'list-catalog', 'uses' => 'PageLandingContr
 Route::get('/service-list/{service}', ['as' => 'page-landing-show-service', 'uses' => 'PageLandingController@showService']);
 Route::get('/article-list', ['as' => 'list-article', 'uses' => 'PageLandingController@showArticleList']);
 Route::get('/article-list/{article}', ['as' => 'page-landing-show-article', 'uses' => 'PageLandingController@showArticle']);
+Route::get('/news-events-list', ['as' => 'list-news', 'uses' => 'PageLandingController@showNewsList']);
 
 Route::get('/set-cookie', function () {
     $uuid = (string) Str::uuid();

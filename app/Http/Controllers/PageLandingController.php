@@ -10,11 +10,12 @@ use App\Http\Repositories\ArticleRepository;
 use App\Http\Repositories\InquiryRepository;
 use App\Http\Repositories\ServiceRepository;
 use App\Http\Repositories\MyWebsiteRepository;
+use App\Http\Repositories\NewsRepository;
 use App\Http\Repositories\ServiceCategoryRepository;
 
 class PageLandingController extends Controller
 {
-    public $myWebsiteRepository,$inquiryRepository,$serviceRepository, $serviceCategoryRepository, $articleRepository, $reviewRepository;
+    public $myWebsiteRepository,$inquiryRepository,$serviceRepository, $serviceCategoryRepository, $articleRepository, $reviewRepository, $newsRepository;
 
     public function __construct()
     {
@@ -24,22 +25,28 @@ class PageLandingController extends Controller
         $this->serviceCategoryRepository = app(ServiceCategoryRepository::class);
         $this->articleRepository = app(ArticleRepository::class);
         $this->reviewRepository = app(ReviewRepository::class);
+        $this->newsRepository = app(NewsRepository::class);
     }
 
     public function index()
     {
         $activeTemplate = $this->myWebsiteRepository->query()->with('contents')->whereActive(1)->first() ?? null;
-
+        $featuredReviews = collect();
         if($activeTemplate){
             $contents = [];
             foreach($activeTemplate->contents as $content){
                 $contents[$content->content_code] = collect(json_decode($content->data));
             }
+            $featuredReviews = $this->reviewRepository->query()->with('service:id,name,icon,slug')
+            ->where('rating','>', 3)
+            ->inRandomOrder()
+            ->limit(3)
+            ->get();
         }else{
             abort(404);
         }
-        // dd($contents);
-        return view('landing.template-1.index',compact('contents'));
+
+        return view('landing.template-1.index',compact('contents','featuredReviews'));
     }
 
     public function saveInquiry(Request $request)
@@ -123,11 +130,24 @@ class PageLandingController extends Controller
         return view('landing.template-1.articles.list',compact('articles','keyword'));
     }
 
-    public function showArticle(Article $article){
+    public function showArticle(Article $article)
+    {
         $article->load('service');
         $reviewArray = $article->service ? $article->service->reviews->pluck('rating')->toArray() : [];
         $averageReview = !$reviewArray ? 0 : round(array_sum($reviewArray)/count($reviewArray));
         return view('landing.template-1.articles.show',compact('article','averageReview'));
+    }
+
+    public function showNewsList(Request $request)
+    {
+
+        $newsEvents = $this->newsRepository->query()
+        ->whereNotNull('published_at')
+        ->orderBy('published_at', 'DESC')
+        ->select('id','name','slug','description','thumbnail','headline','created_at','published_at')
+        ->paginate(10);
+
+        return view('landing.template-1.news_events.list',compact('newsEvents'));
     }
 
 }

@@ -35,7 +35,7 @@ class NewsController extends Controller
     {
         //
         $news = $this->newsRepository->query()
-        ->select('id','name','headline','published_at','is_featured','thumbnail','created_at')
+        ->select('id','name','headline','published_at','is_featured','thumbnail','created_at','slug')
         ->orderBy('created_at','DESC')
         ->paginate(10);
         return view('admin.page-management.news.index',compact('news'));
@@ -87,6 +87,7 @@ class NewsController extends Controller
             'is_featured'       => null,
             'published_at'      => $request->publish ? now() : null,
             'multimedia'        => $multimedia,
+            'youtube_embed'     => $request->youtube,
             'tags'              => implode (", ", $store_tags)
         ];
 
@@ -162,6 +163,7 @@ class NewsController extends Controller
             'is_featured'       => null,
             'published_at'      => $request->publish ? now() : null,
             'multimedia'        => $multimedia,
+            'youtube_embed'     => $request->youtube,
             'tags'              => implode (", ", $store_tags)
         ];
 
