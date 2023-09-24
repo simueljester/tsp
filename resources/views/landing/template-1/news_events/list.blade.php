@@ -68,12 +68,15 @@
                         <div class="card text-white border-custom parallax mt-3">
                             <div class="border-custom" style="background-image: url('{{ asset('/images/icons/' . $newsEvents[0]->thumbnail) }}');
                                 background-size: cover;height:400px;">
-                            <div class="p-3 border-custom" style="background:rgba(0, 0, 0, 0.5);">
-                                    <h6 class="card-title"> <strong> <a href="" style="text-decoration: none;" class="text-white"> {{$newsEvents[0]->headline}} </a> </strong> </h6>
+                                <div class="p-3 border-custom" style="background:rgba(0, 0, 0, 0.5);">
+                                    <h6 class="card-title"> <strong> <a href="{{route('page-landing-show-news',$newsEvents[0])}}" style="text-decoration: none;" class="text-white"> {{$newsEvents[0]->headline}} </a> </strong> </h6>
                                     <p style="color: rgb(255, 145, 0)"> {{$newsEvents[0]->name}} </p>
                                     <div>
                                         <small> <i class="fa-solid fa-earth-asia"></i> {{ Carbon\Carbon::parse( $newsEvents[0]->published_at)->format('M d, Y')}} </small>
                                     </div>
+                                    <a href="{{route('page-landing-show-news',$newsEvents[0])}}" style="text-decoration: none;cursor: pointer;">
+                                        <small> Read more </small>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -87,12 +90,15 @@
                         <div class="card text-white border-custom parallax mt-3">
                             <div class="border-custom" style="background-image: url('{{ asset('/images/icons/' . $newsEvents[0]->thumbnail) }}');
                                 background-size: cover;height:400px;">
-                            <div class="p-3 border-custom" style="background:rgba(0, 0, 0, 0.5);">
-                                    <h6 class="card-title"> <strong> <a href="" style="text-decoration: none;" class="text-white"> {{$newsEvents[0]->headline}} </a> </strong> </h6>
+                                <div class="p-3 border-custom" style="background:rgba(0, 0, 0, 0.5);">
+                                    <h6 class="card-title"> <strong> <a href="{{route('page-landing-show-news',$newsEvents[0])}}" style="text-decoration: none;" class="text-white"> {{$newsEvents[0]->headline}} </a> </strong> </h6>
                                     <p style="color: rgb(255, 145, 0)"> {{$newsEvents[0]->name}} </p>
                                     <div>
                                         <small> <i class="fa-solid fa-earth-asia"></i> {{ Carbon\Carbon::parse( $newsEvents[0]->published_at)->format('M d, Y')}} </small>
                                     </div>
+                                    <a href="{{route('page-landing-show-news',$newsEvents[0])}}" style="text-decoration: none;cursor: pointer;">
+                                        <small> Read more </small>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -101,16 +107,18 @@
                         <div class="card text-white border-custom parallax mt-3">
                             <div class="border-custom" style="background-image: url('{{ asset('/images/icons/' . $newsEvents[1]->thumbnail) }}');
                                 background-size: cover;height:400px;">
-                            <div class="p-3 border-custom" style="background:rgba(0, 0, 0, 0.5);">
-                                    <h6 class="card-title"> <strong> <a href="" style="text-decoration: none;" class="text-white"> {{$newsEvents[1]->headline}} </a> </strong> </h6>
+                                <div class="p-3 border-custom" style="background:rgba(0, 0, 0, 0.5);">
+                                    <h6 class="card-title"> <strong> <a href="{{route('page-landing-show-news',$newsEvents[1])}}" style="text-decoration: none;" class="text-white"> {{$newsEvents[1]->headline}} </a> </strong> </h6>
                                     <p style="color: rgb(255, 145, 0)"> {{$newsEvents[1]->name}} </p>
                                     <div>
                                         <small> <i class="fa-solid fa-earth-asia"></i> {{ Carbon\Carbon::parse( $newsEvents[1]->published_at)->format('M d, Y')}} </small>
                                     </div>
+                                    <a href="{{route('page-landing-show-news',$newsEvents[1])}}" style="text-decoration: none;cursor: pointer;">
+                                        <small> Read more </small>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -121,13 +129,17 @@
                         <div class="card text-white border-custom parallax mt-3">
                             <div class="border-custom" style="background-image: url('{{ asset('/images/icons/' . $newsEvents[0]->thumbnail) }}');
                                 background-size: cover;height:500px;">
-                            <div class="p-3 border-custom" style="background:rgba(0, 0, 0, 0.5);">
-                                    <h6 class="card-title"> <strong> <a href="" style="text-decoration: none;" class="text-white"> {{$newsEvents[0]->headline}} </a> </strong> </h6>
+                                <div class="p-3 border-custom" style="background:rgba(0, 0, 0, 0.5);">
+                                    <h6 class="card-title"> <strong> <a href="{{route('page-landing-show-news',$newsEvents[0])}}" style="text-decoration: none;" class="text-white"> {{$newsEvents[0]->headline}} </a> </strong> </h6>
                                     <p style="color: rgb(255, 145, 0)"> {{$newsEvents[0]->name}} </p>
                                     <div>
                                         <small> <i class="fa-solid fa-earth-asia"></i> {{ Carbon\Carbon::parse( $newsEvents[0]->published_at)->format('M d, Y')}} </small>
                                     </div>
+                                    <a href="{{route('page-landing-show-news',$newsEvents[0])}}" style="text-decoration: none;cursor: pointer;">
+                                        <small> Read more </small>
+                                    </a>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -135,25 +147,32 @@
                         <div class="card text-white border-custom parallax mt-3">
                             <div class="border-custom" style="background-image: url('{{ asset('/images/icons/' . $newsEvents[1]->thumbnail) }}');
                                 background-size: cover;height:250px;">
-                            <div class="p-3 border-custom" style="background:rgba(0, 0, 0, 0.5);">
-                                    <h6 class="card-title"> <strong> <a href="" style="text-decoration: none;" class="text-white"> {{$newsEvents[1]->headline}} </a> </strong> </h6>
+                                <div class="p-3 border-custom" style="background:rgba(0, 0, 0, 0.5);">
+                                    <h6 class="card-title"> <strong> <a href="{{route('page-landing-show-news',$newsEvents[1])}}" style="text-decoration: none;" class="text-white"> {{$newsEvents[1]->headline}} </a> </strong> </h6>
                                     <p style="color: rgb(255, 145, 0)"> {{$newsEvents[1]->name}} </p>
                                     <div>
                                         <small> <i class="fa-solid fa-earth-asia"></i> {{ Carbon\Carbon::parse( $newsEvents[1]->published_at)->format('M d, Y')}} </small>
                                     </div>
+                                    <a href="{{route('page-landing-show-news',$newsEvents[1])}}" style="text-decoration: none;cursor: pointer;">
+                                        <small> Read more </small>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                         <div class="card text-white border-custom parallax mt-3">
                             <div class="border-custom" style="background-image: url('{{ asset('/images/icons/' . $newsEvents[2]->thumbnail) }}');
                                 background-size: cover;height:250px;">
-                            <div class="p-3 border-custom" style="background:rgba(0, 0, 0, 0.5);">
-                                    <h6 class="card-title"> <strong> <a href="" style="text-decoration: none;" class="text-white"> {{$newsEvents[2]->headline}} </a> </strong> </h6>
+                                <div class="p-3 border-custom" style="background:rgba(0, 0, 0, 0.5);">
+                                    <h6 class="card-title"> <strong> <a href="{{route('page-landing-show-news',$newsEvents[2])}}" style="text-decoration: none;" class="text-white"> {{$newsEvents[2]->headline}} </a> </strong> </h6>
                                     <p style="color: rgb(255, 145, 0)"> {{$newsEvents[2]->name}} </p>
                                     <div>
                                         <small> <i class="fa-solid fa-earth-asia"></i> {{ Carbon\Carbon::parse( $newsEvents[2]->published_at)->format('M d, Y')}} </small>
                                     </div>
+                                    <a href="{{route('page-landing-show-news',$newsEvents[2])}}" style="text-decoration: none;cursor: pointer;">
+                                        <small> Read more </small>
+                                    </a>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -163,41 +182,50 @@
             <div>
                 <div class="row mt-3">
                     <div class="col-sm-6">
-                        <div class="card text-white border-custom parallax mt-3">
+                        <div class="card text-white border-custom parallax mt-3 news-featured-layout">
                             <div class="border-custom" style="background-image: url('{{ asset('/images/icons/' . $newsEvents[0]->thumbnail) }}');
                                 background-size: cover;height:500px;">
-                            <div class="p-3 border-custom" style="background:rgba(0, 0, 0, 0.5);">
-                                    <h6 class="card-title"> <strong> <a href="" style="text-decoration: none;" class="text-white"> {{$newsEvents[0]->headline}} </a> </strong> </h6>
+                                <div class="p-3 border-custom" style="background:rgba(0, 0, 0, 0.5);">
+                                    <h6 class="card-title news-title-featured"> <strong> <a href="{{route('page-landing-show-news',$newsEvents[0])}}" style="text-decoration: none;" class="text-white"> {{$newsEvents[0]->headline}} </a> </strong> </h6>
                                     <p style="color: rgb(255, 145, 0)"> {{$newsEvents[0]->name}} </p>
                                     <div>
                                         <small> <i class="fa-solid fa-earth-asia"></i> {{ Carbon\Carbon::parse( $newsEvents[0]->published_at)->format('M d, Y')}} </small>
                                     </div>
+                                    <a href="{{route('page-landing-show-news',$newsEvents[0])}}" style="text-decoration: none;cursor: pointer;">
+                                        <small> Read more </small>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="card text-white border-custom parallax mt-3">
+                        <div class="card text-white border-custom parallax mt-3 news-featured-layout">
                             <div class="border-custom" style="background-image: url('{{ asset('/images/icons/' . $newsEvents[1]->thumbnail) }}');
                                 background-size: cover;height:250px;">
-                            <div class="p-3 border-custom" style="background:rgba(0, 0, 0, 0.5);">
-                                    <h6 class="card-title"> <strong> <a href="" style="text-decoration: none;" class="text-white"> {{$newsEvents[1]->headline}} </a> </strong> </h6>
+                                <div class="p-3 border-custom" style="background:rgba(0, 0, 0, 0.5);">
+                                    <h6 class="card-title news-title-featured"> <strong> <a href="{{route('page-landing-show-news',$newsEvents[1])}}" style="text-decoration: none;" class="text-white"> {{$newsEvents[1]->headline}} </a> </strong> </h6>
                                     <p style="color: rgb(255, 145, 0)"> {{$newsEvents[1]->name}} </p>
                                     <div>
                                         <small> <i class="fa-solid fa-earth-asia"></i> {{ Carbon\Carbon::parse( $newsEvents[1]->published_at)->format('M d, Y')}} </small>
                                     </div>
+                                    <a href="{{route('page-landing-show-news',$newsEvents[1])}}" style="text-decoration: none;cursor: pointer;">
+                                        <small> Read more </small>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="card text-white border-custom parallax mt-3">
+                        <div class="card text-white border-custom parallax mt-3 news-featured-layout">
                             <div class="border-custom" style="background-image: url('{{ asset('/images/icons/' . $newsEvents[2]->thumbnail) }}');
                                 background-size: cover;height:250px;">
-                            <div class="p-3 border-custom" style="background:rgba(0, 0, 0, 0.5);">
-                                    <h6 class="card-title"> <strong> <a href="" style="text-decoration: none;" class="text-white"> {{$newsEvents[2]->headline}} </a> </strong> </h6>
+                                <div class="p-3 border-custom" style="background:rgba(0, 0, 0, 0.5);">
+                                    <h6 class="card-title news-title-featured"> <strong> <a href="{{route('page-landing-show-news',$newsEvents[2])}}" style="text-decoration: none;" class="text-white"> {{$newsEvents[2]->headline}} </a> </strong> </h6>
                                     <p style="color: rgb(255, 145, 0)"> {{$newsEvents[2]->name}} </p>
                                     <div>
                                         <small> <i class="fa-solid fa-earth-asia"></i> {{ Carbon\Carbon::parse( $newsEvents[2]->published_at)->format('M d, Y')}} </small>
                                     </div>
+                                    <a href="{{route('page-landing-show-news',$newsEvents[2])}}" style="text-decoration: none;cursor: pointer;">
+                                        <small> Read more </small>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -213,22 +241,24 @@
                             @case(2)
                             @break
                             @default
-                            <div class="card articles " style="border:none;cursor:pointer;background:transparent">
+                            <div class="card articles " style="border:none;background:transparent">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <div class="card-hover-scale">
-                                                <img src="{{asset('images/icons').'/'.$news->thumbnail}}" class="" style="width: 100%;height: 150px;object-fit:cover;border-radius:12px;">
-                                            </div>
+                                            <a href="{{route('page-landing-show-news',$news)}}">
+                                                <div class="card-hover-scale">
+                                                    <img src="{{asset('images/icons').'/'.$news->thumbnail}}" class="" style="width: 100%;height: 150px;object-fit:cover;border-radius:12px;">
+                                                </div>
+                                            </a>
                                         </div>
                                         <div class="col-sm-9 text-left">
                                             <h6>
                                                 <b>
-                                                    <a href="#" style="color: rgb(255, 145, 0)"> {{$news->name}} </a>
+                                                    <a href="{{route('page-landing-show-news',$news)}}" style="color: rgb(255, 145, 0)"> {{$news->name}} </a>
                                                 </b>
                                             </h6>
                                             <div>
-                                                <i class="fa-solid fa-earth-asia"></i> Publication Date: {{$news->published_at->format('M d, Y')}}
+                                                <i class="fa-solid fa-earth-asia"></i> {{$news->published_at->format('M d, Y')}}
                                             </div>
                                             <div class="text-muted char-article-limit">
                                                 {{ substr(strip_tags($news->description),0,110) }}

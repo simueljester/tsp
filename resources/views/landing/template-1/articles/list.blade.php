@@ -83,12 +83,14 @@
         <div class="row mt-3">
             @forelse ($articles as $article)
                 <div class="col-sm-12">
-                    <div class="card articles " style="border:none;cursor:pointer;background:transparent">
+                    <div class="card articles " style="border:none;background:transparent">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="card-hover-scale">
-                                        <img src="{{asset('images/icons').'/'.$article->thumbnail}}" class="" style="width: 100%;height: 150px;object-fit:cover;border-radius:12px;">
+                                        <a href="{{route('page-landing-show-article', $article)}}">
+                                            <img src="{{asset('images/icons').'/'.$article->thumbnail}}" class="" style="width: 100%;height: 150px;object-fit:cover;border-radius:12px;">
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="col-sm-9 text-left">
@@ -100,6 +102,7 @@
                                     <div>
                                         <i class="fa-solid fa-earth-asia"></i> Publication Date: {{$article->created_at->format('M d, Y')}}
                                     </div>
+
                                     <div class="text-muted char-article-limit">
                                         {{ substr(strip_tags($article->description),0,110) }}
                                     </div>

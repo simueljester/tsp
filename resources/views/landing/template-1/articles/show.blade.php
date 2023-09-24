@@ -72,7 +72,7 @@
                 <div>
                     <i class="fa-solid fa-earth-asia"></i> Publication Date: {{$article->published_at->format('M d, Y')}}
                 </div>
-                <div class="mt-3 p-3 bg-light border-custom">
+                <div class="mt-3 p-3 bg-light border-custom article-description">
                     {!! $article->description !!}
                 </div>
             </div>

@@ -38,16 +38,17 @@
                 {{ session()->get('error') }}
             </div>
         @endif
-        <div class="container p-4 ">
+        <div class="container p-5">
             <div>
                 <a href="/" style="text-decoration: none;">
                     <strong> <img class="zoomIn" src="{{ asset('images') }}/symbol2.png" width="30"> <b class="text-muted">TSP</b> </strong>
                 </a>
-                <span class="float-right" >
+                <button id="openNv" class="btn float-right" style="background: transparent; border:none;color:rgba(247,136,32,1);" onclick="toggleNav()"><i class="fa-solid fa-bars"></i></button>
+                <span class="float-right" id="nav-content-desktop">
                     <span class="ml-2"> <a href="{{route('list-catalog')}}" class="text-dark" style="text-decoration: none;"> Services </a>  </span>
                     <span class="ml-2"> <a href="#containerArticles" class="text-dark" style="text-decoration: none;"> Articles </a> </span>
                     <span class="ml-2"> <a href="#containerAboutEvents" class="text-dark" style="text-decoration: none;"> About </a> </span>
-                    {{-- <span class="ml-2"> <a href="#containerAboutEvents" class="text-dark" style="text-decoration: none;"> Events </a> </span> --}}
+                    <span class="ml-2"> <a href="#containerAboutEvents" class="text-dark" style="text-decoration: none;"> News & Events </a> </span>
                     <span class="ml-2"> <a href="#containerChooseUs" class="text-dark" style="text-decoration: none;"> Why Choose Us </a> </span>
                     <span class="ml-2"> <a href="#containerContact" class="text-dark" style="text-decoration: none;"> Contact </a> </span>
                 </span>
@@ -55,6 +56,15 @@
         </div>
     </div>
 
+    <div id="mySidebar" class="sidebar shadow">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <span class="ml-2"> <a href="{{route('list-catalog')}}" class="text-white" style="text-decoration: none;"> Services </a>  </span>
+        <span class="ml-2"> <a href="#containerArticles" class="text-white" style="text-decoration: none;"> Articles </a> </span>
+        <span class="ml-2"> <a href="#containerAboutEvents" class="text-white" style="text-decoration: none;"> About </a> </span>
+        <span class="ml-2"> <a href="#containerAboutEvents" class="text-white" style="text-decoration: none;"> News & Events </a> </span>
+        <span class="ml-2"> <a href="#containerChooseUs" class="text-white" style="text-decoration: none;"> Why Choose Us </a> </span>
+        <span class="ml-2"> <a href="#containerContact" class="text-white" style="text-decoration: none;"> Contact </a> </span>
+    </div>
 
     @include('landing.template-1.intro')
     @include('landing.template-1.service')
@@ -63,6 +73,60 @@
     @include('landing.template-1.choose-us')
     @include('landing.template-1.contact')
     @include('landing.template-1.footer')
+
+    <style>
+            .sidebar {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background: rgb(247,172,32);
+        background: linear-gradient(90deg, rgba(247,172,32,1) 0%, rgba(247,136,32,1) 94%);
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+        border-top-right-radius:12px;
+        border-bottom-right-radius:12px;
+    }
+
+    .sidebar a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        color: #222020;
+        display: block;
+        transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+        color: #f1f1f1;
+    }
+
+    .sidebar .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+    .serviceCard{
+        transition: transform 500ms;
+        cursor: pointer;
+    }
+    .serviceCard:hover {
+        transform: scale(1.1);
+    }
+
+
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+    </style>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
@@ -193,6 +257,23 @@
     });
 
 
+    var toogleVal = 1;
+
+
+    function toggleNav(){
+
+        if(toogleVal == 1){
+            document.getElementById("mySidebar").style.width = "250px";
+            toogleVal = 0
+        }else{
+            document.getElementById("mySidebar").style.width = "0";
+            toogleVal = 1
+        }
+    }
+    function closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+        toogleVal = 1
+    }
 
 
 </script>

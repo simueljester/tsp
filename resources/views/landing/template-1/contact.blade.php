@@ -32,7 +32,7 @@
                     <textarea name="description" id="description" cols="30" rows="10" class="form-control"></textarea>
                 </div>
                 <div>
-                    <button class="btn btn-primary"> Send Inquiry </button>
+                    <button class="btn btn-primary border-custom btn-sm"> Send Inquiry </button>
                 </div>
             </form>
             <hr>

@@ -193,18 +193,18 @@
   .sidebar a {font-size: 18px;}
 }
 
-.flex-container{
-  display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-  display: -ms-flexbox;  /* TWEENER - IE 10 */
-  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-  display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+    .flex-container{
+        display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+        display: -ms-flexbox;  /* TWEENER - IE 10 */
+        display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+        display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
 
-  justify-content: center;
-  align-items: center;
+        justify-content: center;
+        align-items: center;
 
-  width: 100%;
-  height: 100%;
-}
+        width: 100%;
+        height: 100%;
+    }
 
 </style>
 

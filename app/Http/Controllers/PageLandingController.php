@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\News;
 use App\Article;
 use App\Service;
 use Illuminate\Http\Request;
+use App\Http\Repositories\NewsRepository;
 use App\Http\Repositories\ReviewRepository;
 use App\Http\Repositories\ArticleRepository;
 use App\Http\Repositories\InquiryRepository;
 use App\Http\Repositories\ServiceRepository;
 use App\Http\Repositories\MyWebsiteRepository;
-use App\Http\Repositories\NewsRepository;
 use App\Http\Repositories\ServiceCategoryRepository;
 
 class PageLandingController extends Controller
@@ -148,6 +149,12 @@ class PageLandingController extends Controller
         ->paginate(10);
 
         return view('landing.template-1.news_events.list',compact('newsEvents'));
+    }
+
+    public function showNews(News $news)
+    {
+
+        return view('landing.template-1.news_events.show',compact('news'));
     }
 
 }
