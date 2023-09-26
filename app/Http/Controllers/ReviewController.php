@@ -58,6 +58,10 @@ class ReviewController extends Controller
     public function show(Review $review)
     {
         //
+        $review->viewed_at = $review->viewed_at ?? now();
+        $review->save();
+
+        return view('admin.page-management.reviews.show',compact('review'));
     }
 
     /**

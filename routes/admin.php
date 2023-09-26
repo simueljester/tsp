@@ -141,6 +141,7 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
             Route::get('/list', ['as' => 'index', 'uses' => 'ReviewController@index']);
             Route::get('/create', ['as' => 'create', 'uses' => 'ReviewController@create']);
             Route::post('/save', ['as' => 'save', 'uses' => 'ReviewController@save']);
+            Route::get('/show/{review}', ['as' => 'show', 'uses' => 'ReviewController@show']);
             Route::get('/edit/{review}', ['as' => 'edit', 'uses' => 'ReviewController@edit']);
             Route::post('/update', ['as' => 'update', 'uses' => 'ReviewController@update']);
             Route::post('/delete', ['as' => 'delete', 'uses' => 'ReviewController@delete']);

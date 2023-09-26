@@ -11,7 +11,7 @@
   </div>
 
 
-    <div class="row mt-3 mb-5">
+    <div class="row mt-3 mb-5 fadeIn">
         <div class="col-sm-9">
             @if ($activeWebsite && $activeIntro)
                 <div class="card bg-gradient-primary" style="">
@@ -46,18 +46,18 @@
                     <a href="{{route('admin.inquiry.index')}}">
                         <div class="card text-center">
                             <div class="card-body">
+                                <h3 class="text-primary"> <strong> {{$unreadInquiry}} </strong> </h3>
                                 <strong> <i class="fa-solid fa-envelope"></i> Unread Inquiries </strong>
-                                <h3> <strong> {{$unreadInquiry}} </strong> </h3>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-sm-4">
-                    <a href="{{route('admin.inquiry.index')}}">
+                    <a href="{{route('admin.pages.reviews.index')}}">
                         <div class="card text-center">
                             <div class="card-body">
+                                <h3 class="text-primary"> <strong> {{$unreadReviews}} </strong> </h3>
                                 <strong> <i class="fa-solid fa-star-half-stroke"></i> Unread Reviews </strong>
-                                <h3> <strong> {{$unreadInquiry}} </strong> </h3>
                             </div>
                         </div>
                     </a>
@@ -66,8 +66,8 @@
                     <a href="{{route('admin.pages.articles.index')}}">
                         <div class="card text-center">
                             <div class="card-body">
+                                <h3 class="text-primary"> <strong> {{$articles}} </strong> </h3>
                                 <strong> <i class="fa-regular fa-newspaper"></i> Articles </strong>
-                                <h3 class="float-right"> <strong> {{$articles}} </strong> </h3>
                             </div>
                         </div>
                     </a>
@@ -75,11 +75,9 @@
             </div>
         </div>
         <div class="col-sm-3">
-            <div class="card">
+            <div class="card bg-light">
                 <div class="card-body">
-                    <div>
-                        test
-                    </div>
+                    <strong> Top Services </strong>
                 </div>
             </div>
         </div>

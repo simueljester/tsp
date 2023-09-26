@@ -43,6 +43,9 @@
                                             @else
                                                 TSP
                                             @endif
+                                            @if ($review->viewed_at == null)
+                                                <small class="text-success">New</small>
+                                            @endif
                                         </h6>
 
                                     </div>
@@ -61,7 +64,8 @@
                                     <i class="fa-solid fa-user"></i> {{$review->commented_by}}
                                 </td>
                                 <td>
-                                    <a href="javascript:;" class="text-white btn bg-primary btn-sm" onclick="viewReview({{$review}}, {{json_encode($review->created_at->format('M d, Y'))}})">
+
+                                    <a href="{{route('admin.pages.reviews.show',$review)}}" class="text-white btn bg-primary btn-sm" onclick="viewReview({{$review}}, {{json_encode($review->created_at->format('M d, Y'))}})">
                                         View
                                     </a>
                                     <button type="button" class="btn btn-outline-secondary btn-sm" onclick="confirmDelete({{$review->id}})">
@@ -111,49 +115,6 @@
         </div>
       </div>
 
-    {{-- View Review --}}
-    <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Review</h5>
-              <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body text-center">
-                <div class="p-3">
-                    <center>
-                        <h1>
-                            <div class="border-custom-circle text-center custom-icon-parent-2 bg-light shadow target-icon mb-3">
-                                <i class="custom-icon-child-2" id="serviceIcon"></i>
-                            </div>
-                        </h1>
-                    </center>
-                </div>
-                <div class="text-center">
-                    <strong id="serviceName"></strong>
-                    <div>
-                        <i class="fa-solid fa-star text-warning"></i> x <span id="reviewRating"></span>
-                    </div>
-                </div>
-                <div>
-                    <p id="reviewComment"></p>
-                </div>
-                <div>
-                    <i class="fa-solid fa-user"></i> <strong class="text-uppercase" id="reviewCommentedBy"></strong>
-                </div>
-                <div>
-                    <small id="reviewCommentDate"></small>
-                </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
 </div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
@@ -166,17 +127,6 @@
 
     function proceedDelete(){
         document.getElementById("deleteForm").submit();
-    }
-
-    function viewReview(review,created_at){
-        $('#serviceIcon').removeClass(review.service.icon)
-        $('#serviceIcon').addClass(review.service.icon)
-        $('#serviceName').html(review.service.name)
-        $('#reviewComment').html( '" <i>' + review.comment + '</i>"')
-        $('#reviewCommentedBy').html(review.commented_by)
-        $('#reviewCommentDate').html(created_at)
-        $('#reviewRating').html(review.rating)
-        $('#reviewModal').modal('show')
     }
 
 </script>

@@ -8,12 +8,13 @@ use Illuminate\Http\Request;
 use App\Http\Repositories\MyWebsiteRepository;
 use App\Http\Repositories\MyWebsiteContentRepository;
 use App\Http\Repositories\NewsRepository;
+use App\Http\Repositories\ReviewRepository;
 use App\Http\Repositories\ServiceRepository;
 
 class DashboardController extends Controller
 {
     public $mywebsiteRepository, $mywebsiteContentRepository, $articleRepository, $newsRepository, $serviceRepository, $inquiryRepository;
-
+    public $reviewRepository;
     //
     public function __construct()
     {
@@ -24,6 +25,7 @@ class DashboardController extends Controller
         $this->newsRepository = app(NewsRepository::class);
         $this->serviceRepository = app(ServiceRepository::class);
         $this->inquiryRepository = app(InquiryRepository::class);
+        $this->reviewRepository = app(ReviewRepository::class);
     }
     public function index()
     {
@@ -41,8 +43,9 @@ class DashboardController extends Controller
 
         $activeIntro = $activeIntro == '' ? null : json_decode($activeIntro->data);
         $unreadInquiry = $this->inquiryRepository->query()->whereNull('viewed_at')->count();
+        $unreadReviews = $this->reviewRepository->query()->whereNull('viewed_at')->count();
         $articles = $this->articleRepository->query()->count();
 
-        return view('admin.dashboard',compact('activeWebsite','activeIntro','unreadInquiry','articles'));
+        return view('admin.dashboard',compact('activeWebsite','activeIntro','unreadInquiry','unreadReviews','articles'));
     }
 }
