@@ -12,7 +12,7 @@ class Inquiry extends Model
     protected $table = 'inquiries';
     //
     protected $fillable = [
-        'name','email','description','service_id','contact'
+        'name','email','description','service_id','contact','viewed_at'
     ];
 
     public function service(): BelongsTo

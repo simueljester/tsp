@@ -31,10 +31,15 @@
                     </thead>
                     <tbody>
                         @forelse ($inquiries as $inquiry)
-                            <tr>
-
+                            <tr class=" {{$inquiry->viewed_at ? 'bg-white' : 'bg-light'}}">
                                 <td>
                                     <h6 class="mb-0 text-s">
+
+                                        @if ($inquiry->viewed_at == null)
+                                            <i class="fa-solid fa-envelope text-success"></i>
+                                        @else
+                                            <i class="fa-solid fa-envelope-open"></i>
+                                        @endif
                                         @if ($inquiry->service)
                                             <a href="{{route('admin.pages.services.show',$inquiry->service->id)}}" class="text-primary">
                                                 {{$inquiry->service->name}}
@@ -43,20 +48,15 @@
                                             TSP
                                         @endif
                                     </h6>
-                                    <i class="fa-solid fa-user"></i> {{$inquiry->name}} <br>
-                                    <small class="text-muted"> {{$inquiry->email}} / {{$inquiry->contact}} </small>
-                                    <p class="text-capitalize" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 500px;">
-                                        {{$inquiry->description}}
-                                    </p>
+                                    <small> <i class="fa-solid fa-user"></i> &nbsp {{$inquiry->name}} </small> <br>
+                                    <small class="text-muted"> {{$inquiry->email}}  </small>
                                 </td>
 
                                 <td>
-                                    {{$inquiry->created_at->format('M d, Y h:i a')}}
+                                    <small> {{$inquiry->created_at->format('M d, Y h:i a')}} </small>
                                 </td>
                                 <td>
-                                    <a href="javascript:;" class="text-white btn bg-primary btn-sm" onclick="viewInquiry({{$inquiry}}, {{json_encode($inquiry->created_at->format('M d, Y'))}})">
-                                        View
-                                    </a>
+                                    <a href="{{route('admin.inquiry.show',$inquiry)}}" class="text-white btn bg-primary btn-sm"> View </a>
                                     <button type="button" class="btn btn-outline-secondary btn-sm" onclick="confirmDelete({{$inquiry->id}})">
                                         Delete
                                     </button>
@@ -102,53 +102,6 @@
           </div>
         </div>
     </div>
-
-       {{-- View Inquiry --}}
-       <div class="modal fade" id="inquiryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">View Inquiry</h5>
-              <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body text-center">
-                <div id="serviceContainer">
-                    <div class="p-3">
-                        <center>
-                            <h1>
-                                <div class="border-custom-circle text-center custom-icon-parent-2 bg-light shadow target-icon mb-3">
-                                    <i class="custom-icon-child-2" id="serviceIcon"></i>
-                                </div>
-                            </h1>
-                        </center>
-                    </div>
-                    <div class="text-center">
-                        <strong id="serviceName"></strong>
-                    </div>
-                </div>
-
-                <div>
-                    <p id="inquiryDescription"></p>
-                </div>
-                <div>
-                    <i class="fa-solid fa-user"></i> <strong class="text-uppercase" id="inquiryName"></strong>
-                </div>
-                <div>
-                    <small id="inquiryEmail"></small>
-                </div>
-                <div>
-                    <small id="inquiryDate"></small>
-                </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
 </div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
@@ -161,24 +114,6 @@
 
     function proceedDelete(){
         document.getElementById("deleteForm").submit();
-    }
-
-    function viewInquiry(inquiry,created_at){
-        if(inquiry.service != null){
-            $('#serviceIcon').removeClass(inquiry.service.icon)
-            $('#serviceIcon').addClass(inquiry.service.icon)
-            $('#serviceName').html(inquiry.service.name)
-            $('#serviceContainer').show()
-        }else{
-            $('#serviceContainer').hide()
-        }
-
-        $('#inquiryEmail').html(inquiry.email + ' / ' + inquiry.contact)
-
-        $('#inquiryDescription').html(inquiry.description)
-        $('#inquiryName').html(inquiry.name)
-        $('#inquiryDate').html(created_at)
-        $('#inquiryModal').modal('show')
     }
 
 </script>

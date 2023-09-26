@@ -2,8 +2,12 @@
     <div class="container-fluid p-5 bg-info text-center mt-5" style="background: rgb(112,96,70);
     background: linear-gradient(90deg, rgba(112,96,70,1) 21%, rgba(0,0,0,0.7707457983193278) 100%);">
         <div class="row p-3">
-            <div class="col-sm-6 text-right">
-
+            <div class="col-sm-6 text-right p-3">
+                <center>
+                    <img class="about-image" width="150" src="{{ asset('images') }}/symbol2.png">
+                    <br>
+                    <strong class="text-white"> TSP - Technology Solutions Provider & Consultancy </strong>
+                </center>
             </div>
             <div class="col-sm-6 text-left">
                 <strong class="text-white"> Useful Links </strong>

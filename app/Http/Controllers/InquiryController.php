@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Repositories\InquiryRepository;
+use App\Inquiry;
 use Illuminate\Http\Request;
 
 class InquiryController extends Controller
@@ -41,5 +42,15 @@ class InquiryController extends Controller
         catch(\Exception $e) {
             return redirect()->back()->with('error', 'Exception occured. Please contact your developer');
         }
+    }
+
+    public function show(Inquiry $inquiry)
+    {
+        $inquiry->viewed_at = $inquiry->viewed_at ?? now();
+        $inquiry->save();
+
+        $inquiry->load('service');
+
+        return view('admin.show-inquiry',compact('inquiry'));
     }
 }

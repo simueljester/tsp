@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin','as'=>'admin.'], functi
     Route::group(['prefix'=>'inquiry','as'=>'inquiry.'], function(){
         Route::get('/', ['as' => 'index', 'uses' => 'InquiryController@index']);
         Route::post('/delete', ['as' => 'delete', 'uses' => 'InquiryController@delete']);
+        Route::get('/show/{inquiry}', ['as' => 'show', 'uses' => 'InquiryController@show']);
     });
 
     //My Website
