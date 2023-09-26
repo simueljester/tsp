@@ -31,7 +31,7 @@
                 <strong> {{$article->created_at->format('M d, Y')}} </strong>
             </div>
         </div>
-        <div class="card-body">
+        <div class="card-body article-description">
             {!! $article->description !!}
         </div>
         <div class="card-footer bg-light">

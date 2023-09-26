@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\News;
 use App\Article;
 use App\Service;
+use App\Traits\ServiceTrait;
 use Illuminate\Http\Request;
 use App\Http\Repositories\NewsRepository;
 use App\Http\Repositories\ReviewRepository;
@@ -17,6 +18,7 @@ use App\Http\Repositories\ServiceCategoryRepository;
 class PageLandingController extends Controller
 {
     public $myWebsiteRepository,$inquiryRepository,$serviceRepository, $serviceCategoryRepository, $articleRepository, $reviewRepository, $newsRepository;
+    use ServiceTrait;
 
     public function __construct()
     {
@@ -99,7 +101,7 @@ class PageLandingController extends Controller
         $service->load('category','articles:id,name,slug,thumbnail,service_id,description','reviews:id,comment,commented_by,rating,service_id,created_at');
 
         $reviewArray = $service->reviews->pluck('rating')->toArray();
-        $averageReview = !$reviewArray ? 0 : round(array_sum($reviewArray)/count($reviewArray));
+        $averageReview = !$reviewArray ? 0 : $this->fetchAverageRating($reviewArray);
 
         return view('landing.template-1.catalog.show',compact('service','categories','averageReview'));
     }
@@ -135,7 +137,7 @@ class PageLandingController extends Controller
     {
         $article->load('service');
         $reviewArray = $article->service ? $article->service->reviews->pluck('rating')->toArray() : [];
-        $averageReview = !$reviewArray ? 0 : round(array_sum($reviewArray)/count($reviewArray));
+        $averageReview = !$reviewArray ? 0 : $this->fetchAverageRating($reviewArray);
         return view('landing.template-1.articles.show',compact('article','averageReview'));
     }
 

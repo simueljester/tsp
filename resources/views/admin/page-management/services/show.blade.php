@@ -22,59 +22,135 @@
             </nav>
         </div>
     </div>
-    <div class="card fadeIn mt-3">
-        <div class="card-header">
-            <h3>
-                <div class="border-custom-circle text-center custom-icon-parent-2 bg-light shadow target-icon mb-3">
-                    <h1> <i class="{{$service->icon}} custom-icon-child-2" id="showicon"></i> </h1>
-                </div>
-                {{$service->name}}
-            </h3>
-            <hr class="horizontal dark my-1">
-            <div> <small> <strong> Category: </strong> {{$service->category ? $service->category->name : 'Uncategorize'}} </small> </div>
-            @if ($service->type == 'service')
-                <div> <small> <strong> Type: </strong> Service</small> </div>
-            @else
-                <div> <small> <strong> Type: </strong> Product</small> </div>
-            @endif
-            @if ($service->published_at)
-                <div> <small> <strong> Publication Date: </strong> {{$service->published_at->format('m-d-Y')}}</small> </div>
-            @endif
-            @if ($service->created_at == $service->updated_at)
-                <small> <strong> Creation: </strong> {{$service->created_at->format('m-d-Y')}} </small>
-            @else
-                <small> <strong> Last Updated: </strong> {{$service->updated_at->format('m-d-Y')}} </small>
-            @endif
-        </div>
-        <div class="card-body">
-            <div> {!! $service->description !!} </div>
-            @if ($service->multimedia)
-                <div>
-                    <strong>Gallery</strong>
-                    <div class="mt-2">
-                        <div class="multiple-slider">
-                            @foreach (json_decode($service->multimedia,true) as $media)
-                            <div class="card-hover-scale" style="cursor: pointer;" onclick="viewGallery({{json_encode($media)}})">
-                                <img class="card-img-top border-custom" src="{{asset('/images/dropzone').'/'.$media}}" style="height:200px;width:250px;object-fit: cover;">
-                            </div>
-                            @endforeach
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="card fadeIn mt-3">
+                <div class="card-header">
+                    <h3>
+                        <div class="border-custom-circle text-center custom-icon-parent-2 bg-light shadow target-icon mb-3">
+                            <h1> <i class="{{$service->icon}} custom-icon-child-2" id="showicon"></i> </h1>
                         </div>
+                        {{$service->name}}
+                    </h3>
+                    <hr class="horizontal dark my-1">
+                    <div> <small> <strong> Category: </strong> {{$service->category ? $service->category->name : 'Uncategorize'}} </small> </div>
+                    @if ($service->type == 'service')
+                        <div> <small> <strong> Type: </strong> Service</small> </div>
+                    @else
+                        <div> <small> <strong> Type: </strong> Product</small> </div>
+                    @endif
+                    @if ($service->published_at)
+                        <div> <small> <strong> Publication Date: </strong> {{$service->published_at->format('m-d-Y')}}</small> </div>
+                    @endif
+                    @if ($service->created_at == $service->updated_at)
+                        <small> <strong> Creation: </strong> {{$service->created_at->format('m-d-Y')}} </small>
+                    @else
+                        <small> <strong> Last Updated: </strong> {{$service->updated_at->format('m-d-Y')}} </small>
+                    @endif
+                </div>
+                <div class="card-body">
+                    <div> {!! $service->description !!} </div>
+                    @if ($service->multimedia)
+                        <div>
+                            <strong>Gallery</strong>
+                            <div class="mt-2">
+                                <div class="multiple-slider">
+                                    @foreach (json_decode($service->multimedia,true) as $media)
+                                    <div class="card-hover-scale" style="cursor: pointer;" onclick="viewGallery({{json_encode($media)}})">
+                                        <img class="card-img-top border-custom" src="{{asset('/images/dropzone').'/'.$media}}" style="height:200px;width:250px;object-fit: cover;">
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
+                    @foreach ($service->tags as $tag)
+                        <span class="badge badge-pill bg-light text-dark" style="border-radius: 20px;">{{$tag}}</span>
+                    @endforeach
+                </div>
+                <div class="card-footer bg-light">
+                    <a href="#" class="btn btn-sm btn-primary" onclick="selectCategory({{$service->id}})"> Manage Category </a>
+                    @if ($service->category)
+                        <a href="{{route('admin.pages.services.edit',$service)}}" class="btn btn-sm btn-info"> Edit </a>
+                    @endif
+                    <a href="#" class="btn btn-sm btn-outline-secondary" onclick="deleteConfirmation()"> Delete </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            @if ($service->reviews->isNotEmpty())
+                <div class="card fadeIn mt-3">
+
+                    <div class="card-body">
+                        @if ($averageRating > 0)
+                            <h3 class="text-muted"> {{$averageRating}} / 5 </h3> <small> Average Rate </small>
+                        @endif
+
+                        <div class="table-responsive mt-3">
+                            <table class="table align-items-center mb-0">
+                              <tbody>
+                                <tr>
+                                    <td>
+                                        <i class="fa-solid fa-star text-primary"></i>
+                                        <i class="fa-solid fa-star text-primary"></i>
+                                        <i class="fa-solid fa-star text-primary"></i>
+                                        <i class="fa-solid fa-star text-primary"></i>
+                                        <i class="fa-solid fa-star text-primary"></i>
+                                    </td>
+                                    <td> {{$detailedReviewRatings[5] ?? 0 }} </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <i class="fa-solid fa-star text-primary"></i>
+                                        <i class="fa-solid fa-star text-primary"></i>
+                                        <i class="fa-solid fa-star text-primary"></i>
+                                        <i class="fa-solid fa-star text-primary"></i>
+                                    </td>
+                                    <td> {{$detailedReviewRatings[4] ?? 0 }} </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <i class="fa-solid fa-star text-primary"></i>
+                                        <i class="fa-solid fa-star text-primary"></i>
+                                        <i class="fa-solid fa-star text-primary"></i>
+                                    </td>
+                                    <td> {{$detailedReviewRatings[3] ?? 0 }} </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <i class="fa-solid fa-star text-primary"></i>
+                                        <i class="fa-solid fa-star text-primary"></i>
+                                    </td>
+                                    <td> {{$detailedReviewRatings[2] ?? 0 }} </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <i class="fa-solid fa-star text-primary"></i>
+                                    </td>
+                                    <td> {{$detailedReviewRatings[1] ?? 0 }} </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <small class="text-muted"> No ratings </small>
+                                    </td>
+                                    <td> {{$detailedReviewRatings[0] ?? 0 }} </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <small class="text-muted"> Total Reviewers </small>
+                                    </td>
+                                    <td> {{$service->reviews->count() }} </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
                     </div>
                 </div>
             @endif
-
-            @foreach ($service->tags as $tag)
-                <span class="badge badge-pill bg-light text-dark" style="border-radius: 20px;">{{$tag}}</span>
-            @endforeach
-        </div>
-        <div class="card-footer bg-light">
-            <a href="#" class="btn btn-sm btn-primary" onclick="selectCategory({{$service->id}})"> Manage Category </a>
-            @if ($service->category)
-                <a href="{{route('admin.pages.services.edit',$service)}}" class="btn btn-sm btn-info"> Edit </a>
-            @endif
-            <a href="#" class="btn btn-sm btn-outline-secondary" onclick="deleteConfirmation()"> Delete </a>
         </div>
     </div>
+
 
     {{-- Modal view image --}}
     <div class="modal fade" id="viewGalleryModal" tabindex="-1" role="dialog" aria-hidden="true">

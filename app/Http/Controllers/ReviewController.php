@@ -23,7 +23,7 @@ class ReviewController extends Controller
     public function index()
     {
         //
-        $reviews = $this->reviewRepository->query()->with('service:id,name,icon')->paginate(10);
+        $reviews = $this->reviewRepository->query()->with('service:id,name,icon,slug')->paginate(10);
         return view('admin.page-management.reviews.index',compact('reviews'));
     }
 

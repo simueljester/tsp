@@ -6,6 +6,7 @@ use App\Article;
 use App\Service;
 use App\ServiceCategory;
 use App\Helpers\IconHelper;
+use App\Traits\ServiceTrait;
 use Illuminate\Http\Request;
 use App\Helpers\UploadHelper;
 use Illuminate\Validation\Rule;
@@ -21,6 +22,7 @@ class ServiceController extends Controller
 
     public $serviceRepository, $categoryRepository, $tagRepository;
     public $icon;
+    use ServiceTrait;
     /**
      * Create a new controller instance.
      *
@@ -116,10 +118,15 @@ class ServiceController extends Controller
 
     public function show(Service $service)
     {
-        $service->load('category');
+        $service->load('category','reviews');
         $categories = $this->categoryRepository->query()->get();
         $service->tags = explode(',', $service->tags);
-        return view('admin.page-management.services.show',compact('service','categories'));
+
+        $reviewArray = $service->reviews->pluck('rating')->toArray();
+        $averageRating = !$reviewArray ? 0 : $this->fetchAverageRating($reviewArray);
+        $detailedReviewRatings = array_count_values($reviewArray);
+
+        return view('admin.page-management.services.show',compact('service','categories','averageRating','detailedReviewRatings'));
     }
 
     public function edit(Service $service)

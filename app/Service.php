@@ -39,7 +39,7 @@ class Service extends Model
 
    public function reviews(): HasMany
    {
-       return $this->hasMany('App\Review', 'service_id','id');
+       return $this->hasMany('App\Review', 'service_id','id')->orderBy('created_at','DESC');
    }
 
 }

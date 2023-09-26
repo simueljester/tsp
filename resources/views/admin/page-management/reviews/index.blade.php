@@ -27,6 +27,7 @@
                     <thead>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Service </th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Comment </th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Rate </th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Commented By </th>
                     </thead>
                     <tbody>
@@ -36,19 +37,25 @@
                                     <div class="d-flex flex-column justify-content-center">
                                         <h6 class="mb-0 text-s">
                                             @if ($review->service)
-                                                <a href="{{route('admin.pages.services.show',$review->service->id)}}" class="text-primary">
+                                                <a href="{{route('admin.pages.services.show',$review->service->slug)}}" class="text-primary">
                                                     {{$review->service->name}}
                                                 </a>
                                             @else
                                                 TSP
                                             @endif
                                         </h6>
+
                                     </div>
                                 </td>
                                 <td>
                                     <p class="text-capitalize" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 500px;">
                                           {{$review->comment}}
                                     </p>
+                                </td>
+                                <td>
+                                    @for ($i = 1; $i <= $review->rating; $i++)
+                                        <i class="fa-solid fa-star text-warning"></i>
+                                    @endfor
                                 </td>
                                 <td>
                                     <i class="fa-solid fa-user"></i> {{$review->commented_by}}
@@ -126,6 +133,9 @@
                 </div>
                 <div class="text-center">
                     <strong id="serviceName"></strong>
+                    <div>
+                        <i class="fa-solid fa-star text-warning"></i> x <span id="reviewRating"></span>
+                    </div>
                 </div>
                 <div>
                     <p id="reviewComment"></p>
@@ -165,6 +175,7 @@
         $('#reviewComment').html( '" <i>' + review.comment + '</i>"')
         $('#reviewCommentedBy').html(review.commented_by)
         $('#reviewCommentDate').html(created_at)
+        $('#reviewRating').html(review.rating)
         $('#reviewModal').modal('show')
     }
 
