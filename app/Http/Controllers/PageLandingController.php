@@ -69,23 +69,30 @@ class PageLandingController extends Controller
 
     public function showCatalog(Request $request)
     {
-        $keyword = $request->keyword ?? null;
+        $activeTemplate = $this->myWebsiteRepository->query()->with('contents')->whereActive(1)->first() ?? null;
 
-        $grouped = $this->serviceRepository->query()
-        ->when($keyword, function ($query) use ($keyword) {
-            $query->where('name', 'like', '%' . $keyword . '%')
-            ->orWhere('description_clean', 'like', '%' . $keyword . '%');
-        })
-        ->whereNotNull('category_id')
-        ->whereNotNull('published_at')
-        ->select('id','name','description','description_clean','published_at','category_id','icon','slug','type')
-        ->get()
-        ->groupBy('category_id');
+        if($activeTemplate){
+            $keyword = $request->keyword ?? null;
 
-        $categories = $this->serviceCategoryRepository->query()->select('id','name','description')
-        ->has('services')->get()->keyBy('id');
+            $grouped = $this->serviceRepository->query()
+            ->when($keyword, function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%')
+                ->orWhere('description_clean', 'like', '%' . $keyword . '%');
+            })
+            ->whereNotNull('category_id')
+            ->whereNotNull('published_at')
+            ->select('id','name','description','description_clean','published_at','category_id','icon','slug','type')
+            ->get()
+            ->groupBy('category_id');
 
-        return view('landing.template-1.catalog.services',compact('grouped','keyword','categories'));
+            $categories = $this->serviceCategoryRepository->query()->select('id','name','description')
+            ->has('services')->get()->keyBy('id');
+
+            return view('landing.template-1.catalog.services',compact('grouped','keyword','categories'));
+        }else{
+            abort(503);
+        }
+
     }
 
     public function showService(Service $service)
@@ -122,15 +129,21 @@ class PageLandingController extends Controller
 
     public function showArticleList(Request $request)
     {
-        $keyword = $request->keyword ?? null;
-        $articles = $this->articleRepository->query()
-        ->when($keyword, function ($query) use ($keyword) {
-            $query->where('name', 'like', '%' . $keyword . '%');
-        })
-        ->whereNotNull('published_at')
-        ->orderBy('published_at', 'DESC')
-        ->paginate(10);
-        return view('landing.template-1.articles.list',compact('articles','keyword'));
+        $activeTemplate = $this->myWebsiteRepository->query()->with('contents')->whereActive(1)->first() ?? null;
+        if($activeTemplate){
+            $keyword = $request->keyword ?? null;
+            $articles = $this->articleRepository->query()
+            ->when($keyword, function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })
+            ->whereNotNull('published_at')
+            ->orderBy('published_at', 'DESC')
+            ->paginate(10);
+            return view('landing.template-1.articles.list',compact('articles','keyword'));
+        }else{
+            abort(503);
+        }
+
     }
 
     public function showArticle(Article $article)
@@ -143,14 +156,20 @@ class PageLandingController extends Controller
 
     public function showNewsList(Request $request)
     {
+        $activeTemplate = $this->myWebsiteRepository->query()->with('contents')->whereActive(1)->first() ?? null;
+        if($activeTemplate){
+            $newsEvents = $this->newsRepository->query()
+            ->whereNotNull('published_at')
+            ->orderBy('published_at', 'DESC')
+            ->select('id','name','slug','description','thumbnail','headline','created_at','published_at')
+            ->paginate(10);
 
-        $newsEvents = $this->newsRepository->query()
-        ->whereNotNull('published_at')
-        ->orderBy('published_at', 'DESC')
-        ->select('id','name','slug','description','thumbnail','headline','created_at','published_at')
-        ->paginate(10);
+            return view('landing.template-1.news_events.list',compact('newsEvents'));
+        }
+        else{
+            abort(503);
+        }
 
-        return view('landing.template-1.news_events.list',compact('newsEvents'));
     }
 
     public function showNews(News $news)
