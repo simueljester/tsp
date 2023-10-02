@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Repositories\ArticleRepository;
-use App\Http\Repositories\InquiryRepository;
+use App\Traits\ServiceTrait;
 use Illuminate\Http\Request;
-use App\Http\Repositories\MyWebsiteRepository;
-use App\Http\Repositories\MyWebsiteContentRepository;
 use App\Http\Repositories\NewsRepository;
 use App\Http\Repositories\ReviewRepository;
+use App\Http\Repositories\ArticleRepository;
+use App\Http\Repositories\InquiryRepository;
 use App\Http\Repositories\ServiceRepository;
+use App\Http\Repositories\MyWebsiteRepository;
+use App\Http\Repositories\MyWebsiteContentRepository;
 
 class DashboardController extends Controller
 {
     public $mywebsiteRepository, $mywebsiteContentRepository, $articleRepository, $newsRepository, $serviceRepository, $inquiryRepository;
     public $reviewRepository;
+    use ServiceTrait;
     //
     public function __construct()
     {
@@ -46,6 +48,14 @@ class DashboardController extends Controller
         $unreadReviews = $this->reviewRepository->query()->whereNull('viewed_at')->count();
         $articles = $this->articleRepository->query()->count();
 
-        return view('admin.dashboard',compact('activeWebsite','activeIntro','unreadInquiry','unreadReviews','articles'));
+        $topServices = $this->serviceRepository->query()->with('reviews:id,service_id,rating')->select('id','name','slug','type','icon')->get();
+        $topServices->map(function ($service){
+            $reviewArray = $service->reviews->pluck('rating')->toArray();
+            $service['rating'] = !$reviewArray ? 0 : $this->fetchAverageRating($reviewArray);
+            return $service;
+        });
+        $topServices = $topServices->sortByDesc('rating')->take(5);
+
+        return view('admin.dashboard',compact('activeWebsite','activeIntro','unreadInquiry','unreadReviews','articles','topServices'));
     }
 }

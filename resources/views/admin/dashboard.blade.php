@@ -33,9 +33,14 @@
                 </div>
             @else
             <div class="card">
-                <div class="card-body">
+                <div class="card-body p-5">
                     <div>
-                        no active website
+                        <center>
+                            <i class="fa-solid fa-globe fa-5x rubberBand"></i>
+                            <div class="mt-2">
+                                No active website. <a href="{{route('admin.my-website.index')}}"> Click here to manage </a>
+                            </div>
+                        </center>
                     </div>
                 </div>
             </div>
@@ -77,7 +82,25 @@
         <div class="col-sm-3">
             <div class="card bg-light">
                 <div class="card-body">
-                    <strong> Top Services </strong>
+                    <strong> High Rating Services </strong>
+                    <br>
+                    <hr>
+                    @foreach ($topServices as $service)
+                        @if ($service->rating != 0)
+                            <div class="card mt-3">
+                                <div class="card-body">
+                                    <a href="{{route('admin.pages.services.show',$service)}}" class="text-primary">
+                                        <strong> <i class="{{$service->icon}}"></i> {{$service->name}} </strong>
+                                    </a>
+                                    <div class="mt-2">
+                                        @for ($i = 1; $i <= $service->rating; $i++)
+                                            <i class="fa-solid fa-star text-warning"></i>
+                                        @endfor
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>

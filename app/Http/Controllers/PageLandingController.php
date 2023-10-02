@@ -46,7 +46,7 @@ class PageLandingController extends Controller
             ->limit(3)
             ->get();
         }else{
-            abort(404);
+            abort(503);
         }
 
         return view('landing.template-1.index',compact('contents','featuredReviews'));
